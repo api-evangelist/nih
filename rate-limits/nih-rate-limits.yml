@@ -1,0 +1,84 @@
+name: NIH API Rate Limits
+description: NIH and NCBI APIs enforce rate limits to ensure fair access and system stability. Rate limits vary by API service and whether an API key is registered. Exceeding limits may result in temporary IP blocking.
+url: https://www.ncbi.nlm.nih.gov/home/develop/api/
+created: '2026-06-13'
+modified: '2026-06-13'
+rateLimits:
+  - api: NCBI E-utilities (Entrez)
+    baseURL: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/
+    documentationURL: https://www.ncbi.nlm.nih.gov/books/NBK25497/
+    tiers:
+      - name: Without API Key
+        requestsPerSecond: 3
+        requestsPerMinute: 180
+        notes: Default limit. API key registration required as of December 1, 2018 for production use.
+      - name: With Registered API Key
+        requestsPerSecond: 10
+        requestsPerMinute: 600
+        notes: Obtain a free API key at https://support.nlm.nih.gov/kbArticle/?pn=KA-05317
+      - name: Enhanced API Key
+        requestsPerSecond: Custom
+        notes: Contact info@ncbi.nlm.nih.gov with justification for limits above 10 rps
+    enforcement:
+      - Requests exceeding limits will receive HTTP 429 responses
+      - Persistent violations may result in IP address blocking
+      - Large batch jobs should be scheduled on weekends or 9 PM - 5 AM EST weekdays
+
+  - api: PubChem PUG REST
+    baseURL: https://pubchem.ncbi.nlm.nih.gov/rest/pug/
+    documentationURL: https://pubchem.ncbi.nlm.nih.gov/docs/programmatic-access
+    tiers:
+      - name: Standard (No Key Required)
+        requestsPerSecond: 5
+        notes: Universal limit for all users and applications. No API key is available to increase this limit.
+    enforcement:
+      - Maximum 5 requests per second per user/application/organization
+      - No API key whitelisting available for higher limits
+      - Contact PubChem for bulk access optimization guidance
+      - Large downloads should use FTP bulk data rather than the REST API
+
+  - api: NIH RePORTER API
+    baseURL: https://api.reporter.nih.gov/v2/
+    documentationURL: https://api.reporter.nih.gov/
+    tiers:
+      - name: Standard (No Key Required)
+        requestsPerSecond: 1
+        notes: Recommended rate; no authentication required
+    enforcement:
+      - Post no more than 1 URL request per second
+      - Large batch jobs should run on weekends or weekdays 9 PM - 5 AM EST
+      - IP addresses violating usage policy may be blocked
+      - Maximum 500 records per request
+      - Maximum offset of 14,999 (projects) or 9,999 (publications)
+
+  - api: ClinicalTrials.gov REST API
+    baseURL: https://clinicaltrials.gov/api/v2/
+    documentationURL: https://clinicaltrials.gov/data-api/api
+    tiers:
+      - name: Standard (No Key Required)
+        notes: No specific rate limit published; reasonable use expected
+    enforcement:
+      - No API key required
+      - Fair use policy applies
+      - Bulk download recommended for large-scale data retrieval
+
+  - api: NCBI Datasets v2 REST API
+    baseURL: https://api.ncbi.nlm.nih.gov/datasets/v2/
+    documentationURL: https://www.ncbi.nlm.nih.gov/datasets/docs/v2/api/rest-api/
+    tiers:
+      - name: Standard
+        notes: Follows NCBI general API key policies; API key recommended for production use
+    enforcement:
+      - NCBI API key recommended for sustained programmatic access
+      - Same key used across NCBI services
+
+  - api: NCBI BLAST URL API
+    baseURL: https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi
+    documentationURL: https://ncbi.github.io/blast-cloud/dev/api.html
+    tiers:
+      - name: Standard
+        notes: Asynchronous submission model; poll for results rather than sustained high-frequency requests
+    enforcement:
+      - Jobs are queued; check status before polling for results
+      - Avoid excessive polling; recommended interval is every 5-60 seconds
+      - NCBI discourages running more than 5 simultaneous BLAST searches

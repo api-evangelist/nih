@@ -1,0 +1,59 @@
+name: NIH API FinOps
+description: All NIH and NCBI public APIs are provided at no cost as a public service funded by the US federal government. There are no subscription fees, per-call charges, or data access costs. FinOps considerations focus on operational efficiency, responsible usage, and infrastructure optimization for consumers of these free public APIs.
+url: https://www.ncbi.nlm.nih.gov/home/develop/api/
+created: '2026-06-13'
+modified: '2026-06-13'
+costModel:
+  type: Free Public Service
+  subscriptionFee: $0.00
+  perCallFee: $0.00
+  dataTransferFee: $0.00
+  notes: NIH APIs are funded by US taxpayers and provided free of charge. All data is publicly accessible without cost. No billing accounts, credit cards, or payment methods are required.
+
+costDrivers:
+  - name: No Direct Costs
+    description: NIH/NCBI APIs are entirely free. There are no costs to the API consumer for any tier of access including high-volume enhanced API keys.
+    mitigation: N/A - no consumer costs exist
+
+  - name: Infrastructure Costs (Consumer Side)
+    description: While API access is free, consumers may incur costs for their own compute infrastructure used to process retrieved data, store downloaded datasets, or run analysis pipelines.
+    mitigation: Optimize data retrieval patterns, use bulk FTP downloads for large datasets instead of individual API calls, cache responses locally where appropriate
+
+  - name: Bulk Data Alternatives
+    description: For very large-scale data needs, NCBI offers FTP bulk downloads (e.g., PubMed baseline files, GenBank flat files) which may be more cost-effective on consumer infrastructure than streaming via API.
+    mitigation: Use FTP bulk access at ftp.ncbi.nlm.nih.gov for large-scale data pipeline needs
+
+recommendations:
+  - category: Rate Limit Compliance
+    description: Register for a free NCBI API key to increase E-utilities rate limits from 3 to 10 requests per second. This avoids throttling without any additional cost.
+    action: Register at https://support.nlm.nih.gov/kbArticle/?pn=KA-05317
+
+  - category: Caching Strategy
+    description: Cache API responses locally to reduce repeated identical requests. PubMed article metadata and PubChem compound properties change infrequently.
+    action: Implement local caching with TTL appropriate to the data type (e.g., 24h for metadata, 7d for static compound data)
+
+  - category: Batch Scheduling
+    description: Schedule large batch data retrieval jobs during off-peak hours (weekends or 9 PM - 5 AM EST weekdays) per NCBI guidance to ensure continued access.
+    action: Use cron jobs or workflow schedulers to run bulk queries during NCBI-recommended low-traffic windows
+
+  - category: Bulk Data vs API
+    description: Use FTP bulk data downloads for full dataset needs rather than paginating through millions of API records. More efficient and preferred by NCBI for large-scale access.
+    action: Access bulk data at https://ftp.ncbi.nlm.nih.gov/ for GenBank, PubMed, and other full datasets
+
+  - category: Error Handling
+    description: Implement exponential backoff and retry logic to gracefully handle 429 (rate limit) and 503 (service unavailable) responses without wasting request quota.
+    action: Implement retry with exponential backoff starting at 1 second, doubling up to 60 seconds
+
+budgetGuidance:
+  annualCost: $0.00
+  notes: No budget allocation is required for NIH API access. Costs are entirely on the consumer infrastructure side (compute, storage, network egress from consumer's cloud/on-prem environment).
+  relatedCosts:
+    - type: Cloud Compute
+      description: Processing and analyzing retrieved biomedical data
+      provider: Consumer's own infrastructure
+    - type: Data Storage
+      description: Storing downloaded datasets, cached responses, and processed results
+      provider: Consumer's own infrastructure
+    - type: Network Egress
+      description: Outbound data transfer from consumer's cloud environment when calling NIH APIs
+      provider: Consumer's cloud provider (if applicable)

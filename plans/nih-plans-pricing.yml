@@ -1,0 +1,74 @@
+name: NIH API Plans and Pricing
+description: NIH and NCBI APIs are provided as free public services with no cost to access. All APIs are publicly funded and offered without subscription fees. Access tiers are differentiated primarily by API key registration, which unlocks higher rate limits.
+url: https://www.ncbi.nlm.nih.gov/home/develop/api/
+created: '2026-06-13'
+modified: '2026-06-13'
+plans:
+  - name: Anonymous / No Key
+    description: Default access for all NCBI E-utilities without an API key. Suitable for light usage, testing, and exploration.
+    url: https://www.ncbi.nlm.nih.gov/home/develop/api/
+    price: Free
+    rateLimits:
+      - type: RequestsPerSecond
+        limit: 3
+        description: Up to 3 requests per second for E-utilities without an API key
+    features:
+      - Access to all Entrez databases (PubMed, Gene, Nuccore, Protein, etc.)
+      - ESearch, EFetch, ESummary, ELink, EInfo, EPost, EGQuery, ESpell, ECitMatch
+      - No registration required
+
+  - name: Registered API Key
+    description: Free API key registration unlocks higher rate limits for NCBI E-utilities. Recommended for all production applications and research workflows.
+    url: https://support.nlm.nih.gov/kbArticle/?pn=KA-05317
+    price: Free
+    rateLimits:
+      - type: RequestsPerSecond
+        limit: 10
+        description: Up to 10 requests per second for E-utilities with a registered API key
+    features:
+      - All features of anonymous access
+      - Higher rate limit (10 rps vs 3 rps)
+      - API key tied to NCBI account for usage monitoring
+      - Required for any production or high-volume use
+
+  - name: Enhanced API Key (High Volume)
+    description: For users requiring more than 10 requests per second. Available on a case-by-case basis by contacting NCBI with documented need.
+    url: https://support.nlm.nih.gov/kbArticle/?pn=KA-05318
+    price: Free
+    rateLimits:
+      - type: RequestsPerSecond
+        limit: Negotiated
+        description: Custom rate limits above 10 rps granted based on use case and resource availability
+    features:
+      - Custom rate limits for high-volume institutional or research use
+      - Requires documented justification submitted to info@ncbi.nlm.nih.gov
+      - Reviewed and approved by NCBI on a case-by-case basis
+
+  - name: PubChem Access
+    description: PubChem API is free and open with a single usage tier. No API key is required; rate limits are enforced globally.
+    url: https://pubchem.ncbi.nlm.nih.gov/docs/programmatic-access
+    price: Free
+    rateLimits:
+      - type: RequestsPerSecond
+        limit: 5
+        description: Maximum of 5 requests per second per user or application
+    features:
+      - Full access to PubChem PUG REST API
+      - Chemical structure search
+      - Compound property retrieval
+      - Biological assay data
+      - No API key required
+
+  - name: NIH RePORTER Access
+    description: Free public access to NIH research funding data with no registration required. Rate limits enforced per IP address.
+    url: https://api.reporter.nih.gov/
+    price: Free
+    rateLimits:
+      - type: RequestsPerSecond
+        limit: 1
+        description: No more than 1 URL request per second recommended
+    features:
+      - Search NIH-funded projects and grants
+      - Access publications linked to NIH awards
+      - Filter by institute, mechanism, fiscal year, keywords
+      - Maximum 500 records per request, offset up to 14999
