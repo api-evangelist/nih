@@ -1,0 +1,184 @@
+{
+  "title": "NIH Biomedical API Domain Vocabulary",
+  "description": "Domain-specific terms and concepts used across NIH public APIs",
+  "source": "National Institutes of Health (NIH)",
+  "apis": [
+    "NCBI E-utilities",
+    "NCBI Datasets v2",
+    "PubChem PUG REST",
+    "ClinicalTrials.gov REST API",
+    "NIH RePORTER API",
+    "NCBI BLAST URL API",
+    "PMC OA API"
+  ],
+  "terms": [
+    {
+      "term": "PMID",
+      "label": "PubMed Identifier",
+      "description": "Unique integer identifier for PubMed citations",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "PMCID",
+      "label": "PubMed Central Identifier",
+      "description": "Unique identifier for PMC full-text articles",
+      "api": "PMC OA API"
+    },
+    {
+      "term": "NCT ID",
+      "label": "National Clinical Trial Identifier",
+      "description": "Unique identifier for ClinicalTrials.gov study records (format: NCTxxxxxxxx)",
+      "api": "ClinicalTrials.gov REST API"
+    },
+    {
+      "term": "CID",
+      "label": "Compound Identifier",
+      "description": "PubChem unique integer identifier for chemical compounds",
+      "api": "PubChem PUG REST"
+    },
+    {
+      "term": "SID",
+      "label": "Substance Identifier",
+      "description": "PubChem unique identifier for deposited substances",
+      "api": "PubChem PUG REST"
+    },
+    {
+      "term": "AID",
+      "label": "Assay Identifier",
+      "description": "PubChem unique identifier for biological assays",
+      "api": "PubChem PUG REST"
+    },
+    {
+      "term": "GeneID",
+      "label": "NCBI Gene Identifier",
+      "description": "Unique integer identifier for genes in the NCBI Gene database",
+      "api": "NCBI Datasets v2"
+    },
+    {
+      "term": "TaxID",
+      "label": "Taxonomy Identifier",
+      "description": "NCBI taxonomy database unique identifier for organisms",
+      "api": "NCBI Datasets v2"
+    },
+    {
+      "term": "Accession",
+      "label": "GenBank Accession Number",
+      "description": "Alphanumeric identifier for biological sequence records",
+      "api": "NCBI Datasets v2"
+    },
+    {
+      "term": "RID",
+      "label": "Request Identifier",
+      "description": "BLAST search request identifier for checking job status",
+      "api": "NCBI BLAST URL API"
+    },
+    {
+      "term": "eSearch",
+      "label": "Entrez Search",
+      "description": "E-utility for searching any Entrez database and returning UIDs",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "eFetch",
+      "label": "Entrez Fetch",
+      "description": "E-utility for retrieving records in various formats using UIDs",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "eLink",
+      "label": "Entrez Link",
+      "description": "E-utility for linking records between Entrez databases",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "eSummary",
+      "label": "Entrez Summary",
+      "description": "E-utility for retrieving document summaries for UIDs",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "eInfo",
+      "label": "Entrez Info",
+      "description": "E-utility for retrieving database statistics and field information",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "WebEnv",
+      "label": "Web Environment",
+      "description": "NCBI server-side storage token for caching search results",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "query_key",
+      "label": "Query Key",
+      "description": "Integer key referencing a cached Entrez search result",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "retmax",
+      "label": "Retrieval Maximum",
+      "description": "Maximum number of records to return from E-utility queries",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "retstart",
+      "label": "Retrieval Start",
+      "description": "Starting offset for paginating E-utility results",
+      "api": "NCBI E-utilities"
+    },
+    {
+      "term": "Overall Status",
+      "label": "Study Overall Status",
+      "description": "Current recruitment status of a clinical trial (RECRUITING, COMPLETED, etc.)",
+      "api": "ClinicalTrials.gov REST API"
+    },
+    {
+      "term": "Phase",
+      "label": "Study Phase",
+      "description": "Clinical trial phase designation (PHASE1, PHASE2, PHASE3, PHASE4)",
+      "api": "ClinicalTrials.gov REST API"
+    },
+    {
+      "term": "Fiscal Year",
+      "label": "NIH Fiscal Year",
+      "description": "Government fiscal year (Oct 1 - Sep 30) for NIH funding records",
+      "api": "NIH RePORTER API"
+    },
+    {
+      "term": "Activity Code",
+      "label": "NIH Activity Code",
+      "description": "Code designating NIH award mechanism type (R01, R21, K08, etc.)",
+      "api": "NIH RePORTER API"
+    },
+    {
+      "term": "Direct Costs",
+      "label": "Direct Costs",
+      "description": "NIH grant funds allocated directly to the research project",
+      "api": "NIH RePORTER API"
+    },
+    {
+      "term": "Indirect Costs",
+      "label": "Indirect Costs",
+      "description": "NIH grant funds for institutional overhead (F&A costs)",
+      "api": "NIH RePORTER API"
+    },
+    {
+      "term": "BLAST",
+      "label": "Basic Local Alignment Search Tool",
+      "description": "Algorithm for finding similar sequences in biological databases",
+      "api": "NCBI BLAST URL API"
+    },
+    {
+      "term": "E-value",
+      "label": "Expect Value",
+      "description": "BLAST statistical measure of sequence alignment significance",
+      "api": "NCBI BLAST URL API"
+    },
+    {
+      "term": "Bit Score",
+      "label": "BLAST Bit Score",
+      "description": "Normalized score for BLAST alignment quality comparison across databases",
+      "api": "NCBI BLAST URL API"
+    }
+  ]
+}

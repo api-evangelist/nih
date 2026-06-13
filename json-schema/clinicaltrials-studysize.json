@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "sizeBytes": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "sizeBytes"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StudySize"
+}

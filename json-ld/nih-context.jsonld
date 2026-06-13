@@ -1,0 +1,64 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "ncbi": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/",
+    "ct": "https://clinicaltrials.gov/api/v2/",
+    "pubchem": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/",
+    "reporter": "https://api.reporter.nih.gov/v2/",
+    "nih": "https://www.nih.gov/",
+    "MedicalStudy": "schema:MedicalStudy",
+    "MedicalTrial": "schema:MedicalTrial",
+    "MedicalCondition": "schema:MedicalCondition",
+    "Drug": "schema:Drug",
+    "ChemicalSubstance": "schema:ChemicalSubstance",
+    "Organization": "schema:Organization",
+    "ResearchProject": "schema:ResearchProject",
+    "Grant": "schema:Grant",
+    "Gene": {
+      "@id": "ncbi:Gene",
+      "@type": "@id"
+    },
+    "GenomeAssembly": {
+      "@id": "ncbi:GenomeAssembly",
+      "@type": "@id"
+    },
+    "Compound": {
+      "@id": "pubchem:Compound",
+      "@type": "@id"
+    },
+    "ClinicalTrial": {
+      "@id": "ct:studies",
+      "@type": "@id"
+    },
+    "nctId": {
+      "@id": "ct:nctId",
+      "@type": "xsd:string"
+    },
+    "grantNumber": {
+      "@id": "reporter:grantNumber",
+      "@type": "xsd:string"
+    },
+    "taxonId": {
+      "@id": "ncbi:taxon",
+      "@type": "xsd:integer"
+    },
+    "pubMedId": {
+      "@id": "ncbi:pubmed",
+      "@type": "xsd:string"
+    },
+    "fiscalYear": {
+      "@id": "reporter:fiscalYear",
+      "@type": "xsd:integer"
+    },
+    "institute": {
+      "@id": "reporter:institute",
+      "@type": "xsd:string"
+    },
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@type": "APIContext",
+  "@id": "https://www.nih.gov/",
+  "name": "National Institutes of Health (NIH) API Linked Data Context",
+  "description": "JSON-LD context for NIH public APIs including NCBI Datasets, ClinicalTrials.gov, PubChem, NIH RePORTER, and E-utilities"
+}

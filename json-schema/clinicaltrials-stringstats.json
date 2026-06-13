@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "properties": {
+    "field": {
+      "type": "string"
+    },
+    "longest": {
+      "$ref": "#/components/schemas/LongestString"
+    },
+    "missingStudiesCount": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "piece": {
+      "type": "string"
+    },
+    "topValues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ValueCount"
+      }
+    },
+    "type": {
+      "$ref": "#/components/schemas/FieldStatsType"
+    },
+    "uniqueValuesCount": {
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "field",
+    "missingStudiesCount",
+    "piece",
+    "type",
+    "uniqueValuesCount"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StringStats"
+}

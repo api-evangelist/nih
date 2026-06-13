@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "pieces": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "type": {
+      "type": "string"
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EnumItem"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "pieces",
+    "type",
+    "values"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnumInfo"
+}

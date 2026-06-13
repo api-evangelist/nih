@@ -1,0 +1,13 @@
+{
+  "description": "ClinicalTrials.gov REST API - Study search example",
+  "api": "ClinicalTrials.gov REST API v2",
+  "endpoint": "GET /studies",
+  "parameters": {
+    "query.cond": "cancer",
+    "query.term": "AREA[Phase]PHASE3",
+    "filter.overallStatus": "RECRUITING",
+    "pageSize": 10,
+    "format": "json"
+  },
+  "curl_example": "curl -X GET 'https://clinicaltrials.gov/api/v2/studies?query.cond=cancer&filter.overallStatus=RECRUITING&pageSize=10' -H 'Accept: application/json'"
+}

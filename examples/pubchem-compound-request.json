@@ -1,0 +1,12 @@
+{
+  "description": "PubChem PUG REST API - Get compound properties by CID",
+  "api": "PubChem PUG REST",
+  "endpoint": "GET /compound/cid/{cids}/JSON",
+  "parameters": {
+    "cids": [
+      2244
+    ],
+    "properties": "MolecularFormula,MolecularWeight,CanonicalSMILES,IUPACName"
+  },
+  "curl_example": "curl -X GET 'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/2244/property/MolecularFormula,MolecularWeight/JSON'"
+}

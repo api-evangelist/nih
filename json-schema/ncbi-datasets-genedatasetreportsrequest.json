@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "properties": {
+    "returned_content": {
+      "$ref": "#/components/schemas/v2GeneDatasetReportsRequestContentType",
+      "title": "Return complete gene reports, or abbreviated reports with either GeneIDs only or GeneIDs, transcript and protein counts."
+    },
+    "gene_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "accessions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "symbols_for_taxon": {
+      "$ref": "#/components/schemas/v2GeneDatasetReportsRequestSymbolsForTaxon"
+    },
+    "taxon": {
+      "type": "string",
+      "title": "NCBI Taxonomy ID or name (common or scientific) that the genes are annotated at"
+    },
+    "locus_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "table_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "table_format": {
+      "type": "string",
+      "title": "Specify a predefined set of fields for the tabular report using built-in templates. Use of this parameter requires the HTTP header, `accept: text/tab-separated-values`."
+    },
+    "include_tabular_header": {
+      "$ref": "#/components/schemas/v2IncludeTabularHeader",
+      "title": "Specify when to include the table header when requesting a tabular report."
+    },
+    "page_size": {
+      "type": "integer",
+      "title": "The maximum number of gene reports to return. Default is 20 and maximum is 1000. If the number of results exceeds the page size, `page_token` can be used to retrieve the remaining results."
+    },
+    "page_token": {
+      "type": "string",
+      "title": "A page token is returned when the results count exceeds `page size`. Use this token along with previous request parameters to retrieve the next page of results. When `page_token` is empty, all results have been retrieved."
+    },
+    "query": {
+      "type": "string",
+      "title": "Limit to genes that match the specified gene symbol, name (description), alias, locus tag or protein name."
+    },
+    "types": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/v2GeneType"
+      }
+    },
+    "accession_filter": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tax_search_subtree": {
+      "type": "boolean",
+      "title": "If true, include genes from taxonomic ranks below the requested taxon."
+    },
+    "sort": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/v2SortField"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "v2GeneDatasetReportsRequest"
+}

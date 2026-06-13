@@ -1,0 +1,47 @@
+{
+  "path": "/studies",
+  "method": "get",
+  "status": "200",
+  "example": {
+    "totalCount": 438897,
+    "studies": [
+      {
+        "protocolSection": {
+          "identificationModule": {
+            "nctId": "NCT03540771",
+            "briefTitle": "Introducing Palliative Care (PC) Within the Treatment of End Stage Liver Disease (ESLD)"
+          },
+          "statusModule": {
+            "overallStatus": "RECRUITING"
+          }
+        },
+        "hasResults": false
+      },
+      {
+        "protocolSection": {
+          "identificationModule": {
+            "nctId": "NCT03630471",
+            "briefTitle": "Effectiveness of a Problem-solving Intervention for Common Adolescent Mental Health Problems in India"
+          },
+          "statusModule": {
+            "overallStatus": "COMPLETED"
+          }
+        },
+        "hasResults": false
+      },
+      {
+        "protocolSection": {
+          "identificationModule": {
+            "nctId": "NCT00587795",
+            "briefTitle": "Orthopedic Study of the Aircast StabilAir Wrist Fracture Brace"
+          },
+          "statusModule": {
+            "overallStatus": "TERMINATED"
+          }
+        },
+        "hasResults": true
+      }
+    ],
+    "nextPageToken": "abracadabra"
+  }
+}

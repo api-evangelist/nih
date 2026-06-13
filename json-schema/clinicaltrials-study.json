@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "protocolSection": {
+      "$ref": "#/components/schemas/ProtocolSection"
+    },
+    "resultsSection": {
+      "$ref": "#/components/schemas/ResultsSection"
+    },
+    "annotationSection": {
+      "$ref": "#/components/schemas/AnnotationSection"
+    },
+    "documentSection": {
+      "$ref": "#/components/schemas/DocumentSection"
+    },
+    "derivedSection": {
+      "$ref": "#/components/schemas/DerivedSection"
+    },
+    "hasResults": {
+      "type": "boolean"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Study"
+}

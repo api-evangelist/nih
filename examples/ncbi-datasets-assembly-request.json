@@ -1,0 +1,15 @@
+{
+  "description": "NCBI Datasets API - Genome assembly request example",
+  "api": "NCBI Datasets v2",
+  "endpoint": "GET /genome/accession/{accessions}",
+  "parameters": {
+    "accessions": [
+      "GCF_000001405.40"
+    ],
+    "include_annotation_type": [
+      "GENOME_FASTA",
+      "GENOME_GFF"
+    ]
+  },
+  "curl_example": "curl -X GET 'https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000001405.40' -H 'Accept: application/json'"
+}

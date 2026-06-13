@@ -1,0 +1,1155 @@
+{
+  "vocabulary": [
+    {
+      "term": "genome_download_summary",
+      "summary": "Get a download summary (preview) of a genome data package by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accessions}/download_summary"
+    },
+    {
+      "term": "genome_download_summary_by_post",
+      "summary": "Get a download summary (preview) of a genome data package by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/download_summary"
+    },
+    {
+      "term": "genome_dataset_report",
+      "summary": "Get a genome assembly report by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accessions}/dataset_report"
+    },
+    {
+      "term": "genome_dataset_reports_by_taxon",
+      "summary": "Get a genome assembly report by taxon",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/taxon/{taxons}/dataset_report"
+    },
+    {
+      "term": "genome_dataset_reports_by_bioproject",
+      "summary": "Get genome assembly reports by BioProject accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/bioproject/{bioprojects}/dataset_report"
+    },
+    {
+      "term": "genome_dataset_reports_by_biosample_id",
+      "summary": "Get genome assembly reports by BioSample accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/biosample/{biosample_ids}/dataset_report"
+    },
+    {
+      "term": "genome_dataset_reports_by_wgs",
+      "summary": "Get a genome assembly data report by WGS accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/wgs/{wgs_accessions}/dataset_report"
+    },
+    {
+      "term": "genome_dataset_reports_by_assembly_name",
+      "summary": "Get genome assembly reports by assembly name",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/assembly_name/{assembly_names}/dataset_report"
+    },
+    {
+      "term": "genome_dataset_report_by_post",
+      "summary": "Get a genome assembly report",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/dataset_report"
+    },
+    {
+      "term": "assembly_accessions_for_sequence_accession",
+      "summary": "Get a genome assembly accession for a nucleotide sequence accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/sequence_accession/{accession}/sequence_assemblies"
+    },
+    {
+      "term": "assembly_accessions_for_sequence_accession_by_post",
+      "summary": "Get a genome assembly accession for a nucleotide sequence accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/sequence_assemblies"
+    },
+    {
+      "term": "genome_sequence_report",
+      "summary": "Get a genome sequence report by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accession}/sequence_reports"
+    },
+    {
+      "term": "genome_sequence_report_by_post",
+      "summary": "Get a genome sequence report by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/sequence_reports"
+    },
+    {
+      "term": "genome_links_by_accession",
+      "summary": "Get assembly links by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accessions}/links"
+    },
+    {
+      "term": "genome_links_by_accession_by_post",
+      "summary": "Get assembly links by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/links"
+    },
+    {
+      "term": "checkm_histogram_by_taxon",
+      "summary": "Get CheckM histogram data by species taxon",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/taxon/{species_taxon}/checkm_histogram"
+    },
+    {
+      "term": "checkm_histogram_by_taxon_by_post",
+      "summary": "Get CheckM histogram data by species taxon",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/checkm_histogram"
+    },
+    {
+      "term": "BioSample_dataset_report",
+      "summary": "Get BioSample dataset reports by accession(s)",
+      "tags": [
+        "BioSample"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/biosample/accession/{accessions}/biosample_report"
+    },
+    {
+      "term": "download_assembly_package",
+      "summary": "Get a genome data package by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accessions}/download"
+    },
+    {
+      "term": "download_assembly_package_post",
+      "summary": "Get a genome data package by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/download"
+    },
+    {
+      "term": "download_gene_package",
+      "summary": "Get a gene data package by GeneID",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/id/{gene_ids}/download"
+    },
+    {
+      "term": "download_gene_package_post",
+      "summary": "Get a gene data package",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/gene/download"
+    },
+    {
+      "term": "download_prokaryote_gene_package",
+      "summary": "Get a prokaryote gene data package by RefSeq protein accession",
+      "tags": [
+        "Prokaryote"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/protein/accession/{accessions}/download"
+    },
+    {
+      "term": "download_prokaryote_gene_package_post",
+      "summary": "Get a prokaryote gene data package by RefSeq protein accession",
+      "tags": [
+        "Prokaryote"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/protein/accession/download"
+    },
+    {
+      "term": "download_genome_annotation_package",
+      "summary": "Get a genome annotation data package by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accession}/annotation_report/download"
+    },
+    {
+      "term": "download_genome_annotation_package_by_post",
+      "summary": "Get a genome annotation data package by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/annotation_report/download"
+    },
+    {
+      "term": "download_taxonomy_package",
+      "summary": "Get a taxonomy data package by Taxonomy ID",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon/{tax_ids}/download"
+    },
+    {
+      "term": "download_taxonomy_package_by_post",
+      "summary": "Get a taxonomy data package by Taxonomy ID",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy/download"
+    },
+    {
+      "term": "check_assembly_availability",
+      "summary": "Check the validity of a genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accessions}/check"
+    },
+    {
+      "term": "check_assembly_availability_post",
+      "summary": "Check the validity of a genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/check"
+    },
+    {
+      "term": "download_organelle_package",
+      "summary": "Get an organelle data package by nucleotide accession",
+      "tags": [
+        "Organelle"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/organelle/accession/{accessions}/download"
+    },
+    {
+      "term": "download_organelle_package_by_post",
+      "summary": "Get an organelle data package",
+      "tags": [
+        "Organelle"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/organelle/download"
+    },
+    {
+      "term": "version",
+      "summary": "Version",
+      "tags": [
+        "Version"
+      ],
+      "source": "ClinicalTrials.gov REST API",
+      "method": "GET",
+      "path": "/version"
+    },
+    {
+      "term": "gene_reports_by_id",
+      "summary": "Get gene reports by GeneID",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/id/{gene_ids}"
+    },
+    {
+      "term": "gene_metadata_by_accession",
+      "summary": "Get gene metadata by RefSeq Accession",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/accession/{accessions}"
+    },
+    {
+      "term": "gene_metadata_by_tax_and_symbol",
+      "summary": "Get gene metadata by gene symbol",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/symbol/{symbols}/taxon/{taxon}"
+    },
+    {
+      "term": "gene_reports_by_taxon",
+      "summary": "Get gene reports by taxonomic identifier",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/taxon/{taxon}"
+    },
+    {
+      "term": "gene_metadata_by_post",
+      "summary": "Get gene metadata as JSON",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/gene"
+    },
+    {
+      "term": "gene_dataset_reports_by_id",
+      "summary": "Get a gene data report by GeneID",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/id/{gene_ids}/dataset_report"
+    },
+    {
+      "term": "gene_dataset_report_by_accession",
+      "summary": "Get a gene data report by RefSeq nucleotide or protein accession",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/accession/{accessions}/dataset_report"
+    },
+    {
+      "term": "gene_dataset_report_by_tax_and_symbol",
+      "summary": "Get a gene data report by symbol and taxon",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/symbol/{symbols}/taxon/{taxon}/dataset_report"
+    },
+    {
+      "term": "gene_dataset_reports_by_taxon",
+      "summary": "Get a gene data report by taxon",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/taxon/{taxon}/dataset_report"
+    },
+    {
+      "term": "gene_dataset_reports_by_locus_tag",
+      "summary": "Get a gene data report by locus tag",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/locus_tag/{locus_tags}/dataset_report"
+    },
+    {
+      "term": "gene_dataset_report",
+      "summary": "Get a gene data report",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/gene/dataset_report"
+    },
+    {
+      "term": "gene_product_reports_by_id",
+      "summary": "Get a gene product report by GeneID",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/id/{gene_ids}/product_report"
+    },
+    {
+      "term": "gene_product_report_by_accession",
+      "summary": "Get a gene product report by RefSeq nucleotide or protein accession",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/accession/{accessions}/product_report"
+    },
+    {
+      "term": "gene_product_report_by_tax_and_symbol",
+      "summary": "Get a gene product report by symbol and taxon",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/symbol/{symbols}/taxon/{taxon}/product_report"
+    },
+    {
+      "term": "gene_product_reports_by_taxon",
+      "summary": "Get a gene product report by taxon",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/taxon/{taxon}/product_report"
+    },
+    {
+      "term": "gene_product_reports_by_locus_tags",
+      "summary": "Get a gene product report by locus tag",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/locus_tag/{locus_tags}/product_report"
+    },
+    {
+      "term": "gene_product_report",
+      "summary": "Get a gene product report",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/gene/product_report"
+    },
+    {
+      "term": "gene_download_summary_by_id",
+      "summary": "Get a download summary of a gene data package by GeneID",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/id/{gene_ids}/download_summary"
+    },
+    {
+      "term": "gene_download_summary_by_post",
+      "summary": "Get a download summary of a gene data package",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/gene/download_summary"
+    },
+    {
+      "term": "gene_counts_for_taxon",
+      "summary": "Get gene counts by taxon",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/taxon/{taxon}/counts"
+    },
+    {
+      "term": "gene_counts_for_taxon_by_post",
+      "summary": "Get gene counts by taxon",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/gene/taxon/counts"
+    },
+    {
+      "term": "gene_orthologs_by_id",
+      "summary": "Get a gene data report for a gene ortholog set by GeneID",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/id/{gene_id}/orthologs"
+    },
+    {
+      "term": "gene_orthologs_by_post",
+      "summary": "Get a gene data report for a gene ortholog set by GeneID",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/gene/orthologs"
+    },
+    {
+      "term": "gene_links_by_id",
+      "summary": "Get gene links by GeneID",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/id/{gene_ids}/links"
+    },
+    {
+      "term": "gene_links_by_id_by_post",
+      "summary": "Get gene links by GeneID",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/gene/links"
+    },
+    {
+      "term": "gene_chromosome_summary",
+      "summary": "Get gene counts per chromosome by taxon and annotation name",
+      "tags": [
+        "Gene"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/gene/taxon/{taxon}/annotation/{annotation_name}/chromosome_summary"
+    },
+    {
+      "term": "genome_annotation_report",
+      "summary": "Get genome annotation reports by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accession}/annotation_report"
+    },
+    {
+      "term": "genome_annotation_report_by_post",
+      "summary": "Get genome annotation reports by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/annotation_report"
+    },
+    {
+      "term": "annotation_report_facets_by_accession",
+      "summary": "Get genome annotation report summary information by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accession}/annotation_summary"
+    },
+    {
+      "term": "annotation_report_facets_by_post",
+      "summary": "Get genome annotation report summary information by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/annotation_summary"
+    },
+    {
+      "term": "genome_annotation_download_summary",
+      "summary": "Get a download summary (preview) of a genome annotation data package by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accession}/annotation_report/download_summary"
+    },
+    {
+      "term": "genome_annotation_download_summary_by_post",
+      "summary": "Get a download summary (preview) of a genome annotation data package by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/annotation_report/download_summary"
+    },
+    {
+      "term": "organelle_datareport_by_accession",
+      "summary": "Get an organelle data report by nucleotide accession",
+      "tags": [
+        "Organelle"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/organelle/accessions/{accessions}/dataset_report"
+    },
+    {
+      "term": "organelle_datareport_by_taxon",
+      "summary": "Get an organelle data report by taxon",
+      "tags": [
+        "Organelle"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/organelle/taxon/{taxons}/dataset_report"
+    },
+    {
+      "term": "organelle_datareport_by_post",
+      "summary": "Get an organelle data report",
+      "tags": [
+        "Organelle"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/organelle/dataset_report"
+    },
+    {
+      "term": "taxonomy_metadata",
+      "summary": "Use taxonomic identifiers to get taxonomic metadata",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon/{taxons}"
+    },
+    {
+      "term": "taxonomy_metadata_post",
+      "summary": "Get taxonomy metadata by taxon",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy"
+    },
+    {
+      "term": "taxonomy_data_report",
+      "summary": "Get a taxonomy data report by taxon",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon/{taxons}/dataset_report"
+    },
+    {
+      "term": "taxonomy_data_report_post",
+      "summary": "Get a taxonomy data report by taxon",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy/dataset_report"
+    },
+    {
+      "term": "taxonomy_names",
+      "summary": "Get a taxonomy names report by taxon",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon/{taxons}/name_report"
+    },
+    {
+      "term": "taxonomy_names_post",
+      "summary": "Get a taxonomy names report by taxon",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy/name_report"
+    },
+    {
+      "term": "taxonomy_related_ids",
+      "summary": "Get child nodes, and optionally parent nodes, for a given taxon by Taxonomy ID",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon/{tax_id}/related_ids"
+    },
+    {
+      "term": "taxonomy_related_ids_post",
+      "summary": "Get child nodes, and optionally parent nodes, for a given taxon by Taxonomy ID",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy/related_ids"
+    },
+    {
+      "term": "taxonomy_filtered_subtree",
+      "summary": "Get a filtered taxonomic subtree by taxon",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon/{taxons}/filtered_subtree"
+    },
+    {
+      "term": "taxonomy_filtered_subtree_post",
+      "summary": "Get a filtered taxonomic subtree by taxon",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy/filtered_subtree"
+    },
+    {
+      "term": "tax_name_query",
+      "summary": "Get a list of taxonomy names and IDs by partial taxonomic name",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon_suggest/{taxon_query}"
+    },
+    {
+      "term": "tax_name_query_by_post",
+      "summary": "Get a list of taxonomy names and IDs by partial taxonomic name",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy/taxon_suggest"
+    },
+    {
+      "term": "taxonomy_links",
+      "summary": "Get external links by Taxonomy ID",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon/{taxon}/links"
+    },
+    {
+      "term": "taxonomy_links_by_post",
+      "summary": "Get external links by Taxonomy ID",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy/links"
+    },
+    {
+      "term": "taxonomy_image",
+      "summary": "Get a taxonomy image by taxon",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon/{taxon}/image"
+    },
+    {
+      "term": "taxonomy_image_post",
+      "summary": "Get a taxonomy image by taxon",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy/image"
+    },
+    {
+      "term": "taxonomy_image_metadata",
+      "summary": "Get taxonomy image metadata by Taxonomy ID",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/taxonomy/taxon/{taxon}/image/metadata"
+    },
+    {
+      "term": "taxonomy_image_metadata_post",
+      "summary": "Get taxonomy image metadata by Taxonomy ID",
+      "tags": [
+        "Taxonomy"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/taxonomy/image/metadata"
+    },
+    {
+      "term": "virus_genome_summary",
+      "summary": "Get a download summary of a virus genome data package by taxon",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/taxon/{taxon}/genome"
+    },
+    {
+      "term": "virus_genome_summary_by_post",
+      "summary": "Get a download summary of a virus genome data package",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/virus/genome"
+    },
+    {
+      "term": "sars2_protein_summary",
+      "summary": "Get a download summary of a SARS-CoV-2 protein data package by protein name",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/taxon/sars2/protein/{proteins}"
+    },
+    {
+      "term": "sars2_protein_summary_by_post",
+      "summary": "Get a download summary of a SARS-CoV-2 protein data package by protein name",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/virus/taxon/sars2/protein"
+    },
+    {
+      "term": "virus_genome_table",
+      "summary": "Get virus genome metadata in a tabular format",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/taxon/{taxon}/genome/table"
+    },
+    {
+      "term": "sars2_protein_table",
+      "summary": "Get SARS-CoV-2 protein metadata in a tabular format by protein name",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/taxon/sars2/protein/{proteins}/table"
+    },
+    {
+      "term": "virus_reports_by_taxon",
+      "summary": "Get a virus data report by taxon",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/taxon/{taxon}/dataset_report"
+    },
+    {
+      "term": "virus_reports_by_acessions",
+      "summary": "Get a virus data report by nucleotide accession",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/accession/{accessions}/dataset_report"
+    },
+    {
+      "term": "virus_reports_by_post",
+      "summary": "Get a virus data report",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/virus"
+    },
+    {
+      "term": "virus_annotation_reports_by_taxon",
+      "summary": "Get a virus annotation report by taxon",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/taxon/{taxon}/annotation_report"
+    },
+    {
+      "term": "virus_annotation_reports_by_acessions",
+      "summary": "Get a virus annotation report by nucleotide accession",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/accession/{accessions}/annotation_report"
+    },
+    {
+      "term": "virus_annotation_reports_by_post",
+      "summary": "Get a virus annotation report",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/virus/annotation_report"
+    },
+    {
+      "term": "virus_accession_availability",
+      "summary": "Check the validity of a virus genome nucleotide accession",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/accession/{accessions}/check"
+    },
+    {
+      "term": "virus_accession_availability_post",
+      "summary": "Check the validity of a virus genome nucleotide accession",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/virus/check"
+    },
+    {
+      "term": "virus_genome_download",
+      "summary": "Get a virus genome data package by taxon",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/taxon/{taxon}/genome/download"
+    },
+    {
+      "term": "virus_genome_download_accession",
+      "summary": "Get a virus genome data package by nucleotide accession",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/accession/{accessions}/genome/download"
+    },
+    {
+      "term": "virus_genome_download_post",
+      "summary": "Get a virus genome data package",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/virus/genome/download"
+    },
+    {
+      "term": "sars2_protein_download",
+      "summary": "Get a SARS-CoV-2 protein data package by protein name",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/virus/taxon/sars2/protein/{proteins}/download"
+    },
+    {
+      "term": "sars2_protein_download_post",
+      "summary": "Get a SARS-CoV-2 protein data package",
+      "tags": [
+        "Virus"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/virus/taxon/sars2/protein/download"
+    },
+    {
+      "term": "assembly_revision_history_by_get",
+      "summary": "Get a revision history for a genome assembly by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "GET",
+      "path": "/genome/accession/{accession}/revision_history"
+    },
+    {
+      "term": "assembly_revision_history_by_post",
+      "summary": "Get a revision history for a genome assembly by genome assembly accession",
+      "tags": [
+        "Genome"
+      ],
+      "source": "NCBI Datasets API",
+      "method": "POST",
+      "path": "/genome/revision_history"
+    },
+    {
+      "term": "listStudies",
+      "summary": "Studies",
+      "tags": [
+        "Studies"
+      ],
+      "source": "ClinicalTrials.gov REST API",
+      "method": "GET",
+      "path": "/studies"
+    },
+    {
+      "term": "fetchStudy",
+      "summary": "Single Study",
+      "tags": [
+        "Studies"
+      ],
+      "source": "ClinicalTrials.gov REST API",
+      "method": "GET",
+      "path": "/studies/{nctId}"
+    },
+    {
+      "term": "studiesMetadata",
+      "summary": "Data Model Fields",
+      "tags": [
+        "Studies"
+      ],
+      "source": "ClinicalTrials.gov REST API",
+      "method": "GET",
+      "path": "/studies/metadata"
+    },
+    {
+      "term": "searchAreas",
+      "summary": "Search Areas",
+      "tags": [
+        "Studies"
+      ],
+      "source": "ClinicalTrials.gov REST API",
+      "method": "GET",
+      "path": "/studies/search-areas"
+    },
+    {
+      "term": "enums",
+      "summary": "Enums",
+      "tags": [
+        "Studies"
+      ],
+      "source": "ClinicalTrials.gov REST API",
+      "method": "GET",
+      "path": "/studies/enums"
+    },
+    {
+      "term": "sizeStats",
+      "summary": "Study Sizes",
+      "tags": [
+        "Stats"
+      ],
+      "source": "ClinicalTrials.gov REST API",
+      "method": "GET",
+      "path": "/stats/size"
+    },
+    {
+      "term": "fieldValuesStats",
+      "summary": "Field Values",
+      "tags": [
+        "Stats"
+      ],
+      "source": "ClinicalTrials.gov REST API",
+      "method": "GET",
+      "path": "/stats/field/values"
+    },
+    {
+      "term": "listFieldSizesStats",
+      "summary": "List Field Sizes",
+      "tags": [
+        "Stats"
+      ],
+      "source": "ClinicalTrials.gov REST API",
+      "method": "GET",
+      "path": "/stats/field/sizes"
+    }
+  ],
+  "total": 115
+}

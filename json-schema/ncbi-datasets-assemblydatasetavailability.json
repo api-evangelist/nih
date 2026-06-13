@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "valid_assemblies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "invalid_assemblies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reason": {
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "v2AssemblyDatasetAvailability"
+}

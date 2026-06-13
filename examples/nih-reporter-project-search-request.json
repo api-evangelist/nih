@@ -1,0 +1,27 @@
+{
+  "description": "NIH RePORTER API - Search research projects example",
+  "api": "NIH RePORTER API v2",
+  "endpoint": "POST /projects/search",
+  "request_body": {
+    "criteria": {
+      "fiscal_years": [
+        2024
+      ],
+      "agencies": [
+        "NCI"
+      ],
+      "activity_codes": [
+        "R01"
+      ],
+      "award_amount_range": {
+        "min_amount": 100000,
+        "max_amount": 500000
+      }
+    },
+    "offset": 0,
+    "limit": 25,
+    "sort_field": "project_start_date",
+    "sort_order": "desc"
+  },
+  "curl_example": "curl -X POST 'https://api.reporter.nih.gov/v2/projects/search' -H 'Content-Type: application/json' -d '{\"criteria\":{\"fiscal_years\":[2024],\"agencies\":[\"NCI\"]}}'"
+}

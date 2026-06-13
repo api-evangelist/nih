@@ -1,0 +1,13 @@
+{
+  "description": "NCBI Datasets API - Gene search by symbol example",
+  "api": "NCBI Datasets v2",
+  "endpoint": "GET /gene/symbol/{symbols}/gene_ids",
+  "parameters": {
+    "symbols": [
+      "BRCA1",
+      "BRCA2"
+    ],
+    "taxon": "human"
+  },
+  "curl_example": "curl -X GET 'https://api.ncbi.nlm.nih.gov/datasets/v2/gene/symbol/BRCA1,BRCA2/gene_ids?taxon=human' -H 'Accept: application/json'"
+}
