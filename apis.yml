@@ -2,7 +2,7 @@ aid: nih
 name: National Institutes of Health (NIH)
 description: The US National Institutes of Health (NIH) provides a suite of public REST APIs for biomedical research, including PubMed literature search via E-utilities, ClinicalTrials.gov clinical trial data, chemical compound data through PubChem, gene and genome databases via NCBI Datasets, BLAST sequence alignment, and NIH research funding data through RePORTER.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/nih/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -20,7 +20,7 @@ tags:
 apis:
   - name: NCBI E-utilities (Entrez Programming Utilities)
     description: The public API to the NCBI Entrez system providing programmatic access to all Entrez databases including PubMed, PMC, Gene, Nuccore, and Protein. Supports searching, fetching, linking, and summarizing records across 38+ databases.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.ncbi.nlm.nih.gov/home/develop/api/
     baseURL: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/
     tags:
@@ -37,7 +37,7 @@ apis:
 
   - name: NCBI Datasets v2 REST API
     description: OpenAPI 3.0-based REST API providing programmatic access to biological datasets including gene metadata, genome assemblies, taxonomy classifications, and virus genomes. Supports multiple programming languages via generated client libraries.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.ncbi.nlm.nih.gov/datasets/docs/v2/api/rest-api/
     baseURL: https://api.ncbi.nlm.nih.gov/datasets/v2/
     tags:
@@ -57,7 +57,7 @@ apis:
 
   - name: PubChem Power User Gateway (PUG REST)
     description: Suite of REST APIs providing programmatic access to PubChem chemical compound data, including chemical structure searches, compound properties, biological assay data, and chemical standardization for millions of compounds.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://pubchem.ncbi.nlm.nih.gov/docs/programmatic-access
     baseURL: https://pubchem.ncbi.nlm.nih.gov/rest/pug/
     tags:
@@ -77,7 +77,7 @@ apis:
 
   - name: ClinicalTrials.gov REST API
     description: REST API providing access to the ClinicalTrials.gov database of federally and privately supported clinical studies on human participants, covering study designs, eligibility criteria, locations, results, and status information.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://clinicaltrials.gov/data-api/api
     baseURL: https://clinicaltrials.gov/api/v2/
     tags:
@@ -96,7 +96,7 @@ apis:
 
   - name: NIH RePORTER API
     description: REST API providing programmatic access to NIH-funded research project data including grants, contracts, publications, and patents. Enables search and retrieval of funding records with extensive filtering by institute, mechanism, fiscal year, and keywords.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://reporter.nih.gov/
     baseURL: https://api.reporter.nih.gov/v2/
     tags:
@@ -113,7 +113,7 @@ apis:
 
   - name: NCBI BLAST URL API
     description: API enabling developers to submit BLAST (Basic Local Alignment Search Tool) sequence searches via HTTPS for processing at NCBI or cloud service providers, check job status, and retrieve results in multiple formats for sequence similarity analysis.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=DeveloperInfo
     baseURL: https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi
     tags:
@@ -130,7 +130,7 @@ apis:
 
   - name: PubMed Central (PMC) OA API
     description: APIs for programmatic access to PubMed Central's Open Access content, including file validation, Open Access service, and an ID converter for translating between PMCID, PMID, Manuscript ID, and DOI identifiers.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://pmc.ncbi.nlm.nih.gov/tools/developers/
     baseURL: https://www.ncbi.nlm.nih.gov/pmc/
     tags:
