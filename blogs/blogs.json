@@ -2,10 +2,17 @@
   "repo": "nih",
   "feeds": [
     {
+      "source": "https://ncbiinsights.ncbi.nlm.nih.gov/feed/",
+      "feed_url": "https://ncbiinsights.ncbi.nlm.nih.gov/feed/",
+      "title": "",
+      "saved": 1,
+      "method": "feed"
+    },
+    {
       "source": "https://www.linkedin.com/company/national-institutes-of-health",
       "error": "HTTPError"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z",
+  "post_count": 3
 }
