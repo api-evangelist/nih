@@ -146,6 +146,10 @@ apis:
         url: https://pmc.ncbi.nlm.nih.gov/
 
 common:
+  - type: DomainSecurity
+    url: security/nih-domain-security.yml
+  - type: Authentication
+    url: authentication/nih-authentication.yml
   - type: Website
     url: https://www.nih.gov/
   - type: Documentation
