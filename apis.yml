@@ -146,6 +146,8 @@ apis:
         url: https://pmc.ncbi.nlm.nih.gov/
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/nih-agentic-access.yml
   - type: DomainSecurity
     url: security/nih-domain-security.yml
   - type: Authentication
