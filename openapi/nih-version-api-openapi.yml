@@ -1,0 +1,56 @@
+openapi: 3.0.3
+info:
+  title: ClinicalTrials.gov REST BioSample Version API
+  description: This API is made available to provide users meta data, statistics, and the most recent version of the clinical trials available on ClinicalTrials.gov.
+  version: 2.0.5
+servers:
+- url: https://clinicaltrials.gov/api/v2
+  description: This server
+tags:
+- name: Version
+  description: Version info
+paths:
+  /version:
+    get:
+      summary: Version
+      description: 'API and data versions.
+
+
+        API version follows [Semantic Versioning 2.0.0 Schema](https://semver.org/spec/v2.0.0.html).
+
+        Data version is UTC timestamp in `yyyy-MM-dd''T''HH:mm:ss` format.'
+      tags:
+      - Version
+      operationId: version
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/errorMessage'
+components:
+  schemas:
+    errorMessage:
+      type: string
+      description: A text message describing an error
+    Version:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+        dataTimestamp:
+          type: string
+      additionalProperties: false
+      required:
+      - apiVersion
+externalDocs:
+  description: Introduction on clinicaltrials.gov
+  url: https://clinicaltrials.gov/data-about-studies/learn-about-api

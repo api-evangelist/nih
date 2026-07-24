@@ -1,0 +1,193 @@
+openapi: 3.0.3
+info:
+  title: ClinicalTrials.gov REST BioSample Prokaryote API
+  description: This API is made available to provide users meta data, statistics, and the most recent version of the clinical trials available on ClinicalTrials.gov.
+  version: 2.0.5
+servers:
+- url: https://clinicaltrials.gov/api/v2
+  description: This server
+tags:
+- name: Prokaryote
+  description: '#### Options to download prokaryote gene data, including the associated sequence and metadata.
+
+    These gene services allow you to download gene and protein sequence, and metadata as a prokaryote gene data package, for prokaryotic [RefSeq non-redundant proteins](https://www.ncbi.nlm.nih.gov/refseq/about/nonredundantproteins/).
+
+    '
+paths:
+  /protein/accession/{accessions}/download:
+    get:
+      summary: Get a prokaryote gene data package by RefSeq protein accession
+      description: Download a prokaryote gene data package including sequence, annotation and data reports by RefSeq non-redundant protein accession.
+      tags:
+      - Prokaryote
+      operationId: download_prokaryote_gene_package
+      responses:
+        default:
+          description: An unexpected error response.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+        '200':
+          description: A successful response
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+      parameters:
+      - name: accessions
+        description: One or more RefSeq non-redundant protein accessions (preceded by `WP_`)
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          example-0:
+            value: WP_015878339.1
+            summary: DNA-deoxyinosine glycosylase
+          example-1:
+            value: WP_001040085.1
+            summary: type II CRISPR RNA-guided endonuclease Cas9
+      - name: include_annotation_type
+        description: Specify which sequence files to include in the data package.
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2Fasta'
+        examples:
+          example-0:
+            value: FASTA_GENE
+            summary: Include gene sequence file, which includes gene sequences for all genomes on which the protein is annotated
+          example-1:
+            value:
+            - FASTA_GENE
+            - FASTA_PROTEIN
+            summary: Include gene and protein sequence files
+      - name: gene_flank_config.length
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: taxon
+        description: Limit gene sequences and the genome assemblies described by the [annotation report file](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/data-reports/prokaryote-gene-location/) to the specified NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+  /protein/accession/download:
+    post:
+      summary: Get a prokaryote gene data package by RefSeq protein accession
+      description: Download a prokaryote gene data package including sequence, annotation and data reports by RefSeq non-redundant protein accession.
+      tags:
+      - Prokaryote
+      operationId: download_prokaryote_gene_package_post
+      responses:
+        default:
+          description: An unexpected error response.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+        '200':
+          description: A successful response
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+                description: Zip compressed stream
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v2ProkaryoteGeneRequest'
+            examples:
+              Multiple Prokaryote (WP_) accessions example:
+                description: DNA-deoxyinosine glycosylase (WP_015878339.1) and type II CRISPR RNA-guided endonuclease Cas9 (WP_001040085.1), with gene and protein sequence files
+                value:
+                  accessions:
+                  - WP_015878339.1
+                  - WP_001040085.1
+                  include_annotation_type:
+                  - FASTA_GENE
+                  - FASTA_PROTEIN
+      parameters:
+      - name: filename
+        description: Output file name.
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ncbi_dataset.zip
+components:
+  schemas:
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
+    v2ProkaryoteGeneRequestGeneFlankConfig:
+      type: object
+      properties:
+        length:
+          type: integer
+    v2Fasta:
+      type: string
+      enum:
+      - FASTA_UNSPECIFIED
+      - FASTA_GENE
+      - FASTA_RNA
+      - FASTA_PROTEIN
+      - FASTA_GENE_FLANK
+      - FASTA_CDS
+      - FASTA_5P_UTR
+      - FASTA_3P_UTR
+      default: FASTA_UNSPECIFIED
+    rpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    v2ProkaryoteGeneRequest:
+      type: object
+      properties:
+        accessions:
+          type: array
+          items:
+            type: string
+        include_annotation_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2Fasta'
+        gene_flank_config:
+          $ref: '#/components/schemas/v2ProkaryoteGeneRequestGeneFlankConfig'
+        taxon:
+          type: string
+          title: Limit gene sequences and the genome assemblies described by the [annotation report file](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/data-reports/prokaryote-gene-location/) to the specified NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank.
+externalDocs:
+  description: Introduction on clinicaltrials.gov
+  url: https://clinicaltrials.gov/data-about-studies/learn-about-api
