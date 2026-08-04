@@ -1,0 +1,32 @@
+{
+  "provider": "nih",
+  "sources": [
+    "nih-biosample-api-openapi.yml",
+    "nih-gene-api-openapi.yml",
+    "nih-genome-api-openapi.yml",
+    "nih-organelle-api-openapi.yml",
+    "nih-prokaryote-api-openapi.yml",
+    "nih-stats-api-openapi.yml",
+    "nih-studies-api-openapi.yml",
+    "nih-taxonomy-api-openapi.yml",
+    "nih-version-api-openapi.yml",
+    "nih-virus-api-openapi.yml"
+  ],
+  "outputs": [
+    "nih-biosample-api-openapi.yml",
+    "nih-gene-api-openapi.yml",
+    "nih-genome-api-openapi.yml",
+    "nih-organelle-api-openapi.yml",
+    "nih-prokaryote-api-openapi.yml",
+    "nih-stats-api-openapi.yml",
+    "nih-studies-api-openapi.yml",
+    "nih-taxonomy-api-openapi.yml",
+    "nih-version-api-openapi.yml",
+    "nih-virus-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
