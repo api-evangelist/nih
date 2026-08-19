@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClinicalTrials.gov REST BioSample Version API",
+    "version": "2.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Version",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://clinicaltrials.gov/api/v2/version"
+          },
+          "docs": "API and data versions.\n\nAPI version follows [Semantic Versioning 2.0.0 Schema](https://semver.org/spec/v2.0.0.html).\nData version is UTC timestamp in `yyyy-MM-dd'T'HH:mm:ss` format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

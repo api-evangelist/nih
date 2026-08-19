@@ -1,0 +1,137 @@
+{
+  "item": [
+    {
+      "id": "8e0835c0-7574-48c1-97fd-210dc5cfb637",
+      "name": "Version",
+      "description": {
+        "content": "Version info",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1d3cc16a-7299-4b9d-b0f1-30c8648c28f7",
+          "name": "Version",
+          "request": {
+            "name": "Version",
+            "description": {
+              "content": "API and data versions.\n\nAPI version follows [Semantic Versioning 2.0.0 Schema](https://semver.org/spec/v2.0.0.html).\nData version is UTC timestamp in `yyyy-MM-dd'T'HH:mm:ss` format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97fd4402-e666-4df0-95f1-0186393111c3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"dataTimestamp\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c80c32c6-c2b3-4770-82a5-e68678352490",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://clinicaltrials.gov/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "239f9c79-7690-441f-b947-4531d49c0822",
+    "name": "ClinicalTrials.gov REST BioSample Version API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API is made available to provide users meta data, statistics, and the most recent version of the clinical trials available on ClinicalTrials.gov.",
+      "type": "text/plain"
+    }
+  }
+}

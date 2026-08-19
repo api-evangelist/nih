@@ -1,0 +1,498 @@
+{
+  "item": [
+    {
+      "id": "cc93d21b-2198-4919-bd5d-011b8bfd1bcc",
+      "name": "Stats",
+      "description": {
+        "content": "Data statistics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6bb607fc-18b6-4cff-bf78-7e1cd3444175",
+          "name": "Study Sizes",
+          "request": {
+            "name": "Study Sizes",
+            "description": {
+              "content": "Statistics of study JSON sizes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                "size"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b960266e-ed60-468c-a619-888d251d400e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "size"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"averageSizeBytes\": 7695,\n  \"largestStudies\": [\n    {\n      \"id\": \"string\",\n      \"sizeBytes\": 848\n    },\n    {\n      \"id\": \"string\",\n      \"sizeBytes\": 552\n    }\n  ],\n  \"percentiles\": {},\n  \"ranges\": [\n    {\n      \"sizeRange\": \"string\",\n      \"studiesCount\": 8815\n    },\n    {\n      \"sizeRange\": \"string\",\n      \"studiesCount\": 7173\n    }\n  ],\n  \"totalStudies\": 3444\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5540c28-d4e8-4706-890d-9bdba5afffb7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "size"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41d560dc-7761-4512-87a8-19025116a6dd",
+          "name": "Field Values",
+          "request": {
+            "name": "Field Values",
+            "description": {
+              "content": "Value statistics of the study leaf fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                "field",
+                "values"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "",
+                  "description": "Filter by field types"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Filter by piece names or field paths of leaf fields.\nSee [Data Structure](/data-api/about-api/study-data-structure) for the available values.\n\nIf specified, must be non-empty comma- or pipe-separated list of fields to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5c02e1d-4bbf-4b5b-ace8-16b40c365986",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "field",
+                    "values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "types",
+                      "value": "ENUM|BOOLEAN"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "Phase"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"field\": \"string\",\n    \"missingStudiesCount\": 5897,\n    \"piece\": \"string\",\n    \"type\": \"<string>\",\n    \"uniqueValuesCount\": 6014,\n    \"topValues\": [\n      {\n        \"studiesCount\": 5915,\n        \"value\": \"string\"\n      },\n      {\n        \"studiesCount\": 9065,\n        \"value\": \"string\"\n      }\n    ]\n  },\n  {\n    \"field\": \"string\",\n    \"missingStudiesCount\": 6909,\n    \"piece\": \"string\",\n    \"type\": \"<string>\",\n    \"uniqueValuesCount\": 5905,\n    \"topValues\": [\n      {\n        \"studiesCount\": 2279,\n        \"value\": \"string\"\n      },\n      {\n        \"studiesCount\": 9024,\n        \"value\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db1ded4b-6dd5-47c4-bf70-2ef1141bf839",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "field",
+                    "values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "types",
+                      "value": "ENUM|BOOLEAN"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "Phase"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f6b99b91-383f-40b1-bbd8-9a7c358c0e0c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "field",
+                    "values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "types",
+                      "value": "ENUM|BOOLEAN"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "Phase"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc3d3694-81df-4e7a-8255-420652896c43",
+          "name": "List Field Sizes",
+          "request": {
+            "name": "List Field Sizes",
+            "description": {
+              "content": "Sizes of list/array fields.\n\nTo search studies by a list field size, use `AREA[FieldName:size]` search operator.\nFor example, [AREA\\[Phase:size\\] 2](https://clinicaltrials.gov/search?term=AREA%5BPhase:size%5D%202)\nquery finds studies with 2 phases.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                "field",
+                "sizes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>|<string>",
+                  "description": "Filter by piece names or field paths of leaf fields.\nSee [Data Structure](/data-api/about-api/study-data-structure) for the available values.\n\nIf specified, must be non-empty comma- or pipe-separated list of fields to return.\nIf unspecified, all available stats will be returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9b25b6e-ffda-42bc-8a5c-4140461ebaa9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "field",
+                    "sizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "Phase"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"field\": \"string\",\n    \"piece\": \"string\",\n    \"uniqueSizesCount\": 729,\n    \"maxSize\": 1228,\n    \"minSize\": 4322,\n    \"topSizes\": [\n      {\n        \"size\": 6904,\n        \"studiesCount\": 2757\n      },\n      {\n        \"size\": 6880,\n        \"studiesCount\": 3430\n      }\n    ]\n  },\n  {\n    \"field\": \"string\",\n    \"piece\": \"string\",\n    \"uniqueSizesCount\": 3178,\n    \"maxSize\": 9849,\n    \"minSize\": 7176,\n    \"topSizes\": [\n      {\n        \"size\": 3972,\n        \"studiesCount\": 1268\n      },\n      {\n        \"size\": 1452,\n        \"studiesCount\": 222\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cf28323-1973-49d9-ade5-ca5e246537ba",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "field",
+                    "sizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "Phase"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a24f430-7ab1-4372-a542-764f8a8ba6e5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "field",
+                    "sizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "Phase"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://clinicaltrials.gov/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6452858c-701c-479d-ad9a-97b8a956b08c",
+    "name": "ClinicalTrials.gov REST BioSample Stats API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API is made available to provide users meta data, statistics, and the most recent version of the clinical trials available on ClinicalTrials.gov.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClinicalTrials.gov REST BioSample Stats API",
+    "version": "2.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Study Sizes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://clinicaltrials.gov/api/v2/stats/size"
+          },
+          "docs": "Statistics of study JSON sizes."
+        },
+        {
+          "info": {
+            "name": "Field Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://clinicaltrials.gov/api/v2/stats/field/values",
+            "params": [
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Filter by field types"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Filter by piece names or field paths of leaf fields.\nSee [Data Structure](/data-api/about-api/study-data-structure) for the available values.\n\nIf specified, must be non-empty comma- or pipe-separated list of fields to return."
+              }
+            ]
+          },
+          "docs": "Value statistics of the study leaf fields."
+        },
+        {
+          "info": {
+            "name": "List Field Sizes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://clinicaltrials.gov/api/v2/stats/field/sizes",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Filter by piece names or field paths of leaf fields.\nSee [Data Structure](/data-api/about-api/study-data-structure) for the available values.\n\nIf specified, must be non-empty comma- or pipe-separated list of fields to return.\nIf unspecified, all available stats will be returned."
+              }
+            ]
+          },
+          "docs": "Sizes of list/array fields.\n\nTo search studies by a list field size, use `AREA[FieldName:size]` search operator.\nFor example, [AREA\\[Phase:size\\] 2](https://clinicaltrials.gov/search?term=AREA%5BPhase:size%5D%202)\nquery finds studies with 2 phases."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

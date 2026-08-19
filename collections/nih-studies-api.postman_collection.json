@@ -1,0 +1,1186 @@
+{
+  "item": [
+    {
+      "id": "350ddcdb-d28e-4921-a746-8708095d8c76",
+      "name": "Studies",
+      "description": {
+        "content": "Related to clinical trial studies",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf65d589-898c-4c38-adf4-83d328391288",
+          "name": "Studies",
+          "request": {
+            "name": "Studies",
+            "description": {
+              "content": "Returns data of studies matching query and filter parameters. The studies are returned page by page.\nIf response contains `nextPageToken`, use its value in `pageToken` to get next page.\nThe last page will not contain `nextPageToken`. A page may have empty `studies` array.\nRequest for each subsequent page **must** have the same parameters as for the first page, except\n`countTotal`, `pageSize`, and `pageToken` parameters.\n\nIf neither queries nor filters are set, all studies will be returned.\nIf any query parameter contains only NCT IDs (comma- and/or space-separated), filters are ignored.\n\n`query.*` parameters are in [Essie expression syntax](/find-studies/constructing-complex-search-queries).\nThose parameters affect ranking of studies, if sorted by relevance. See `sort` parameter for details.\n\n`filter.*` and `postFilter.*` parameters have same effect as there is no aggregation calculation. \nBoth are available just to simplify applying parameters from search request.\nBoth do not affect ranking of studies.\n\nNote: When trying JSON format in your browser, do not set too large `pageSize` parameter, if `fields` is\nunlimited. That may return too much data for the browser to parse and render.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "studies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Must be one of the following:\n* `csv`- return CSV table with one page of study data; first page will contain header with column names; available fields are listed on [CSV Download](/data-api/about-api/csv-download) page\n* `json`- return JSON with one page of study data; every study object is placed in a separate line; `markup` type fields format depends on `markupFormat` parameter"
+                },
+                {
+                  "disabled": false,
+                  "key": "markupFormat",
+                  "value": "markdown",
+                  "description": "Format of `markup` type fields:\n* `markdown`- [markdown](https://spec.commonmark.org/0.28/) format\n* `legacy`- compatible with classic PRS\n\nApplicable only to `json` format."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.cond",
+                  "value": "<string>",
+                  "description": "\"Conditions or disease\" query in [Essie expression syntax](/find-studies/constructing-complex-search-queries). See \"ConditionSearch Area\" on [Search Areas](/data-api/about-api/search-areas#ConditionSearch) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.term",
+                  "value": "<string>",
+                  "description": "\"Other terms\" query in [Essie expression syntax](/find-studies/constructing-complex-search-queries). See \"BasicSearch Area\" on [Search Areas](/data-api/about-api/search-areas#BasicSearch) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.locn",
+                  "value": "<string>",
+                  "description": "\"Location terms\" query in [Essie expression syntax](/find-studies/constructing-complex-search-queries). See \"LocationSearch Area\" on [Search Areas](/data-api/about-api/search-areas#LocationSearch) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.titles",
+                  "value": "<string>",
+                  "description": "\"Title / acronym\" query in [Essie expression syntax](/find-studies/constructing-complex-search-queries). See \"TitleSearch Area\" on [Search Areas](/data-api/about-api/search-areas#TitleSearch) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.intr",
+                  "value": "<string>",
+                  "description": "\"Intervention / treatment\" query in [Essie expression syntax](/find-studies/constructing-complex-search-queries). See \"InterventionSearch Area\" on [Search Areas](/data-api/about-api/search-areas#InterventionSearch) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.outc",
+                  "value": "<string>",
+                  "description": "\"Outcome measure\" query in [Essie expression syntax](/find-studies/constructing-complex-search-queries). See \"OutcomeSearch Area\" on [Search Areas](/data-api/about-api/search-areas#OutcomeSearch) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.spons",
+                  "value": "<string>",
+                  "description": "\"Sponsor / collaborator\" query in [Essie expression syntax](/find-studies/constructing-complex-search-queries). See \"SponsorSearch Area\" on [Search Areas](/data-api/about-api/search-areas#SponsorSearch) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.lead",
+                  "value": "<string>",
+                  "description": "Searches in \"LeadSponsorName\" field. See [Study Data Structure](/data-api/about-api/study-data-structure#LeadSponsorName) for more details. The query is in [Essie expression syntax](/find-studies/constructing-complex-search-queries)."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.id",
+                  "value": "<string>",
+                  "description": "\"Study IDs\" query in [Essie expression syntax](/find-studies/constructing-complex-search-queries). See \"IdSearch Area\" on [Search Areas](/data-api/about-api/search-areas#IdSearch) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "query.patient",
+                  "value": "<string>",
+                  "description": "See \"PatientSearch Area\" on [Search Areas](/data-api/about-api/search-areas#PatientSearch) for more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.overallStatus",
+                  "value": "<string>|<string>",
+                  "description": "Filter by comma- or pipe-separated list of statuses"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.geo",
+                  "value": "<string>",
+                  "description": "Filter by geo-function. Currently only distance function is supported.\nFormat: `distance(latitude,longitude,distance)`"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.ids",
+                  "value": "<string>|<string>",
+                  "description": "Filter by comma- or pipe-separated list of NCT IDs (a.k.a. ClinicalTrials.gov identifiers).\nThe provided IDs will be searched in [NCTId](data-api/about-api/study-data-structure#NCTId) and\n[NCTIdAlias](data-api/about-api/study-data-structure#NCTIdAlias) fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.advanced",
+                  "value": "<string>",
+                  "description": "Filter by query in [Essie expression syntax](/find-studies/constructing-complex-search-queries)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.synonyms",
+                  "value": "<string>|<string>",
+                  "description": "Filter by comma- or pipe-separated list of `area`:`synonym_id` pairs"
+                },
+                {
+                  "disabled": false,
+                  "key": "postFilter.overallStatus",
+                  "value": "<string>|<string>",
+                  "description": "Filter by comma- or pipe-separated list of statuses"
+                },
+                {
+                  "disabled": false,
+                  "key": "postFilter.geo",
+                  "value": "<string>",
+                  "description": "Filter by geo-function. Currently only distance function is supported.\nFormat: `distance(latitude,longitude,distance)`"
+                },
+                {
+                  "disabled": false,
+                  "key": "postFilter.ids",
+                  "value": "<string>|<string>",
+                  "description": "Filter by comma- or pipe-separated list of NCT IDs (a.k.a. ClinicalTrials.gov identifiers).\nThe provided IDs will be searched in [NCTId](data-api/about-api/study-data-structure#NCTId) and\n[NCTIdAlias](data-api/about-api/study-data-structure#NCTIdAlias) fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "postFilter.advanced",
+                  "value": "<string>",
+                  "description": "Filter by query in [Essie expression syntax](/find-studies/constructing-complex-search-queries)"
+                },
+                {
+                  "disabled": false,
+                  "key": "postFilter.synonyms",
+                  "value": "<string>|<string>",
+                  "description": "Filter by comma- or pipe-separated list of `area`:`synonym_id` pairs"
+                },
+                {
+                  "disabled": false,
+                  "key": "aggFilters",
+                  "value": "<string>",
+                  "description": "Apply aggregation filters, aggregation counts will not be provided.\nThe value is comma- or pipe-separated list of pairs `filter_id`:`space-separated list of option keys` for the checked options."
+                },
+                {
+                  "disabled": false,
+                  "key": "geoDecay",
+                  "value": "func:exp,scale:300mi,offset:0mi,decay:0.5",
+                  "description": "Set proximity factor by distance from `filter.geo` location to the closest [LocationGeoPoint](/data-api/about-api/study-data-structure#LocationGeoPoint) of a study.\nIgnored, if `filter.geo` parameter is not set or response contains more than 10,000 studies."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "If specified, must be non-empty comma- or pipe-separated list of fields to return. If unspecified, all fields will be returned.\nOrder of the fields does not matter.\n\nFor `csv` format, specify list of columns. The column names are available on [CSV Download](/data-api/about-api/csv-download).\n\nFor `json` format, every list item is either area name, piece name, field name, or special name.\nIf a piece or a field is a branch node, all descendant fields will be included.\nAll area names are available on [Search Areas](/data-api/about-api/search-areas),\nthe piece and field names — on [Data Structure](/data-api/about-api/study-data-structure) and also can be retrieved at `/studies/metadata` endpoint.\nThere is a special name, `@query`, which expands to all fields queried by search."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "",
+                  "description": "Comma- or pipe-separated list of sorting options of the studies. The returning studies are not sorted by default for a performance reason.\nEvery list item contains a field/piece name and an optional sort direction (`asc` for ascending or `desc` for descending)\nafter colon character.\n\nAll piece and field names can be found on [Data Structure](/data-api/about-api/study-data-structure) and also can be retrieved\nat `/studies/metadata` endpoint. Currently, only date and numeric fields are allowed for sorting.\nThere is a special \"field\" `@relevance` to sort by relevance to a search query.\n\nStudies missing sort field are always last. Default sort direction:\n* Date field - `desc`\n* Numeric field - `asc`\n* `@relevance` - `desc`"
+                },
+                {
+                  "disabled": false,
+                  "key": "countTotal",
+                  "value": "false",
+                  "description": "Count total number of studies in all pages and return `totalCount` field with first page, if `true`.\nFor CSV, the result can be found in `x-total-count` response header.\nThe parameter is ignored for the subsequent pages."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Page size is maximum number of studies to return in response. It does not have to be the same for every page.\nIf not specified or set to 0, the default value will be used. It will be coerced down to  1,000, if greater than that."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Token to get next page. Set it to a `nextPageToken` value returned with the previous page in JSON format.\nFor CSV, it can be found in `x-next-page-token` response header.\nDo not specify it for first page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea51f452-c9af-40b7-8614-255db1646c82",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "markupFormat",
+                      "value": "markdown"
+                    },
+                    {
+                      "key": "query.cond",
+                      "value": "lung cancer"
+                    },
+                    {
+                      "key": "query.term",
+                      "value": "AREA[LastUpdatePostDate]RANGE[2023-01-15,MAX]"
+                    },
+                    {
+                      "key": "query.locn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.titles",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.intr",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.outc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.spons",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.lead",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.patient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter.overallStatus",
+                      "value": "NOT_YET_RECRUITING|RECRUITING"
+                    },
+                    {
+                      "key": "filter.geo",
+                      "value": "distance(39.0035707,-77.1013313,50mi)"
+                    },
+                    {
+                      "key": "filter.ids",
+                      "value": "NCT04852770|NCT01728545|NCT02109302"
+                    },
+                    {
+                      "key": "filter.advanced",
+                      "value": "AREA[StartDate]2022"
+                    },
+                    {
+                      "key": "filter.synonyms",
+                      "value": "ConditionSearch:1651367|BasicSearch:2013558"
+                    },
+                    {
+                      "key": "postFilter.overallStatus",
+                      "value": "NOT_YET_RECRUITING|RECRUITING"
+                    },
+                    {
+                      "key": "postFilter.geo",
+                      "value": "distance(39.0035707,-77.1013313,50mi)"
+                    },
+                    {
+                      "key": "postFilter.ids",
+                      "value": "NCT04852770|NCT01728545|NCT02109302"
+                    },
+                    {
+                      "key": "postFilter.advanced",
+                      "value": "AREA[StartDate]2022"
+                    },
+                    {
+                      "key": "postFilter.synonyms",
+                      "value": "ConditionSearch:1651367|BasicSearch:2013558"
+                    },
+                    {
+                      "key": "aggFilters",
+                      "value": "results:with,status:com"
+                    },
+                    {
+                      "key": "geoDecay",
+                      "value": "func:linear,scale:100km,offset:10km,decay:0.1"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "NCTId|BriefTitle|OverallStatus|HasResults"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "@relevance"
+                    },
+                    {
+                      "key": "countTotal",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "2"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 438897,\n  \"studies\": [\n    {\n      \"protocolSection\": {\n        \"identificationModule\": {\n          \"nctId\": \"NCT03540771\",\n          \"briefTitle\": \"Introducing Palliative Care (PC) Within the Treatment of End Stage Liver Disease (ESLD)\"\n        },\n        \"statusModule\": {\n          \"overallStatus\": \"RECRUITING\"\n        }\n      },\n      \"hasResults\": false\n    },\n    {\n      \"protocolSection\": {\n        \"identificationModule\": {\n          \"nctId\": \"NCT03630471\",\n          \"briefTitle\": \"Effectiveness of a Problem-solving Intervention for Common Adolescent Mental Health Problems in India\"\n        },\n        \"statusModule\": {\n          \"overallStatus\": \"COMPLETED\"\n        }\n      },\n      \"hasResults\": false\n    },\n    {\n      \"protocolSection\": {\n        \"identificationModule\": {\n          \"nctId\": \"NCT00587795\",\n          \"briefTitle\": \"Orthopedic Study of the Aircast StabilAir Wrist Fracture Brace\"\n        },\n        \"statusModule\": {\n          \"overallStatus\": \"TERMINATED\"\n        }\n      },\n      \"hasResults\": true\n    }\n  ],\n  \"nextPageToken\": \"abracadabra\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "620865e9-45c4-488a-b396-af90413ab436",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "markupFormat",
+                      "value": "markdown"
+                    },
+                    {
+                      "key": "query.cond",
+                      "value": "lung cancer"
+                    },
+                    {
+                      "key": "query.term",
+                      "value": "AREA[LastUpdatePostDate]RANGE[2023-01-15,MAX]"
+                    },
+                    {
+                      "key": "query.locn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.titles",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.intr",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.outc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.spons",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.lead",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.patient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter.overallStatus",
+                      "value": "NOT_YET_RECRUITING|RECRUITING"
+                    },
+                    {
+                      "key": "filter.geo",
+                      "value": "distance(39.0035707,-77.1013313,50mi)"
+                    },
+                    {
+                      "key": "filter.ids",
+                      "value": "NCT04852770|NCT01728545|NCT02109302"
+                    },
+                    {
+                      "key": "filter.advanced",
+                      "value": "AREA[StartDate]2022"
+                    },
+                    {
+                      "key": "filter.synonyms",
+                      "value": "ConditionSearch:1651367|BasicSearch:2013558"
+                    },
+                    {
+                      "key": "postFilter.overallStatus",
+                      "value": "NOT_YET_RECRUITING|RECRUITING"
+                    },
+                    {
+                      "key": "postFilter.geo",
+                      "value": "distance(39.0035707,-77.1013313,50mi)"
+                    },
+                    {
+                      "key": "postFilter.ids",
+                      "value": "NCT04852770|NCT01728545|NCT02109302"
+                    },
+                    {
+                      "key": "postFilter.advanced",
+                      "value": "AREA[StartDate]2022"
+                    },
+                    {
+                      "key": "postFilter.synonyms",
+                      "value": "ConditionSearch:1651367|BasicSearch:2013558"
+                    },
+                    {
+                      "key": "aggFilters",
+                      "value": "results:with,status:com"
+                    },
+                    {
+                      "key": "geoDecay",
+                      "value": "func:linear,scale:100km,offset:10km,decay:0.1"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "NCTId|BriefTitle|OverallStatus|HasResults"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "@relevance"
+                    },
+                    {
+                      "key": "countTotal",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "2"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab7135e6-764c-4251-887c-1ec00a94afd8",
+          "name": "Single Study",
+          "request": {
+            "name": "Single Study",
+            "description": {
+              "content": "Returns data of a single study.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "studies",
+                ":nctId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Must be one of the following:\n* `csv`- return CSV table; available fields are listed on [CSV Download](/data-api/about-api/csv-download)\n* `json`- return JSON object; format of `markup` fields depends on `markupFormat` parameter\n* `json.zip`- put JSON object into a .json file and download it as zip archive; field values of type `markup` are in [markdown](https://spec.commonmark.org/0.28/) format\n* `fhir.json` - return FHIR JSON; fields are not customizable; see [Access Data in FHIR](/data-api/fhir)\n* `ris`- return RIS record; available tags are listed on [RIS Download](/data-api/about-api/ris-download)"
+                },
+                {
+                  "disabled": false,
+                  "key": "markupFormat",
+                  "value": "markdown",
+                  "description": "Format of `markup` type fields:\n* `markdown`- [markdown](https://spec.commonmark.org/0.28/) format\n* `legacy`- compatible with classic PRS\n\nApplicable only to `json` format."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "If specified, must be non-empty comma- or pipe-separated list of fields to return. If unspecified, all fields will be returned.\nOrder of the fields does not matter.\n\nFor `csv` format, specify list of columns. The column names are available on [CSV Download](/data-api/about-api/csv-download).\n\nFor `json` and `json.zip` formats, every list item is either area name, piece name, or field name.\nIf a piece or a field is a branch node, all descendant fields will be included.\nAll area names are available on [Search Areas](/data-api/about-api/search-areas),\nthe piece and field names - on [Data Structure](/data-api/about-api/study-data-structure) and also can be retrieved at `/studies/metadata` endpoint.\n\nFor `fhir.json` format, all available fields are returned and this parameter must be unspecified.\n\nFor `ris` format, specify list of tags. The tag names are available on [RIS Download](/data-api/about-api/ris-download)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nctId",
+                  "description": "(Required) NCT Number of a study. If found in [NCTIdAlias](data-api/about-api/study-data-structure#NCTIdAlias) field,\n301 HTTP redirect to the actual study will be returned."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f42e261-96ea-4253-a24d-40effae66d0c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    ":nctId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "markupFormat",
+                      "value": "markdown"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "NCTId|BriefTitle|Reference"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nctId",
+                      "description": "(Required) NCT Number of a study. If found in [NCTIdAlias](data-api/about-api/study-data-structure#NCTIdAlias) field,\n301 HTTP redirect to the actual study will be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"protocolSection\": {\n    \"identificationModule\": {\n      \"nctId\": \"stringstrin\",\n      \"nctIdAliases\": [\n        \"stringstrin\",\n        \"stringstrin\"\n      ],\n      \"orgStudyIdInfo\": {\n        \"id\": \"string\",\n        \"type\": \"AHRQ\",\n        \"link\": \"string\"\n      },\n      \"secondaryIdInfos\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"OTHER_GRANT\",\n          \"domain\": \"string\",\n          \"link\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"OTHER_GRANT\",\n          \"domain\": \"string\",\n          \"link\": \"string\"\n        }\n      ],\n      \"briefTitle\": \"string\",\n      \"officialTitle\": \"string\",\n      \"acronym\": \"string\",\n      \"organization\": {\n        \"fullName\": \"string\",\n        \"class\": \"UNKNOWN\"\n      }\n    },\n    \"statusModule\": {\n      \"statusVerifiedDate\": \"string\",\n      \"overallStatus\": \"<string>\",\n      \"lastKnownStatus\": \"<string>\",\n      \"delayedPosting\": false,\n      \"whyStopped\": \"string\",\n      \"expandedAccessInfo\": {\n        \"hasExpandedAccess\": true,\n        \"nctId\": \"stringstrin\",\n        \"statusForNctId\": \"TEMPORARILY_NOT_AVAILABLE\"\n      },\n      \"startDateStruct\": {\n        \"date\": \"string\",\n        \"type\": \"ACTUAL\"\n      },\n      \"primaryCompletionDateStruct\": {\n        \"date\": \"string\",\n        \"type\": \"ACTUAL\"\n      },\n      \"completionDateStruct\": {\n        \"date\": \"string\",\n        \"type\": \"ESTIMATED\"\n      },\n      \"studyFirstSubmitDate\": \"1999-04-28\",\n      \"studyFirstSubmitQcDate\": \"1992-05-15\",\n      \"studyFirstPostDateStruct\": {\n        \"date\": \"2002-10-11\",\n        \"type\": \"ESTIMATED\"\n      },\n      \"resultsWaived\": true,\n      \"resultsFirstSubmitDate\": \"2002-04-14\",\n      \"resultsFirstSubmitQcDate\": \"2020-09-06\",\n      \"resultsFirstPostDateStruct\": {\n        \"date\": \"1981-08-03\",\n        \"type\": \"ESTIMATED\"\n      },\n      \"dispFirstSubmitDate\": \"2014-05-10\",\n      \"dispFirstSubmitQcDate\": \"1998-04-19\",\n      \"dispFirstPostDateStruct\": {\n        \"date\": \"2008-06-08\",\n        \"type\": \"ESTIMATED\"\n      },\n      \"lastUpdateSubmitDate\": \"1972-07-25\",\n      \"lastUpdatePostDateStruct\": {\n        \"date\": \"1997-07-21\",\n        \"type\": \"ACTUAL\"\n      }\n    },\n    \"sponsorCollaboratorsModule\": {\n      \"responsibleParty\": {\n        \"type\": \"SPONSOR_INVESTIGATOR\",\n        \"investigatorFullName\": \"string\",\n        \"investigatorTitle\": \"string\",\n        \"investigatorAffiliation\": \"string\",\n        \"oldNameTitle\": \"string\",\n        \"oldOrganization\": \"string\"\n      },\n      \"leadSponsor\": {\n        \"name\": \"string\",\n        \"class\": \"INDIV\"\n      },\n      \"collaborators\": [\n        {\n          \"name\": \"string\",\n          \"class\": \"OTHER\"\n        },\n        {\n          \"name\": \"string\",\n          \"class\": \"FED\"\n        }\n      ]\n    },\n    \"oversightModule\": {\n      \"oversightHasDmc\": false,\n      \"isFdaRegulatedDrug\": false,\n      \"isFdaRegulatedDevice\": false,\n      \"isUnapprovedDevice\": false,\n      \"isPpsd\": true,\n      \"isUsExport\": true,\n      \"fdaaa801Violation\": false\n    },\n    \"descriptionModule\": {\n      \"briefSummary\": \"string\",\n      \"detailedDescription\": \"string\"\n    },\n    \"conditionsModule\": {\n      \"conditions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"keywords\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"designModule\": {\n      \"studyType\": \"INTERVENTIONAL\",\n      \"nPtrsToThisExpAccNctId\": 2734,\n      \"expandedAccessTypes\": {\n        \"individual\": false,\n        \"intermediate\": true,\n        \"treatment\": false\n      },\n      \"patientRegistry\": false,\n      \"targetDuration\": \"7761 Years\",\n      \"phases\": [\n        \"PHASE1\",\n        \"PHASE4\"\n      ],\n      \"designInfo\": {\n        \"allocation\": \"NA\",\n        \"interventionModel\": \"CROSSOVER\",\n        \"interventionModelDescription\": \"string\",\n        \"primaryPurpose\": \"TREATMENT\",\n        \"observationalModel\": \"DEFINED_POPULATION\",\n        \"timePerspective\": \"OTHER\",\n        \"maskingInfo\": {\n          \"masking\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maskingDescription\": \"string\",\n          \"whoMasked\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"bioSpec\": {\n        \"retention\": \"SAMPLES_WITHOUT_DNA\",\n        \"description\": \"string\"\n      },\n      \"enrollmentInfo\": {\n        \"count\": 88,\n        \"type\": \"ACTUAL\"\n      }\n    },\n    \"armsInterventionsModule\": {\n      \"armGroups\": [\n        {\n          \"label\": \"string\",\n          \"type\": \"SHAM_COMPARATOR\",\n          \"description\": \"string\",\n          \"interventionNames\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"label\": \"string\",\n          \"type\": \"NO_INTERVENTION\",\n          \"description\": \"string\",\n          \"interventionNames\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"interventions\": [\n        {\n          \"type\": \"RADIATION\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"armGroupLabels\": [\n            \"string\",\n            \"string\"\n          ],\n          \"otherNames\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"RADIATION\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"armGroupLabels\": [\n            \"string\",\n            \"string\"\n          ],\n          \"otherNames\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    \"outcomesModule\": {\n      \"primaryOutcomes\": [\n        {\n          \"measure\": \"string\",\n          \"description\": \"string\",\n          \"timeFrame\": \"string\"\n        },\n        {\n          \"measure\": \"string\",\n          \"description\": \"string\",\n          \"timeFrame\": \"string\"\n        }\n      ],\n      \"secondaryOutcomes\": [\n        {\n          \"measure\": \"string\",\n          \"description\": \"string\",\n          \"timeFrame\": \"string\"\n        },\n        {\n          \"measure\": \"string\",\n          \"description\": \"string\",\n          \"timeFrame\": \"string\"\n        }\n      ],\n      \"otherOutcomes\": [\n        {\n          \"measure\": \"string\",\n          \"description\": \"string\",\n          \"timeFrame\": \"string\"\n        },\n        {\n          \"measure\": \"string\",\n          \"description\": \"string\",\n          \"timeFrame\": \"string\"\n        }\n      ]\n    },\n    \"eligibilityModule\": {\n      \"eligibilityCriteria\": \"string\",\n      \"healthyVolunteers\": false,\n      \"sex\": \"FEMALE\",\n      \"genderBased\": false,\n      \"genderDescription\": \"string\",\n      \"minimumAge\": \"4112927 Year\",\n      \"maximumAge\": \"9229351120 Hours\",\n      \"stdAges\": [\n        \"OLDER_ADULT\",\n        \"OLDER_ADULT\"\n      ],\n      \"studyPopulation\": \"string\",\n      \"samplingMethod\": \"PROBABILITY_SAMPLE\"\n    },\n    \"contactsLocationsModule\": {\n      \"centralContacts\": [\n        {\n          \"name\": \"string\",\n          \"role\": \"STUDY_CHAIR\",\n          \"phone\": \"string\",\n          \"phoneExt\": \"string\",\n          \"email\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"role\": \"STUDY_DIRECTOR\",\n          \"phone\": \"string\",\n          \"phoneExt\": \"string\",\n          \"email\": \"string\"\n        }\n      ],\n      \"overallOfficials\": [\n        {\n          \"name\": \"string\",\n          \"affiliation\": \"string\",\n          \"role\": \"SUB_INVESTIGATOR\"\n        },\n        {\n          \"name\": \"string\",\n          \"affiliation\": \"string\",\n          \"role\": \"STUDY_DIRECTOR\"\n        }\n      ],\n      \"locations\": [\n        {\n          \"facility\": \"string\",\n          \"status\": \"RECRUITING\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"contacts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"geoPoint\": {\n            \"lat\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"facility\": \"string\",\n          \"status\": \"ENROLLING_BY_INVITATION\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\",\n          \"contacts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"geoPoint\": {\n            \"lat\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"referencesModule\": {\n      \"references\": [\n        {\n          \"pmid\": \"string\",\n          \"type\": \"DERIVED\",\n          \"citation\": \"string\",\n          \"retractions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"pmid\": \"string\",\n          \"type\": \"RESULT\",\n          \"citation\": \"string\",\n          \"retractions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"seeAlsoLinks\": [\n        {\n          \"label\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"label\": \"string\",\n          \"url\": \"string\"\n        }\n      ],\n      \"availIpds\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"string\",\n          \"url\": \"string\",\n          \"comment\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"string\",\n          \"url\": \"string\",\n          \"comment\": \"string\"\n        }\n      ]\n    },\n    \"ipdSharingStatementModule\": {\n      \"ipdSharing\": \"UNDECIDED\",\n      \"description\": \"string\",\n      \"infoTypes\": [\n        \"ANALYTIC_CODE\",\n        \"SAP\"\n      ],\n      \"timeFrame\": \"string\",\n      \"accessCriteria\": \"string\",\n      \"url\": \"string\"\n    }\n  },\n  \"resultsSection\": {\n    \"participantFlowModule\": {\n      \"preAssignmentDetails\": \"string\",\n      \"recruitmentDetails\": \"string\",\n      \"typeUnitsAnalyzed\": \"string\",\n      \"groups\": [\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\"\n        }\n      ],\n      \"periods\": [\n        {\n          \"title\": \"string\",\n          \"milestones\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"dropWithdraws\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"title\": \"string\",\n          \"milestones\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"dropWithdraws\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"baselineCharacteristicsModule\": {\n      \"populationDescription\": \"string\",\n      \"typeUnitsAnalyzed\": \"string\",\n      \"groups\": [\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\"\n        }\n      ],\n      \"denoms\": [\n        {\n          \"units\": \"string\",\n          \"counts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"units\": \"string\",\n          \"counts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"measures\": [\n        {\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"populationDescription\": \"string\",\n          \"paramType\": \"GEOMETRIC_MEAN\",\n          \"dispersionType\": \"GEOMETRIC_COEFFICIENT\",\n          \"unitOfMeasure\": \"string\",\n          \"calculatePct\": true,\n          \"denomUnitsSelected\": \"string\",\n          \"denoms\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"classes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"populationDescription\": \"string\",\n          \"paramType\": \"GEOMETRIC_MEAN\",\n          \"dispersionType\": \"CONFIDENCE_95\",\n          \"unitOfMeasure\": \"string\",\n          \"calculatePct\": true,\n          \"denomUnitsSelected\": \"string\",\n          \"denoms\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"classes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"outcomeMeasuresModule\": {\n      \"outcomeMeasures\": [\n        {\n          \"type\": \"PRIMARY\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"populationDescription\": \"string\",\n          \"reportingStatus\": \"POSTED\",\n          \"anticipatedPostingDate\": \"string\",\n          \"paramType\": \"MEAN\",\n          \"dispersionType\": \"string\",\n          \"unitOfMeasure\": \"string\",\n          \"calculatePct\": false,\n          \"timeFrame\": \"string\",\n          \"typeUnitsAnalyzed\": \"string\",\n          \"denomUnitsSelected\": \"string\",\n          \"groups\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"denoms\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"classes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"analyses\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"type\": \"PRIMARY\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"populationDescription\": \"string\",\n          \"reportingStatus\": \"POSTED\",\n          \"anticipatedPostingDate\": \"string\",\n          \"paramType\": \"GEOMETRIC_MEAN\",\n          \"dispersionType\": \"string\",\n          \"unitOfMeasure\": \"string\",\n          \"calculatePct\": false,\n          \"timeFrame\": \"string\",\n          \"typeUnitsAnalyzed\": \"string\",\n          \"denomUnitsSelected\": \"string\",\n          \"groups\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"denoms\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"classes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"analyses\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"adverseEventsModule\": {\n      \"frequencyThreshold\": \"string\",\n      \"timeFrame\": \"string\",\n      \"description\": \"string\",\n      \"allCauseMortalityComment\": \"string\",\n      \"eventGroups\": [\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"deathsNumAffected\": 6961,\n          \"deathsNumAtRisk\": 8907,\n          \"seriousNumAffected\": 8116,\n          \"seriousNumAtRisk\": 1687,\n          \"otherNumAffected\": 5891,\n          \"otherNumAtRisk\": 8486\n        },\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"deathsNumAffected\": 1878,\n          \"deathsNumAtRisk\": 7495,\n          \"seriousNumAffected\": 1250,\n          \"seriousNumAtRisk\": 6538,\n          \"otherNumAffected\": 2954,\n          \"otherNumAtRisk\": 397\n        }\n      ],\n      \"seriousEvents\": [\n        {\n          \"term\": \"string\",\n          \"organSystem\": \"string\",\n          \"sourceVocabulary\": \"string\",\n          \"assessmentType\": \"NON_SYSTEMATIC_ASSESSMENT\",\n          \"notes\": \"string\",\n          \"stats\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"term\": \"string\",\n          \"organSystem\": \"string\",\n          \"sourceVocabulary\": \"string\",\n          \"assessmentType\": \"SYSTEMATIC_ASSESSMENT\",\n          \"notes\": \"string\",\n          \"stats\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"otherEvents\": [\n        {\n          \"term\": \"string\",\n          \"organSystem\": \"string\",\n          \"sourceVocabulary\": \"string\",\n          \"assessmentType\": \"SYSTEMATIC_ASSESSMENT\",\n          \"notes\": \"string\",\n          \"stats\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"term\": \"string\",\n          \"organSystem\": \"string\",\n          \"sourceVocabulary\": \"string\",\n          \"assessmentType\": \"NON_SYSTEMATIC_ASSESSMENT\",\n          \"notes\": \"string\",\n          \"stats\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"moreInfoModule\": {\n      \"limitationsAndCaveats\": {\n        \"description\": \"string\"\n      },\n      \"certainAgreement\": {\n        \"piSponsorEmployee\": false,\n        \"restrictionType\": \"OTHER\",\n        \"restrictiveAgreement\": false,\n        \"otherDetails\": \"string\"\n      },\n      \"pointOfContact\": {\n        \"title\": \"string\",\n        \"organization\": \"string\",\n        \"email\": \"string\",\n        \"phone\": \"string\",\n        \"phoneExt\": \"string\"\n      }\n    }\n  },\n  \"annotationSection\": {\n    \"annotationModule\": {\n      \"unpostedAnnotation\": {\n        \"unpostedResponsibleParty\": \"string\",\n        \"unpostedEvents\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dateUnknown\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dateUnknown\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"violationAnnotation\": {\n        \"violationEvents\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"creationDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"issuedDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"releaseDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postedDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"creationDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"issuedDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"releaseDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postedDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  },\n  \"documentSection\": {\n    \"largeDocumentModule\": {\n      \"noSap\": true,\n      \"largeDocs\": [\n        {\n          \"typeAbbrev\": \"string\",\n          \"hasProtocol\": true,\n          \"hasSap\": false,\n          \"hasIcf\": true,\n          \"label\": \"string\",\n          \"date\": \"2017-11-23\",\n          \"uploadDate\": \"string\",\n          \"filename\": \"string\",\n          \"size\": 4027\n        },\n        {\n          \"typeAbbrev\": \"string\",\n          \"hasProtocol\": false,\n          \"hasSap\": false,\n          \"hasIcf\": true,\n          \"label\": \"string\",\n          \"date\": \"1961-09-18\",\n          \"uploadDate\": \"string\",\n          \"filename\": \"string\",\n          \"size\": 9526\n        }\n      ]\n    }\n  },\n  \"derivedSection\": {\n    \"miscInfoModule\": {\n      \"versionHolder\": \"1991-09-01\",\n      \"removedCountries\": [\n        \"string\",\n        \"string\"\n      ],\n      \"submissionTracking\": {\n        \"estimatedResultsFirstSubmitDate\": \"1999-03-31\",\n        \"firstMcpInfo\": {\n          \"postDateStruct\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"submissionInfos\": [\n          {\n            \"releaseDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unreleaseDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unreleaseDateUnknown\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resetDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mcpReleaseN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"releaseDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unreleaseDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unreleaseDateUnknown\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resetDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mcpReleaseN\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"conditionBrowseModule\": {\n      \"meshes\": [\n        {\n          \"id\": \"string\",\n          \"term\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"term\": \"string\"\n        }\n      ],\n      \"ancestors\": [\n        {\n          \"id\": \"string\",\n          \"term\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"term\": \"string\"\n        }\n      ],\n      \"browseLeaves\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"asFound\": \"string\",\n          \"relevance\": \"HIGH\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"asFound\": \"string\",\n          \"relevance\": \"HIGH\"\n        }\n      ],\n      \"browseBranches\": [\n        {\n          \"abbrev\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"abbrev\": \"string\",\n          \"name\": \"string\"\n        }\n      ]\n    },\n    \"interventionBrowseModule\": {\n      \"meshes\": [\n        {\n          \"id\": \"string\",\n          \"term\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"term\": \"string\"\n        }\n      ],\n      \"ancestors\": [\n        {\n          \"id\": \"string\",\n          \"term\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"term\": \"string\"\n        }\n      ],\n      \"browseLeaves\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"asFound\": \"string\",\n          \"relevance\": \"HIGH\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"asFound\": \"string\",\n          \"relevance\": \"HIGH\"\n        }\n      ],\n      \"browseBranches\": [\n        {\n          \"abbrev\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"abbrev\": \"string\",\n          \"name\": \"string\"\n        }\n      ]\n    }\n  },\n  \"hasResults\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c08c916f-bfd7-4574-be94-99d71903e3e7",
+              "name": "Moved Permanently",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    ":nctId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "markupFormat",
+                      "value": "markdown"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "NCTId|BriefTitle|Reference"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nctId",
+                      "description": "(Required) NCT Number of a study. If found in [NCTIdAlias](data-api/about-api/study-data-structure#NCTIdAlias) field,\n301 HTTP redirect to the actual study will be returned."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Moved Permanently",
+              "code": 301,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fb63a03d-b240-4dbc-b17d-d9bbe6d14143",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    ":nctId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "markupFormat",
+                      "value": "markdown"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "NCTId|BriefTitle|Reference"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nctId",
+                      "description": "(Required) NCT Number of a study. If found in [NCTIdAlias](data-api/about-api/study-data-structure#NCTIdAlias) field,\n301 HTTP redirect to the actual study will be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "636ade7e-a7ad-453b-b877-7de689db8d5e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    ":nctId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "markupFormat",
+                      "value": "markdown"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "NCTId|BriefTitle|Reference"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nctId",
+                      "description": "(Required) NCT Number of a study. If found in [NCTIdAlias](data-api/about-api/study-data-structure#NCTIdAlias) field,\n301 HTTP redirect to the actual study will be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f179e5db-f363-4448-9488-be99825ebdef",
+          "name": "Data Model Fields",
+          "request": {
+            "name": "Data Model Fields",
+            "description": {
+              "content": "Returns study data model fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "studies",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "includeIndexedOnly",
+                  "value": "false",
+                  "description": "Include indexed-only fields, if `true`"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeHistoricOnly",
+                  "value": "false",
+                  "description": "Include fields available only in historic data, if `true`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c10d4fa-5e7d-4917-a8aa-2d65cbe2fe80",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeIndexedOnly",
+                      "value": "false"
+                    },
+                    {
+                      "key": "includeHistoricOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"piece\": \"string\",\n    \"sourceType\": \"string\",\n    \"type\": \"string\",\n    \"altPieceNames\": [\n      \"string\",\n      \"string\"\n    ],\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/FieldNode detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/FieldNode detected>\"\n      }\n    ],\n    \"dedLink\": {\n      \"label\": \"string\",\n      \"url\": \"string\"\n    },\n    \"description\": \"string\",\n    \"historicOnly\": false,\n    \"indexedOnly\": true,\n    \"isEnum\": false,\n    \"maxChars\": 1869,\n    \"nested\": true,\n    \"rules\": \"string\",\n    \"synonyms\": true,\n    \"title\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"piece\": \"string\",\n    \"sourceType\": \"string\",\n    \"type\": \"string\",\n    \"altPieceNames\": [\n      \"string\",\n      \"string\"\n    ],\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/FieldNode detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/FieldNode detected>\"\n      }\n    ],\n    \"dedLink\": {\n      \"label\": \"string\",\n      \"url\": \"string\"\n    },\n    \"description\": \"string\",\n    \"historicOnly\": false,\n    \"indexedOnly\": true,\n    \"isEnum\": false,\n    \"maxChars\": 2821,\n    \"nested\": true,\n    \"rules\": \"string\",\n    \"synonyms\": true,\n    \"title\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "363ea09c-d2f6-46c9-86f9-4d19822298bb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeIndexedOnly",
+                      "value": "false"
+                    },
+                    {
+                      "key": "includeHistoricOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76087121-1e6a-417a-89cd-8a21dcc812fe",
+          "name": "Search Areas",
+          "request": {
+            "name": "Search Areas",
+            "description": {
+              "content": "Search Docs and their Search Areas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "studies",
+                "search-areas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22bf340a-3ee6-4ac9-86b9-9529e1721591",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    "search-areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"areas\": [\n      {\n        \"name\": \"string\",\n        \"parts\": [\n          {\n            \"isEnum\": false,\n            \"isSynonyms\": false,\n            \"pieces\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"type\": \"string\",\n            \"weight\": 9991.20588843549\n          },\n          {\n            \"isEnum\": false,\n            \"isSynonyms\": false,\n            \"pieces\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"type\": \"string\",\n            \"weight\": 8400.827219702132\n          }\n        ],\n        \"param\": \"string\",\n        \"uiLabel\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"parts\": [\n          {\n            \"isEnum\": false,\n            \"isSynonyms\": true,\n            \"pieces\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"type\": \"string\",\n            \"weight\": 3027.4342137715703\n          },\n          {\n            \"isEnum\": true,\n            \"isSynonyms\": false,\n            \"pieces\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"type\": \"string\",\n            \"weight\": 1386.8967005957145\n          }\n        ],\n        \"param\": \"string\",\n        \"uiLabel\": \"string\"\n      }\n    ],\n    \"name\": \"string\"\n  },\n  {\n    \"areas\": [\n      {\n        \"name\": \"string\",\n        \"parts\": [\n          {\n            \"isEnum\": false,\n            \"isSynonyms\": true,\n            \"pieces\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"type\": \"string\",\n            \"weight\": 2283.8079222978204\n          },\n          {\n            \"isEnum\": true,\n            \"isSynonyms\": false,\n            \"pieces\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"type\": \"string\",\n            \"weight\": 9761.063493643225\n          }\n        ],\n        \"param\": \"string\",\n        \"uiLabel\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"parts\": [\n          {\n            \"isEnum\": false,\n            \"isSynonyms\": true,\n            \"pieces\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"type\": \"string\",\n            \"weight\": 7592.417086898078\n          },\n          {\n            \"isEnum\": false,\n            \"isSynonyms\": false,\n            \"pieces\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"type\": \"string\",\n            \"weight\": 4816.818350165645\n          }\n        ],\n        \"param\": \"string\",\n        \"uiLabel\": \"string\"\n      }\n    ],\n    \"name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "329cdaaf-24c3-4d97-ae0c-005ec42d735b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    "search-areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea507032-a9f1-445d-beea-e8d66abad3b9",
+          "name": "Enums",
+          "request": {
+            "name": "Enums",
+            "description": {
+              "content": "Returns enumeration types and their values.\n\nEvery item of the returning array represents enum type and contains the following properties:\n* `type` - enum type name\n* `pieces` - array of names of all data pieces having the enum type\n* `values` - all available values of the enum; every item contains the following properties:\n  * `value` - data value\n  * `legacyValue` - data value in legacy API\n  * `exceptions` - map from data piece name to legacy value when different from `legacyValue`\n    (some data pieces had special enum values in legacy API)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "studies",
+                "enums"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eca2689d-c762-4c6a-82ee-2c8f2e585ea6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    "enums"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"pieces\": [\n      \"string\",\n      \"string\"\n    ],\n    \"type\": \"string\",\n    \"values\": [\n      {\n        \"legacyValue\": \"string\",\n        \"value\": \"string\",\n        \"exceptions\": {}\n      },\n      {\n        \"legacyValue\": \"string\",\n        \"value\": \"string\",\n        \"exceptions\": {}\n      }\n    ]\n  },\n  {\n    \"pieces\": [\n      \"string\",\n      \"string\"\n    ],\n    \"type\": \"string\",\n    \"values\": [\n      {\n        \"legacyValue\": \"string\",\n        \"value\": \"string\",\n        \"exceptions\": {}\n      },\n      {\n        \"legacyValue\": \"string\",\n        \"value\": \"string\",\n        \"exceptions\": {}\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b0bee89-d793-4b7e-886d-84969c5d5d67",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studies",
+                    "enums"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://clinicaltrials.gov/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "edf2fa37-a5fc-4223-b2c5-528605ada1f2",
+    "name": "ClinicalTrials.gov REST BioSample Studies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API is made available to provide users meta data, statistics, and the most recent version of the clinical trials available on ClinicalTrials.gov.",
+      "type": "text/plain"
+    }
+  }
+}
