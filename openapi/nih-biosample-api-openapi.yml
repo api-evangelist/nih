@@ -1,11 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ClinicalTrials.gov REST BioSample API
-  description: This API is made available to provide users meta data, statistics, and the most recent version of the clinical trials available on ClinicalTrials.gov.
-  version: 2.0.5
+  title: NCBI Datasets Bio Sample API
+  version: v2
+  description: '### NCBI Datasets is a resource that lets you easily gather data from NCBI.
+
+    The NCBI Datasets version 2 API is updated often to add new features, fix bugs, and enhance usability.
+
+    '
 servers:
-- url: https://clinicaltrials.gov/api/v2
-  description: This server
+- url: https://api.ncbi.nlm.nih.gov/datasets/v2
+security:
+- ApiKeyAuthHeader: []
 tags:
 - name: BioSample
   description: '#### Options to download BioSample data.
@@ -57,61 +62,6 @@ paths:
             summary: Animal sample from Carcharodon carcharias
 components:
   schemas:
-    v2reportsErrorOrganelleErrorCode:
-      type: string
-      enum:
-      - UNKNOWN_ORGANELLE_ERROR_CODE
-      - INVALID_ORGANELLE_TAXON
-      - NO_ORGANELLES_FOR_ACCESSION
-      default: UNKNOWN_ORGANELLE_ERROR_CODE
-    v2reportsBioSampleAttribute:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-    v2reportsErrorAssemblyErrorCode:
-      type: string
-      enum:
-      - UNKNOWN_ASSEMBLY_ERROR_CODE
-      - INVALID_BIOPROJECT_IDS
-      - NO_ASSEMBLIES_FOR_BIOPROJECTS
-      - INVALID_TAXON
-      - MISSING_SEARCH_FIELD
-      - INVALID_BIOSAMPLE_IDS
-      - NO_ASSEMBLIES_FOR_BIOSAMPLE_IDS
-      - NO_ASSEMBLIES_FOR_ASSEMBLY_NAMES
-      - INVALID_WGS_ACCESSIONS
-      - NO_ASSEMBLIES_FOR_WGS_ACCESSIONS
-      default: UNKNOWN_ASSEMBLY_ERROR_CODE
-    v2reportsBioSampleContact:
-      type: object
-      properties:
-        lab:
-          type: string
-          title: Submitter lab name.
-    v2reportsError:
-      type: object
-      properties:
-        assembly_error_code:
-          $ref: '#/components/schemas/v2reportsErrorAssemblyErrorCode'
-        gene_error_code:
-          $ref: '#/components/schemas/v2reportsErrorGeneErrorCode'
-        organelle_error_code:
-          $ref: '#/components/schemas/v2reportsErrorOrganelleErrorCode'
-        virus_error_code:
-          $ref: '#/components/schemas/v2reportsErrorVirusErrorCode'
-        taxonomy_error_code:
-          $ref: '#/components/schemas/v2reportsErrorTaxonomyErrorCode'
-        reason:
-          type: string
-        message:
-          type: string
-        invalid_identifiers:
-          type: array
-          items:
-            type: string
     v2reportsBioSampleOwner:
       type: object
       properties:
@@ -138,27 +88,119 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v2reportsMessage'
-    v2reportsInfraspecificNames:
+    v2reportsWarningGeneWarningCode:
+      type: string
+      enum:
+      - UNKNOWN_GENE_WARNING_CODE
+      - ACCESSION_VERSION_MISMATCH
+      - REPLACED_GENE_ID
+      - DISCONTINUED_GENE_ID
+      - UNRECOGNIZED_GENE_ID
+      - UNRECOGNIZED_GENE_SYMBOL
+      - UNRECOGNIZED_ACCESSION
+      - UNRECOGNIZED_TAX_TOKEN
+      - NO_GENE_ANNOTATION_FOUND
+      - ABOVE_SPECIES_TAXON
+      default: UNKNOWN_GENE_WARNING_CODE
+    v2reportsBioSampleContact:
       type: object
       properties:
-        breed:
+        lab:
           type: string
-          title: A homogenous group of animals within a domesticated species
-        cultivar:
+          title: Submitter lab name.
+    v2reportsErrorGeneErrorCode:
+      type: string
+      enum:
+      - UNKNOWN_GENE_ERROR_CODE
+      - INCOMPLETE_LOOKUP_SYMBOL
+      - INVALID_TAXON_GENE_ARGUMENT
+      default: UNKNOWN_GENE_ERROR_CODE
+    v2reportsWarning:
+      type: object
+      properties:
+        gene_warning_code:
+          $ref: '#/components/schemas/v2reportsWarningGeneWarningCode'
+        reason:
           type: string
-          title: A variety of plant within a species produced and maintained by cultivation
-        ecotype:
+        message:
           type: string
-          title: A population or subspecies occupying a distinct habitat
-        isolate:
+        replaced_id:
+          $ref: '#/components/schemas/v2reportsWarningReplacedId'
+        unrecognized_identifier:
           type: string
-          title: The individual isolate from which the sequences in the genome assembly were derived
-        sex:
+    v2reportsLineageOrganism:
+      type: object
+      properties:
+        tax_id:
+          type: integer
+          title: NCBI Taxonomy identifier
+        name:
           type: string
-          title: Physical sex of sampled organism
-        strain:
+          title: Scientific name
+    rpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
           type: string
-          title: A genetic variant, subtype or culture within a species
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    v2reportsError:
+      type: object
+      properties:
+        assembly_error_code:
+          $ref: '#/components/schemas/v2reportsErrorAssemblyErrorCode'
+        gene_error_code:
+          $ref: '#/components/schemas/v2reportsErrorGeneErrorCode'
+        organelle_error_code:
+          $ref: '#/components/schemas/v2reportsErrorOrganelleErrorCode'
+        virus_error_code:
+          $ref: '#/components/schemas/v2reportsErrorVirusErrorCode'
+        taxonomy_error_code:
+          $ref: '#/components/schemas/v2reportsErrorTaxonomyErrorCode'
+        reason:
+          type: string
+        message:
+          type: string
+        invalid_identifiers:
+          type: array
+          items:
+            type: string
+    v2reportsMessage:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/v2reportsError'
+        warning:
+          $ref: '#/components/schemas/v2reportsWarning'
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
+    v2reportsBioSampleDescription:
+      type: object
+      properties:
+        title:
+          type: string
+        organism:
+          $ref: '#/components/schemas/v2reportsOrganism'
+        comment:
+          type: string
+    v2reportsBioSampleStatus:
+      type: object
+      properties:
+        status:
+          type: string
+        when:
+          type: string
     v2reportsWarningReplacedId:
       type: object
       properties:
@@ -166,11 +208,35 @@ components:
           type: string
         returned:
           type: string
-    v2reportsErrorVirusErrorCode:
+    v2reportsErrorTaxonomyErrorCode:
       type: string
       enum:
-      - UNKNOWN_VIRUS_ERROR_CODE
-      default: UNKNOWN_VIRUS_ERROR_CODE
+      - UNKNOWN_TAXONOMY_ERROR_CODE
+      - INVALID_TAXONOMY_TAXON
+      default: UNKNOWN_TAXONOMY_ERROR_CODE
+    v2reportsErrorAssemblyErrorCode:
+      type: string
+      enum:
+      - UNKNOWN_ASSEMBLY_ERROR_CODE
+      - INVALID_BIOPROJECT_IDS
+      - NO_ASSEMBLIES_FOR_BIOPROJECTS
+      - INVALID_TAXON
+      - MISSING_SEARCH_FIELD
+      - INVALID_BIOSAMPLE_IDS
+      - NO_ASSEMBLIES_FOR_BIOSAMPLE_IDS
+      - NO_ASSEMBLIES_FOR_ASSEMBLY_NAMES
+      - INVALID_WGS_ACCESSIONS
+      - NO_ASSEMBLIES_FOR_WGS_ACCESSIONS
+      default: UNKNOWN_ASSEMBLY_ERROR_CODE
+    v2reportsBioSampleId:
+      type: object
+      properties:
+        db:
+          type: string
+        label:
+          type: string
+        value:
+          type: string
     v2reportsBioProject:
       type: object
       properties:
@@ -186,68 +252,13 @@ components:
           type: array
           items:
             type: string
-    v2reportsBioSampleDescription:
-      type: object
-      properties:
-        title:
-          type: string
-        organism:
-          $ref: '#/components/schemas/v2reportsOrganism'
-        comment:
-          type: string
-    v2reportsBioSampleId:
-      type: object
-      properties:
-        db:
-          type: string
-        label:
-          type: string
-        value:
-          type: string
-    v2reportsBioSampleStatus:
-      type: object
-      properties:
-        status:
-          type: string
-        when:
-          type: string
-    v2reportsLineageOrganism:
-      type: object
-      properties:
-        tax_id:
-          type: integer
-          title: NCBI Taxonomy identifier
-        name:
-          type: string
-          title: Scientific name
-    v2reportsErrorTaxonomyErrorCode:
+    v2reportsErrorOrganelleErrorCode:
       type: string
       enum:
-      - UNKNOWN_TAXONOMY_ERROR_CODE
-      - INVALID_TAXONOMY_TAXON
-      default: UNKNOWN_TAXONOMY_ERROR_CODE
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte
-    v2reportsMessage:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/v2reportsError'
-        warning:
-          $ref: '#/components/schemas/v2reportsWarning'
-    v2reportsErrorGeneErrorCode:
-      type: string
-      enum:
-      - UNKNOWN_GENE_ERROR_CODE
-      - INCOMPLETE_LOOKUP_SYMBOL
-      - INVALID_TAXON_GENE_ARGUMENT
-      default: UNKNOWN_GENE_ERROR_CODE
+      - UNKNOWN_ORGANELLE_ERROR_CODE
+      - INVALID_ORGANELLE_TAXON
+      - NO_ORGANELLES_FOR_ACCESSION
+      default: UNKNOWN_ORGANELLE_ERROR_CODE
     v2reportsBioSampleDataReport:
       type: object
       properties:
@@ -369,6 +380,34 @@ components:
         serotype:
           type: string
           title: Taxonomic name below subspecies. Same as serovar
+    v2reportsBioSampleAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    v2reportsInfraspecificNames:
+      type: object
+      properties:
+        breed:
+          type: string
+          title: A homogenous group of animals within a domesticated species
+        cultivar:
+          type: string
+          title: A variety of plant within a species produced and maintained by cultivation
+        ecotype:
+          type: string
+          title: A population or subspecies occupying a distinct habitat
+        isolate:
+          type: string
+          title: The individual isolate from which the sequences in the genome assembly were derived
+        sex:
+          type: string
+          title: Physical sex of sampled organism
+        strain:
+          type: string
+          title: A genetic variant, subtype or culture within a species
     v2reportsOrganism:
       type: object
       properties:
@@ -394,45 +433,20 @@ components:
           type: string
         infraspecific_names:
           $ref: '#/components/schemas/v2reportsInfraspecificNames'
-    rpcStatus:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-    v2reportsWarningGeneWarningCode:
+    v2reportsErrorVirusErrorCode:
       type: string
       enum:
-      - UNKNOWN_GENE_WARNING_CODE
-      - ACCESSION_VERSION_MISMATCH
-      - REPLACED_GENE_ID
-      - DISCONTINUED_GENE_ID
-      - UNRECOGNIZED_GENE_ID
-      - UNRECOGNIZED_GENE_SYMBOL
-      - UNRECOGNIZED_ACCESSION
-      - UNRECOGNIZED_TAX_TOKEN
-      - NO_GENE_ANNOTATION_FOUND
-      - ABOVE_SPECIES_TAXON
-      default: UNKNOWN_GENE_WARNING_CODE
-    v2reportsWarning:
-      type: object
-      properties:
-        gene_warning_code:
-          $ref: '#/components/schemas/v2reportsWarningGeneWarningCode'
-        reason:
-          type: string
-        message:
-          type: string
-        replaced_id:
-          $ref: '#/components/schemas/v2reportsWarningReplacedId'
-        unrecognized_identifier:
-          type: string
+      - UNKNOWN_VIRUS_ERROR_CODE
+      default: UNKNOWN_VIRUS_ERROR_CODE
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+    ApiKeyAuthHeader:
+      type: apiKey
+      in: header
+      name: api-key
 externalDocs:
-  description: Introduction on clinicaltrials.gov
-  url: https://clinicaltrials.gov/data-about-studies/learn-about-api
+  description: Interactively explore genome assembly datasets
+  url: https://www.ncbi.nlm.nih.gov/datasets/genomes/

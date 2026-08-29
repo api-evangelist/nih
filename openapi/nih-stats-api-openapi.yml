@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ClinicalTrials.gov REST BioSample Stats API
+  title: ClinicalTrials.gov REST Stats API
   description: This API is made available to provide users meta data, statistics, and the most recent version of the clinical trials available on ClinicalTrials.gov.
   version: 2.0.5
 servers:
@@ -172,165 +172,10 @@ paths:
                 $ref: '#/components/schemas/errorMessage'
 components:
   schemas:
-    FieldValuesStatsList:
-      type: array
-      items:
-        $ref: '#/components/schemas/FieldValuesStats'
-    StudySize:
-      type: object
-      properties:
-        id:
-          type: string
-        sizeBytes:
-          type: integer
-          format: int32
-      additionalProperties: false
-      required:
-      - id
-      - sizeBytes
     ListSizesList:
       type: array
       items:
         $ref: '#/components/schemas/ListSizes'
-    FieldStatsType:
-      type: string
-      enum:
-      - ENUM
-      - STRING
-      - DATE
-      - INTEGER
-      - NUMBER
-      - BOOLEAN
-    DateStats:
-      type: object
-      properties:
-        field:
-          type: string
-        formats:
-          type: array
-          items:
-            type: string
-        max:
-          type: string
-        min:
-          type: string
-        missingStudiesCount:
-          type: integer
-          format: int32
-        piece:
-          type: string
-        type:
-          $ref: '#/components/schemas/FieldStatsType'
-      additionalProperties: false
-      required:
-      - field
-      - formats
-      - missingStudiesCount
-      - piece
-      - type
-    ValueCount:
-      type: object
-      properties:
-        studiesCount:
-          type: integer
-          format: int32
-        value:
-          type: string
-      additionalProperties: false
-      required:
-      - studiesCount
-      - value
-    NumberStats:
-      type: object
-      properties:
-        avg:
-          type: number
-          format: double
-        field:
-          type: string
-        max:
-          type: number
-          format: double
-        min:
-          type: number
-          format: double
-        missingStudiesCount:
-          type: integer
-          format: int32
-        piece:
-          type: string
-        type:
-          $ref: '#/components/schemas/FieldStatsType'
-      additionalProperties: false
-      required:
-      - field
-      - missingStudiesCount
-      - piece
-      - type
-    ListSizes:
-      type: object
-      properties:
-        field:
-          type: string
-        maxSize:
-          type: integer
-        minSize:
-          type: integer
-        piece:
-          type: string
-        topSizes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListSize'
-        uniqueSizesCount:
-          type: integer
-          format: int64
-      additionalProperties: false
-      required:
-      - field
-      - piece
-      - uniqueSizesCount
-    EnumStats:
-      type: object
-      properties:
-        field:
-          type: string
-        missingStudiesCount:
-          type: integer
-          format: int32
-        piece:
-          type: string
-        topValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueCount'
-        type:
-          $ref: '#/components/schemas/FieldStatsType'
-        uniqueValuesCount:
-          type: integer
-          format: int64
-      additionalProperties: false
-      required:
-      - field
-      - missingStudiesCount
-      - piece
-      - type
-      - uniqueValuesCount
-    LongestString:
-      type: object
-      properties:
-        length:
-          type: integer
-          format: int32
-        nctId:
-          type: string
-        value:
-          type: string
-      additionalProperties: false
-      required:
-      - length
-      - nctId
-      - value
     GzipStats:
       type: object
       properties:
@@ -357,9 +202,113 @@ components:
       - percentiles
       - ranges
       - totalStudies
+    FieldStatsType:
+      type: string
+      enum:
+      - ENUM
+      - STRING
+      - DATE
+      - INTEGER
+      - NUMBER
+      - BOOLEAN
+    EnumStats:
+      type: object
+      properties:
+        field:
+          type: string
+        missingStudiesCount:
+          type: integer
+          format: int32
+        piece:
+          type: string
+        topValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueCount'
+        type:
+          $ref: '#/components/schemas/FieldStatsType'
+        uniqueValuesCount:
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - field
+      - missingStudiesCount
+      - piece
+      - type
+      - uniqueValuesCount
     errorMessage:
       type: string
       description: A text message describing an error
+    StudySize:
+      type: object
+      properties:
+        id:
+          type: string
+        sizeBytes:
+          type: integer
+          format: int32
+      additionalProperties: false
+      required:
+      - id
+      - sizeBytes
+    ValueCount:
+      type: object
+      properties:
+        studiesCount:
+          type: integer
+          format: int32
+        value:
+          type: string
+      additionalProperties: false
+      required:
+      - studiesCount
+      - value
+    FieldValuesStatsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldValuesStats'
+    LongestString:
+      type: object
+      properties:
+        length:
+          type: integer
+          format: int32
+        nctId:
+          type: string
+        value:
+          type: string
+      additionalProperties: false
+      required:
+      - length
+      - nctId
+      - value
+    BooleanStats:
+      type: object
+      properties:
+        falseCount:
+          type: integer
+          format: int32
+        field:
+          type: string
+        missingStudiesCount:
+          type: integer
+          format: int32
+        piece:
+          type: string
+        trueCount:
+          type: integer
+          format: int32
+        type:
+          $ref: '#/components/schemas/FieldStatsType'
+      additionalProperties: false
+      required:
+      - falseCount
+      - field
+      - missingStudiesCount
+      - piece
+      - trueCount
+      - type
     StringStats:
       type: object
       properties:
@@ -388,6 +337,68 @@ components:
       - piece
       - type
       - uniqueValuesCount
+    ListSizes:
+      type: object
+      properties:
+        field:
+          type: string
+        maxSize:
+          type: integer
+        minSize:
+          type: integer
+        piece:
+          type: string
+        topSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListSize'
+        uniqueSizesCount:
+          type: integer
+          format: int64
+      additionalProperties: false
+      required:
+      - field
+      - piece
+      - uniqueSizesCount
+    DateStats:
+      type: object
+      properties:
+        field:
+          type: string
+        formats:
+          type: array
+          items:
+            type: string
+        max:
+          type: string
+        min:
+          type: string
+        missingStudiesCount:
+          type: integer
+          format: int32
+        piece:
+          type: string
+        type:
+          $ref: '#/components/schemas/FieldStatsType'
+      additionalProperties: false
+      required:
+      - field
+      - formats
+      - missingStudiesCount
+      - piece
+      - type
+    ListSize:
+      type: object
+      properties:
+        size:
+          type: integer
+        studiesCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+      required:
+      - size
+      - studiesCount
     FieldValuesStats:
       anyOf:
       - $ref: '#/components/schemas/EnumStats'
@@ -396,6 +407,45 @@ components:
       - $ref: '#/components/schemas/IntegerStats'
       - $ref: '#/components/schemas/NumberStats'
       - $ref: '#/components/schemas/BooleanStats'
+    DistItem:
+      type: object
+      properties:
+        sizeRange:
+          type: string
+        studiesCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+      required:
+      - sizeRange
+      - studiesCount
+    NumberStats:
+      type: object
+      properties:
+        avg:
+          type: number
+          format: double
+        field:
+          type: string
+        max:
+          type: number
+          format: double
+        min:
+          type: number
+          format: double
+        missingStudiesCount:
+          type: integer
+          format: int32
+        piece:
+          type: string
+        type:
+          $ref: '#/components/schemas/FieldStatsType'
+      additionalProperties: false
+      required:
+      - field
+      - missingStudiesCount
+      - piece
+      - type
     IntegerStats:
       type: object
       properties:
@@ -422,56 +472,6 @@ components:
       - field
       - missingStudiesCount
       - piece
-      - type
-    DistItem:
-      type: object
-      properties:
-        sizeRange:
-          type: string
-        studiesCount:
-          type: integer
-          format: int32
-      additionalProperties: false
-      required:
-      - sizeRange
-      - studiesCount
-    ListSize:
-      type: object
-      properties:
-        size:
-          type: integer
-        studiesCount:
-          type: integer
-          format: int32
-      additionalProperties: false
-      required:
-      - size
-      - studiesCount
-    BooleanStats:
-      type: object
-      properties:
-        falseCount:
-          type: integer
-          format: int32
-        field:
-          type: string
-        missingStudiesCount:
-          type: integer
-          format: int32
-        piece:
-          type: string
-        trueCount:
-          type: integer
-          format: int32
-        type:
-          $ref: '#/components/schemas/FieldStatsType'
-      additionalProperties: false
-      required:
-      - falseCount
-      - field
-      - missingStudiesCount
-      - piece
-      - trueCount
       - type
 externalDocs:
   description: Introduction on clinicaltrials.gov

@@ -1,11 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ClinicalTrials.gov REST BioSample Prokaryote API
-  description: This API is made available to provide users meta data, statistics, and the most recent version of the clinical trials available on ClinicalTrials.gov.
-  version: 2.0.5
+  title: NCBI Datasets Prokaryote API
+  version: v2
+  description: '### NCBI Datasets is a resource that lets you easily gather data from NCBI.
+
+    The NCBI Datasets version 2 API is updated often to add new features, fix bugs, and enhance usability.
+
+    '
 servers:
-- url: https://clinicaltrials.gov/api/v2
-  description: This server
+- url: https://api.ncbi.nlm.nih.gov/datasets/v2
+security:
+- ApiKeyAuthHeader: []
 tags:
 - name: Prokaryote
   description: '#### Options to download prokaryote gene data, including the associated sequence and metadata.
@@ -135,6 +140,11 @@ paths:
           default: ncbi_dataset.zip
 components:
   schemas:
+    v2ProkaryoteGeneRequestGeneFlankConfig:
+      type: object
+      properties:
+        length:
+          type: integer
     protobufAny:
       type: object
       properties:
@@ -143,11 +153,22 @@ components:
         value:
           type: string
           format: byte
-    v2ProkaryoteGeneRequestGeneFlankConfig:
+    v2ProkaryoteGeneRequest:
       type: object
       properties:
-        length:
-          type: integer
+        accessions:
+          type: array
+          items:
+            type: string
+        include_annotation_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/v2Fasta'
+        gene_flank_config:
+          $ref: '#/components/schemas/v2ProkaryoteGeneRequestGeneFlankConfig'
+        taxon:
+          type: string
+          title: Limit gene sequences and the genome assemblies described by the [annotation report file](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/data-reports/prokaryote-gene-location/) to the specified NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank.
     v2Fasta:
       type: string
       enum:
@@ -172,22 +193,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
-    v2ProkaryoteGeneRequest:
-      type: object
-      properties:
-        accessions:
-          type: array
-          items:
-            type: string
-        include_annotation_type:
-          type: array
-          items:
-            $ref: '#/components/schemas/v2Fasta'
-        gene_flank_config:
-          $ref: '#/components/schemas/v2ProkaryoteGeneRequestGeneFlankConfig'
-        taxon:
-          type: string
-          title: Limit gene sequences and the genome assemblies described by the [annotation report file](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/data-reports/prokaryote-gene-location/) to the specified NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+    ApiKeyAuthHeader:
+      type: apiKey
+      in: header
+      name: api-key
 externalDocs:
-  description: Introduction on clinicaltrials.gov
-  url: https://clinicaltrials.gov/data-about-studies/learn-about-api
+  description: Interactively explore genome assembly datasets
+  url: https://www.ncbi.nlm.nih.gov/datasets/genomes/

@@ -1,11 +1,12 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ClinicalTrials.gov REST BioSample Version API
-  description: This API is made available to provide users meta data, statistics, and the most recent version of the clinical trials available on ClinicalTrials.gov.
-  version: 2.0.5
+  title: Nih Version API
+  version: '1.0'
+  description: 'Operations tagged Version across 2 of this provider''s published API definitions: clinicaltrials-v2.json, ncbi-datasets-v2.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://clinicaltrials.gov/api/v2
   description: This server
+- url: https://api.ncbi.nlm.nih.gov/datasets/v2
 tags:
 - name: Version
   description: Version info
@@ -36,6 +37,9 @@ paths:
             text/plain:
               schema:
                 $ref: '#/components/schemas/errorMessage'
+    servers:
+    - url: https://clinicaltrials.gov/api/v2
+      description: This server
 components:
   schemas:
     errorMessage:
@@ -51,6 +55,46 @@ components:
       additionalProperties: false
       required:
       - apiVersion
-externalDocs:
-  description: Introduction on clinicaltrials.gov
-  url: https://clinicaltrials.gov/data-about-studies/learn-about-api
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
+    rpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+    v2VersionReply:
+      type: object
+      properties:
+        version:
+          type: string
+        major_ver:
+          type: integer
+        minor_ver:
+          type: integer
+        patch_ver:
+          type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+    ApiKeyAuthHeader:
+      type: apiKey
+      in: header
+      name: api-key
+x-refined-from:
+- clinicaltrials-v2.json
+- ncbi-datasets-v2.yaml

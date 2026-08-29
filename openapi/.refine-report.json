@@ -1,32 +1,40 @@
 {
   "provider": "nih",
   "sources": [
-    "nih-biosample-api-openapi.yml",
-    "nih-gene-api-openapi.yml",
-    "nih-genome-api-openapi.yml",
-    "nih-organelle-api-openapi.yml",
-    "nih-prokaryote-api-openapi.yml",
-    "nih-stats-api-openapi.yml",
-    "nih-studies-api-openapi.yml",
-    "nih-taxonomy-api-openapi.yml",
-    "nih-version-api-openapi.yml",
-    "nih-virus-api-openapi.yml"
+    "_original/clinicaltrials-v2.json",
+    "_original/ncbi-datasets-v2.yaml"
   ],
   "outputs": [
+    "nih-stats-api-openapi.yml",
+    "nih-studies-api-openapi.yml",
+    "nih-version-api-openapi.yml",
     "nih-biosample-api-openapi.yml",
     "nih-gene-api-openapi.yml",
     "nih-genome-api-openapi.yml",
     "nih-organelle-api-openapi.yml",
     "nih-prokaryote-api-openapi.yml",
-    "nih-stats-api-openapi.yml",
-    "nih-studies-api-openapi.yml",
     "nih-taxonomy-api-openapi.yml",
-    "nih-version-api-openapi.yml",
     "nih-virus-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "clinicaltrials-v2.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "ncbi-datasets-v2.yaml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "tag 'Version' spans 2 source specs (clinicaltrials-v2.json, ncbi-datasets-v2.yaml): per-path servers applied"
+  ],
+  "skipped": [
+    "nih-biosample-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nih-gene-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nih-genome-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nih-organelle-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nih-prokaryote-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nih-stats-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nih-studies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nih-taxonomy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nih-version-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nih-virus-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
