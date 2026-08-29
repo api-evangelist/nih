@@ -321,6 +321,9 @@ apis:
   - type: Documentation
     url: https://clinicaltrials.gov/data-api/api
 common:
+  - type: CapabilityMap
+    url: capabilities/nih-capability-edges.yml
+    name: National Institutes of Health (NIH) Business Capability Map
   - type: AgenticAccess
     url: agentic-access/nih-agentic-access.yml
   - type: DomainSecurity
