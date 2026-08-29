@@ -2,6 +2,18 @@ aid: nih
 name: National Institutes of Health (NIH)
 description: The US National Institutes of Health (NIH) provides a suite of public REST APIs for biomedical research, including PubMed literature search via E-utilities, ClinicalTrials.gov clinical trial data, chemical compound data through PubChem, gene and genome databases via NCBI Datasets, BLAST sequence alignment, and NIH research funding data through RePORTER.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
