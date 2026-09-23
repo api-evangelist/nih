@@ -23,7 +23,8 @@
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "clinicaltrials-v2.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "ncbi-datasets-v2.yaml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
-    "tag 'Version' spans 2 source specs (clinicaltrials-v2.json, ncbi-datasets-v2.yaml): per-path servers applied"
+    "tag 'Version' spans 2 source specs (clinicaltrials-v2.json, ncbi-datasets-v2.yaml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "nih-biosample-api-openapi.yml: previously refined output, superseded by openapi/_original/",

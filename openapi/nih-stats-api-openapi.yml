@@ -172,36 +172,10 @@ paths:
                 $ref: '#/components/schemas/errorMessage'
 components:
   schemas:
-    ListSizesList:
+    FieldValuesStatsList:
       type: array
       items:
-        $ref: '#/components/schemas/ListSizes'
-    GzipStats:
-      type: object
-      properties:
-        averageSizeBytes:
-          type: integer
-          format: int32
-        largestStudies:
-          type: array
-          items:
-            $ref: '#/components/schemas/StudySize'
-        percentiles:
-          type: object
-        ranges:
-          type: array
-          items:
-            $ref: '#/components/schemas/DistItem'
-        totalStudies:
-          type: integer
-          format: int32
-      additionalProperties: false
-      required:
-      - averageSizeBytes
-      - largestStudies
-      - percentiles
-      - ranges
-      - totalStudies
+        $ref: '#/components/schemas/FieldValuesStats'
     FieldStatsType:
       type: string
       enum:
@@ -211,6 +185,41 @@ components:
       - INTEGER
       - NUMBER
       - BOOLEAN
+    FieldValuesStats:
+      anyOf:
+      - $ref: '#/components/schemas/EnumStats'
+      - $ref: '#/components/schemas/StringStats'
+      - $ref: '#/components/schemas/DateStats'
+      - $ref: '#/components/schemas/IntegerStats'
+      - $ref: '#/components/schemas/NumberStats'
+      - $ref: '#/components/schemas/BooleanStats'
+    ListSize:
+      type: object
+      properties:
+        size:
+          type: integer
+        studiesCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+      required:
+      - size
+      - studiesCount
+    LongestString:
+      type: object
+      properties:
+        length:
+          type: integer
+          format: int32
+        nctId:
+          type: string
+        value:
+          type: string
+      additionalProperties: false
+      required:
+      - length
+      - nctId
+      - value
     EnumStats:
       type: object
       properties:
@@ -237,21 +246,33 @@ components:
       - piece
       - type
       - uniqueValuesCount
-    errorMessage:
-      type: string
-      description: A text message describing an error
-    StudySize:
+    DateStats:
       type: object
       properties:
-        id:
+        field:
           type: string
-        sizeBytes:
+        formats:
+          type: array
+          items:
+            type: string
+        max:
+          type: string
+        min:
+          type: string
+        missingStudiesCount:
           type: integer
           format: int32
+        piece:
+          type: string
+        type:
+          $ref: '#/components/schemas/FieldStatsType'
       additionalProperties: false
       required:
-      - id
-      - sizeBytes
+      - field
+      - formats
+      - missingStudiesCount
+      - piece
+      - type
     ValueCount:
       type: object
       properties:
@@ -264,51 +285,21 @@ components:
       required:
       - studiesCount
       - value
-    FieldValuesStatsList:
-      type: array
-      items:
-        $ref: '#/components/schemas/FieldValuesStats'
-    LongestString:
+    errorMessage:
+      type: string
+      description: A text message describing an error
+    DistItem:
       type: object
       properties:
-        length:
+        sizeRange:
+          type: string
+        studiesCount:
           type: integer
           format: int32
-        nctId:
-          type: string
-        value:
-          type: string
       additionalProperties: false
       required:
-      - length
-      - nctId
-      - value
-    BooleanStats:
-      type: object
-      properties:
-        falseCount:
-          type: integer
-          format: int32
-        field:
-          type: string
-        missingStudiesCount:
-          type: integer
-          format: int32
-        piece:
-          type: string
-        trueCount:
-          type: integer
-          format: int32
-        type:
-          $ref: '#/components/schemas/FieldStatsType'
-      additionalProperties: false
-      required:
-      - falseCount
-      - field
-      - missingStudiesCount
-      - piece
-      - trueCount
-      - type
+      - sizeRange
+      - studiesCount
     StringStats:
       type: object
       properties:
@@ -337,6 +328,48 @@ components:
       - piece
       - type
       - uniqueValuesCount
+    ListSizesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListSizes'
+    StudySize:
+      type: object
+      properties:
+        id:
+          type: string
+        sizeBytes:
+          type: integer
+          format: int32
+      additionalProperties: false
+      required:
+      - id
+      - sizeBytes
+    BooleanStats:
+      type: object
+      properties:
+        falseCount:
+          type: integer
+          format: int32
+        field:
+          type: string
+        missingStudiesCount:
+          type: integer
+          format: int32
+        piece:
+          type: string
+        trueCount:
+          type: integer
+          format: int32
+        type:
+          $ref: '#/components/schemas/FieldStatsType'
+      additionalProperties: false
+      required:
+      - falseCount
+      - field
+      - missingStudiesCount
+      - piece
+      - trueCount
+      - type
     ListSizes:
       type: object
       properties:
@@ -360,65 +393,6 @@ components:
       - field
       - piece
       - uniqueSizesCount
-    DateStats:
-      type: object
-      properties:
-        field:
-          type: string
-        formats:
-          type: array
-          items:
-            type: string
-        max:
-          type: string
-        min:
-          type: string
-        missingStudiesCount:
-          type: integer
-          format: int32
-        piece:
-          type: string
-        type:
-          $ref: '#/components/schemas/FieldStatsType'
-      additionalProperties: false
-      required:
-      - field
-      - formats
-      - missingStudiesCount
-      - piece
-      - type
-    ListSize:
-      type: object
-      properties:
-        size:
-          type: integer
-        studiesCount:
-          type: integer
-          format: int32
-      additionalProperties: false
-      required:
-      - size
-      - studiesCount
-    FieldValuesStats:
-      anyOf:
-      - $ref: '#/components/schemas/EnumStats'
-      - $ref: '#/components/schemas/StringStats'
-      - $ref: '#/components/schemas/DateStats'
-      - $ref: '#/components/schemas/IntegerStats'
-      - $ref: '#/components/schemas/NumberStats'
-      - $ref: '#/components/schemas/BooleanStats'
-    DistItem:
-      type: object
-      properties:
-        sizeRange:
-          type: string
-        studiesCount:
-          type: integer
-          format: int32
-      additionalProperties: false
-      required:
-      - sizeRange
-      - studiesCount
     NumberStats:
       type: object
       properties:
@@ -473,6 +447,32 @@ components:
       - missingStudiesCount
       - piece
       - type
+    GzipStats:
+      type: object
+      properties:
+        averageSizeBytes:
+          type: integer
+          format: int32
+        largestStudies:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudySize'
+        percentiles:
+          type: object
+        ranges:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistItem'
+        totalStudies:
+          type: integer
+          format: int32
+      additionalProperties: false
+      required:
+      - averageSizeBytes
+      - largestStudies
+      - percentiles
+      - ranges
+      - totalStudies
 externalDocs:
   description: Introduction on clinicaltrials.gov
   url: https://clinicaltrials.gov/data-about-studies/learn-about-api

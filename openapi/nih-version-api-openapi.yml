@@ -17,7 +17,7 @@ paths:
       description: 'API and data versions.
 
 
-        API version follows [Semantic Versioning 2.0.0 Schema](https://semver.org/spec/v2.0.0.html).
+        API version follows Semantic Versioning 2.0.0 Schema.
 
         Data version is UTC timestamp in `yyyy-MM-dd''T''HH:mm:ss` format.'
       tags:
@@ -55,14 +55,6 @@ components:
       additionalProperties: false
       required:
       - apiVersion
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte
     rpcStatus:
       type: object
       properties:
@@ -75,6 +67,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
     v2VersionReply:
       type: object
       properties:

@@ -13,7 +13,37 @@ paths:
   /studies:
     get:
       summary: Studies
-      description: "Returns data of studies matching query and filter parameters. The studies are returned page by page.\nIf response contains `nextPageToken`, use its value in `pageToken` to get next page.\nThe last page will not contain `nextPageToken`. A page may have empty `studies` array.\nRequest for each subsequent page **must** have the same parameters as for the first page, except\n`countTotal`, `pageSize`, and `pageToken` parameters.\n\nIf neither queries nor filters are set, all studies will be returned.\nIf any query parameter contains only NCT IDs (comma- and/or space-separated), filters are ignored.\n\n`query.*` parameters are in [Essie expression syntax](/find-studies/constructing-complex-search-queries).\nThose parameters affect ranking of studies, if sorted by relevance. See `sort` parameter for details.\n\n`filter.*` and `postFilter.*` parameters have same effect as there is no aggregation calculation. \nBoth are available just to simplify applying parameters from search request.\nBoth do not affect ranking of studies.\n\nNote: When trying JSON format in your browser, do not set too large `pageSize` parameter, if `fields` is\nunlimited. That may return too much data for the browser to parse and render."
+      description: 'Returns data of studies matching query and filter parameters. The studies are returned page by page.
+
+        If response contains `nextPageToken`, use its value in `pageToken` to get next page.
+
+        The last page will not contain `nextPageToken`. A page may have empty `studies` array.
+
+        Request for each subsequent page **must** have the same parameters as for the first page, except
+
+        `countTotal`, `pageSize`, and `pageToken` parameters.
+
+
+        If neither queries nor filters are set, all studies will be returned.
+
+        If any query parameter contains only NCT IDs (comma- and/or space-separated), filters are ignored.
+
+
+        `query.*` parameters are in Essie expression syntax.
+
+        Those parameters affect ranking of studies, if sorted by relevance. See `sort` parameter for details.
+
+
+        `filter.*` and `postFilter.*` parameters have same effect as there is no aggregation calculation.
+
+        Both are available just to simplify applying parameters from search request.
+
+        Both do not affect ranking of studies.
+
+
+        Note: When trying JSON format in your browser, do not set too large `pageSize` parameter, if `fields` is
+
+        unlimited. That may return too much data for the browser to parse and render.'
       tags:
       - Studies
       operationId: listStudies
@@ -649,7 +679,24 @@ paths:
   /studies/enums:
     get:
       summary: Enums
-      description: "Returns enumeration types and their values.\n\nEvery item of the returning array represents enum type and contains the following properties:\n* `type` - enum type name\n* `pieces` - array of names of all data pieces having the enum type\n* `values` - all available values of the enum; every item contains the following properties:\n  * `value` - data value\n  * `legacyValue` - data value in legacy API\n  * `exceptions` - map from data piece name to legacy value when different from `legacyValue`\n    (some data pieces had special enum values in legacy API)"
+      description: 'Returns enumeration types and their values.
+
+
+        Every item of the returning array represents enum type and contains the following properties:
+
+        * `type` - enum type name
+
+        * `pieces` - array of names of all data pieces having the enum type
+
+        * `values` - all available values of the enum; every item contains the following properties:
+
+        * `value` - data value
+
+        * `legacyValue` - data value in legacy API
+
+        * `exceptions` - map from data piece name to legacy value when different from `legacyValue`
+
+        (some data pieces had special enum values in legacy API)'
       tags:
       - Studies
       operationId: enums
@@ -669,52 +716,95 @@ paths:
                 $ref: '#/components/schemas/errorMessage'
 components:
   schemas:
-    AgreementRestrictionType:
-      type: string
-      enum:
-      - LTE60
-      - GT60
-      - OTHER
-    DescriptionModule:
+    PagedStudies:
       type: object
       properties:
-        briefSummary:
+        nextPageToken:
           type: string
-        detailedDescription:
-          type: string
-    NonInferiorityType:
-      type: string
-      enum:
-      - SUPERIORITY
-      - NON_INFERIORITY
-      - EQUIVALENCE
-      - OTHER
-      - NON_INFERIORITY_OR_EQUIVALENCE
-      - SUPERIORITY_OR_OTHER
-      - NON_INFERIORITY_OR_EQUIVALENCE_LEGACY
-      - SUPERIORITY_OR_OTHER_LEGACY
-    FirstMcpInfo:
+        studies:
+          $ref: '#/components/schemas/StudyList'
+        totalCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+      required:
+      - studies
+    OutcomeMeasuresModule:
       type: object
       properties:
-        postDateStruct:
-          $ref: '#/components/schemas/DateStruct'
-    EnrollmentType:
+        outcomeMeasures:
+          type: array
+          items:
+            $ref: '#/components/schemas/OutcomeMeasure'
+    ResponsiblePartyType:
       type: string
       enum:
-      - ACTUAL
-      - ESTIMATED
-    RecruitmentStatus:
+      - SPONSOR
+      - PRINCIPAL_INVESTIGATOR
+      - SPONSOR_INVESTIGATOR
+    AnnotationSection:
+      type: object
+      properties:
+        annotationModule:
+          $ref: '#/components/schemas/AnnotationModule'
+    ViolationEvent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ViolationEventType'
+        description:
+          type: string
+        creationDate:
+          type: string
+          format: date
+        issuedDate:
+          type: string
+          format: date
+        releaseDate:
+          type: string
+          format: date
+        postedDate:
+          type: string
+          format: date
+    Sex:
       type: string
       enum:
-      - ACTIVE_NOT_RECRUITING
-      - COMPLETED
-      - ENROLLING_BY_INVITATION
-      - NOT_YET_RECRUITING
-      - RECRUITING
-      - SUSPENDED
-      - TERMINATED
-      - WITHDRAWN
-      - AVAILABLE
+      - FEMALE
+      - MALE
+      - ALL
+    ExpandedAccessInfo:
+      type: object
+      properties:
+        hasExpandedAccess:
+          type: boolean
+        nctId:
+          $ref: '#/components/schemas/nct'
+        statusForNctId:
+          $ref: '#/components/schemas/ExpandedAccessStatus'
+    ArmGroup:
+      type: object
+      properties:
+        label:
+          type: string
+        type:
+          $ref: '#/components/schemas/ArmGroupType'
+        description:
+          type: string
+        interventionNames:
+          type: array
+          items:
+            type: string
+    MaskingBlock:
+      type: object
+      properties:
+        masking:
+          $ref: '#/components/schemas/DesignMasking'
+        maskingDescription:
+          type: string
+        whoMasked:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhoMasked'
     MeasureParam:
       type: string
       enum:
@@ -727,147 +817,67 @@ components:
       - NUMBER
       - COUNT_OF_PARTICIPANTS
       - COUNT_OF_UNITS
-    DateTimeMinutes:
-      type: string
-      description: Date and time in `yyyy-MM-dd'T'HH:mm` format
-    ProtocolSection:
+    BaselineMeasure:
       type: object
       properties:
-        identificationModule:
-          $ref: '#/components/schemas/IdentificationModule'
-        statusModule:
-          $ref: '#/components/schemas/StatusModule'
-        sponsorCollaboratorsModule:
-          $ref: '#/components/schemas/SponsorCollaboratorsModule'
-        oversightModule:
-          $ref: '#/components/schemas/OversightModule'
-        descriptionModule:
-          $ref: '#/components/schemas/DescriptionModule'
-        conditionsModule:
-          $ref: '#/components/schemas/ConditionsModule'
-        designModule:
-          $ref: '#/components/schemas/DesignModule'
-        armsInterventionsModule:
-          $ref: '#/components/schemas/ArmsInterventionsModule'
-        outcomesModule:
-          $ref: '#/components/schemas/OutcomesModule'
-        eligibilityModule:
-          $ref: '#/components/schemas/EligibilityModule'
-        contactsLocationsModule:
-          $ref: '#/components/schemas/ContactsLocationsModule'
-        referencesModule:
-          $ref: '#/components/schemas/ReferencesModule'
-        ipdSharingStatementModule:
-          $ref: '#/components/schemas/IpdSharingStatementModule'
-    EligibilityModule:
-      type: object
-      properties:
-        eligibilityCriteria:
-          type: string
-        healthyVolunteers:
-          type: boolean
-        sex:
-          $ref: '#/components/schemas/Sex'
-        genderBased:
-          type: boolean
-        genderDescription:
-          type: string
-        minimumAge:
-          type: string
-          pattern: ^\d+ (Year|Years|Month|Months|Week|Weeks|Day|Days|Hour|Hours|Minute|Minutes)$
-        maximumAge:
-          type: string
-          pattern: ^\d+ (Year|Years|Month|Months|Week|Weeks|Day|Days|Hour|Hours|Minute|Minutes)$
-        stdAges:
-          type: array
-          items:
-            $ref: '#/components/schemas/StandardAge'
-        studyPopulation:
-          type: string
-        samplingMethod:
-          $ref: '#/components/schemas/SamplingMethod'
-    SearchDocumentList:
-      type: array
-      items:
-        $ref: '#/components/schemas/SearchDocument'
-    AvailIpd:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-        url:
-          type: string
-        comment:
-          type: string
-    Contact:
-      type: object
-      properties:
-        name:
-          type: string
-        role:
-          $ref: '#/components/schemas/ContactRole'
-        phone:
-          type: string
-        phoneExt:
-          type: string
-        email:
-          type: string
-    ObservationalModel:
-      type: string
-      enum:
-      - COHORT
-      - CASE_CONTROL
-      - CASE_ONLY
-      - CASE_CROSSOVER
-      - ECOLOGIC_OR_COMMUNITY
-      - FAMILY_BASED
-      - DEFINED_POPULATION
-      - NATURAL_HISTORY
-      - OTHER
-    SecondaryIdType:
-      type: string
-      enum:
-      - NIH
-      - FDA
-      - VA
-      - CDC
-      - AHRQ
-      - SAMHSA
-      - OTHER_GRANT
-      - EUDRACT_NUMBER
-      - CTIS
-      - REGISTRY
-      - OTHER
-    ConfidenceIntervalNumSides:
-      type: string
-      enum:
-      - ONE_SIDED
-      - TWO_SIDED
-    AdverseEventsModule:
-      type: object
-      properties:
-        frequencyThreshold:
-          type: string
-        timeFrame:
+        title:
           type: string
         description:
           type: string
-        allCauseMortalityComment:
+        populationDescription:
           type: string
-        eventGroups:
+        paramType:
+          $ref: '#/components/schemas/MeasureParam'
+        dispersionType:
+          $ref: '#/components/schemas/MeasureDispersionType'
+        unitOfMeasure:
+          type: string
+        calculatePct:
+          type: boolean
+        denomUnitsSelected:
+          type: string
+        denoms:
           type: array
           items:
-            $ref: '#/components/schemas/EventGroup'
-        seriousEvents:
+            $ref: '#/components/schemas/Denom'
+        classes:
           type: array
           items:
-            $ref: '#/components/schemas/AdverseEvent'
-        otherEvents:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdverseEvent'
+            $ref: '#/components/schemas/MeasureClass'
+    BrowseBranch:
+      type: object
+      properties:
+        abbrev:
+          type: string
+        name:
+          type: string
+    EnumInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnumInfo'
+    errorMessage:
+      type: string
+      description: A text message describing an error
+    DateType:
+      type: string
+      enum:
+      - ACTUAL
+      - ESTIMATED
+    ExpandedAccessStatus:
+      type: string
+      enum:
+      - AVAILABLE
+      - NO_LONGER_AVAILABLE
+      - TEMPORARILY_NOT_AVAILABLE
+      - APPROVED_FOR_MARKETING
+    InterventionalAssignment:
+      type: string
+      enum:
+      - SINGLE_GROUP
+      - PARALLEL
+      - CROSSOVER
+      - FACTORIAL
+      - SEQUENTIAL
     BrowseModule:
       type: object
       properties:
@@ -887,266 +897,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BrowseBranch'
-    StudyList:
-      title: Array of studies
-      description: '`study` field values of type `markup` are in markdown format.
-
-        '
-      type: array
-      items:
-        $ref: '#/components/schemas/Study'
-    MoreInfoModule:
+    LimitationsAndCaveats:
       type: object
       properties:
-        limitationsAndCaveats:
-          $ref: '#/components/schemas/LimitationsAndCaveats'
-        certainAgreement:
-          $ref: '#/components/schemas/CertainAgreement'
-        pointOfContact:
-          $ref: '#/components/schemas/PointOfContact'
-    DropWithdraw:
-      type: object
-      properties:
-        type:
-          type: string
-        comment:
-          type: string
-        reasons:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlowStats'
-    UnpostedAnnotation:
-      type: object
-      properties:
-        unpostedResponsibleParty:
-          type: string
-        unpostedEvents:
-          type: array
-          items:
-            $ref: '#/components/schemas/UnpostedEvent'
-    DateStruct:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-        type:
-          $ref: '#/components/schemas/DateType'
-    ExpandedAccessInfo:
-      type: object
-      properties:
-        hasExpandedAccess:
-          type: boolean
-        nctId:
-          $ref: '#/components/schemas/nct'
-        statusForNctId:
-          $ref: '#/components/schemas/ExpandedAccessStatus'
-    SeeAlsoLink:
-      type: object
-      properties:
-        label:
-          type: string
-        url:
-          type: string
-    GeoPoint:
-      type: object
-      properties:
-        lat:
-          type: number
-        lon:
-          type: number
-      required:
-      - lat
-      - lon
-    StandardAge:
-      type: string
-      enum:
-      - CHILD
-      - ADULT
-      - OLDER_ADULT
-    BrowseLeafRelevance:
-      type: string
-      enum:
-      - LOW
-      - HIGH
-    UnpostedEvent:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/UnpostedEventType'
-        date:
-          type: string
-          format: date
-        dateUnknown:
-          type: boolean
-    EventGroup:
-      type: object
-      properties:
-        id:
-          type: string
-        title:
-          type: string
         description:
           type: string
-        deathsNumAffected:
-          type: integer
-        deathsNumAtRisk:
-          type: integer
-        seriousNumAffected:
-          type: integer
-        seriousNumAtRisk:
-          type: integer
-        otherNumAffected:
-          type: integer
-        otherNumAtRisk:
-          type: integer
-    FieldNodeList:
-      type: array
-      items:
-        $ref: '#/components/schemas/FieldNode'
-    PartialDate:
-      type: string
-      description: Date in `yyyy`, `yyyy-MM`, or `yyyy-MM-dd` format
-    OfficialRole:
-      type: string
-      enum:
-      - STUDY_CHAIR
-      - STUDY_DIRECTOR
-      - PRINCIPAL_INVESTIGATOR
-      - SUB_INVESTIGATOR
-    OutcomeMeasure:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/OutcomeMeasureType'
-        title:
-          type: string
-        description:
-          type: string
-        populationDescription:
-          type: string
-        reportingStatus:
-          $ref: '#/components/schemas/ReportingStatus'
-        anticipatedPostingDate:
-          $ref: '#/components/schemas/PartialDate'
-        paramType:
-          $ref: '#/components/schemas/MeasureParam'
-        dispersionType:
-          type: string
-        unitOfMeasure:
-          type: string
-        calculatePct:
-          type: boolean
-        timeFrame:
-          type: string
-        typeUnitsAnalyzed:
-          type: string
-        denomUnitsSelected:
-          type: string
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/MeasureGroup'
-        denoms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Denom'
-        classes:
-          type: array
-          items:
-            $ref: '#/components/schemas/MeasureClass'
-        analyses:
-          type: array
-          items:
-            $ref: '#/components/schemas/MeasureAnalysis'
-    StudyType:
-      type: string
-      enum:
-      - EXPANDED_ACCESS
-      - INTERVENTIONAL
-      - OBSERVATIONAL
-    DesignMasking:
-      type: string
-      enum:
-      - NONE
-      - SINGLE
-      - DOUBLE
-      - TRIPLE
-      - QUADRUPLE
-    DenomCount:
-      type: object
-      properties:
-        groupId:
-          type: string
-        value:
-          type: string
-    Intervention:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/InterventionType'
-        name:
-          type: string
-        description:
-          type: string
-        armGroupLabels:
-          type: array
-          items:
-            type: string
-        otherNames:
-          type: array
-          items:
-            type: string
-    ViolationEventType:
-      type: string
-      enum:
-      - VIOLATION_IDENTIFIED
-      - CORRECTION_CONFIRMED
-      - PENALTY_IMPOSED
-      - ISSUES_IN_LETTER_ADDRESSED_CONFIRMED
-    CertainAgreement:
-      type: object
-      properties:
-        piSponsorEmployee:
-          type: boolean
-        restrictionType:
-          $ref: '#/components/schemas/AgreementRestrictionType'
-        restrictiveAgreement:
-          type: boolean
-        otherDetails:
-          type: string
-    Measurement:
-      type: object
-      properties:
-        groupId:
-          type: string
-        value:
-          type: string
-        spread:
-          type: string
-        lowerLimit:
-          type: string
-        upperLimit:
-          type: string
-        comment:
-          type: string
-    AgencyClass:
+    SecondaryIdType:
       type: string
       enum:
       - NIH
-      - FED
-      - OTHER_GOV
-      - INDIV
-      - INDUSTRY
-      - NETWORK
-      - AMBIG
+      - FDA
+      - VA
+      - CDC
+      - AHRQ
+      - SAMHSA
+      - OTHER_GRANT
+      - EUDRACT_NUMBER
+      - CTIS
+      - REGISTRY
       - OTHER
-      - UNKNOWN
-    DocumentSection:
+    AnnotationModule:
       type: object
       properties:
-        largeDocumentModule:
-          $ref: '#/components/schemas/LargeDocumentModule'
+        unpostedAnnotation:
+          $ref: '#/components/schemas/UnpostedAnnotation'
+        violationAnnotation:
+          $ref: '#/components/schemas/ViolationAnnotation'
     ResultsSection:
       type: object
       properties:
@@ -1160,15 +936,31 @@ components:
           $ref: '#/components/schemas/AdverseEventsModule'
         moreInfoModule:
           $ref: '#/components/schemas/MoreInfoModule'
-    Outcome:
+    StudiesZip:
+      description: Study objects as files in zip archive
+      type: string
+    nct:
+      type: string
+      minLength: 11
+      maxLength: 11
+      description: NCT number
+    IpdSharing:
+      type: string
+      enum:
+      - 'YES'
+      - 'NO'
+      - UNDECIDED
+    WebLink:
       type: object
       properties:
-        measure:
+        label:
           type: string
-        description:
+        url:
           type: string
-        timeFrame:
-          type: string
+      additionalProperties: false
+      required:
+      - label
+      - url
     ExpandedAccessTypes:
       type: object
       properties:
@@ -1178,87 +970,171 @@ components:
           type: boolean
         treatment:
           type: boolean
-    MeasureClass:
+    StandardAge:
+      type: string
+      enum:
+      - CHILD
+      - ADULT
+      - OLDER_ADULT
+    Reference:
       type: object
       properties:
-        title:
+        pmid:
           type: string
-        denoms:
+        type:
+          $ref: '#/components/schemas/ReferenceType'
+        citation:
+          type: string
+        retractions:
           type: array
           items:
-            $ref: '#/components/schemas/Denom'
-        categories:
+            $ref: '#/components/schemas/Retraction'
+    ViolationEventType:
+      type: string
+      enum:
+      - VIOLATION_IDENTIFIED
+      - CORRECTION_CONFIRMED
+      - PENALTY_IMPOSED
+      - ISSUES_IN_LETTER_ADDRESSED_CONFIRMED
+    ReferencesModule:
+      type: object
+      properties:
+        references:
           type: array
           items:
-            $ref: '#/components/schemas/MeasureCategory'
-    DateType:
+            $ref: '#/components/schemas/Reference'
+        seeAlsoLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/SeeAlsoLink'
+        availIpds:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailIpd'
+    EnrollmentType:
       type: string
       enum:
       - ACTUAL
       - ESTIMATED
-    InterventionalAssignment:
+    LargeDoc:
+      type: object
+      properties:
+        typeAbbrev:
+          type: string
+        hasProtocol:
+          type: boolean
+        hasSap:
+          type: boolean
+        hasIcf:
+          type: boolean
+        label:
+          type: string
+        date:
+          type: string
+          format: date
+        uploadDate:
+          $ref: '#/components/schemas/DateTimeMinutes'
+        filename:
+          type: string
+        size:
+          type: integer
+    AnalysisDispersionType:
       type: string
       enum:
-      - SINGLE_GROUP
-      - PARALLEL
-      - CROSSOVER
-      - FACTORIAL
-      - SEQUENTIAL
-    Denom:
+      - STANDARD_DEVIATION
+      - STANDARD_ERROR_OF_MEAN
+    ResponsibleParty:
       type: object
       properties:
-        units:
-          type: string
-        counts:
-          type: array
-          items:
-            $ref: '#/components/schemas/DenomCount'
-    FieldNode:
-      type: object
-      properties:
-        altPieceNames:
-          type: array
-          items:
-            type: string
-        children:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldNode'
-        dedLink:
-          $ref: '#/components/schemas/WebLink'
-        description:
-          type: string
-        historicOnly:
-          type: boolean
-        indexedOnly:
-          type: boolean
-        isEnum:
-          type: boolean
-        maxChars:
-          type: integer
-          format: int32
-        name:
-          type: string
-        nested:
-          type: boolean
-        piece:
-          type: string
-        rules:
-          type: string
-        sourceType:
-          type: string
-        synonyms:
-          type: boolean
-        title:
-          type: string
         type:
+          $ref: '#/components/schemas/ResponsiblePartyType'
+        investigatorFullName:
           type: string
-      additionalProperties: false
-      required:
-      - name
-      - piece
-      - sourceType
-      - type
+        investigatorTitle:
+          type: string
+        investigatorAffiliation:
+          type: string
+        oldNameTitle:
+          type: string
+        oldOrganization:
+          type: string
+    SubmissionTracking:
+      type: object
+      properties:
+        estimatedResultsFirstSubmitDate:
+          type: string
+          format: date
+        firstMcpInfo:
+          $ref: '#/components/schemas/FirstMcpInfo'
+        submissionInfos:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionInfo'
+    ArmGroupType:
+      type: string
+      enum:
+      - EXPERIMENTAL
+      - ACTIVE_COMPARATOR
+      - PLACEBO_COMPARATOR
+      - SHAM_COMPARATOR
+      - NO_INTERVENTION
+      - OTHER
+    DesignInfo:
+      type: object
+      properties:
+        allocation:
+          $ref: '#/components/schemas/DesignAllocation'
+        interventionModel:
+          $ref: '#/components/schemas/InterventionalAssignment'
+        interventionModelDescription:
+          type: string
+        primaryPurpose:
+          $ref: '#/components/schemas/PrimaryPurpose'
+        observationalModel:
+          $ref: '#/components/schemas/ObservationalModel'
+        timePerspective:
+          $ref: '#/components/schemas/DesignTimePerspective'
+        maskingInfo:
+          $ref: '#/components/schemas/MaskingBlock'
+    EnrollmentInfo:
+      type: object
+      properties:
+        count:
+          type: integer
+        type:
+          $ref: '#/components/schemas/EnrollmentType'
+    BaselineCharacteristicsModule:
+      type: object
+      properties:
+        populationDescription:
+          type: string
+        typeUnitsAnalyzed:
+          type: string
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeasureGroup'
+        denoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Denom'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaselineMeasure'
+    UnpostedAnnotation:
+      type: object
+      properties:
+        unpostedResponsibleParty:
+          type: string
+        unpostedEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnpostedEvent'
+    SearchDocumentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchDocument'
     Location:
       type: object
       properties:
@@ -1280,149 +1156,187 @@ components:
             $ref: '#/components/schemas/Contact'
         geoPoint:
           $ref: '#/components/schemas/GeoPoint'
+    EventAssessment:
+      type: string
+      enum:
+      - NON_SYSTEMATIC_ASSESSMENT
+      - SYSTEMATIC_ASSESSMENT
+    LargeDocumentModule:
+      type: object
+      properties:
+        noSap:
+          type: boolean
+        largeDocs:
+          type: array
+          items:
+            $ref: '#/components/schemas/LargeDoc'
     StudiesCsv:
       description: Study objects in csv file
       type: string
-    ContactRole:
+    FlowPeriod:
+      type: object
+      properties:
+        title:
+          type: string
+        milestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowMilestone'
+        dropWithdraws:
+          type: array
+          items:
+            $ref: '#/components/schemas/DropWithdraw'
+    MiscInfoModule:
+      type: object
+      properties:
+        versionHolder:
+          type: string
+          format: date
+        removedCountries:
+          type: array
+          items:
+            type: string
+        submissionTracking:
+          $ref: '#/components/schemas/SubmissionTracking'
+    AgreementRestrictionType:
       type: string
       enum:
-      - STUDY_CHAIR
-      - STUDY_DIRECTOR
-      - PRINCIPAL_INVESTIGATOR
-      - SUB_INVESTIGATOR
-      - CONTACT
-    OrgStudyIdInfo:
+      - LTE60
+      - GT60
+      - OTHER
+    SponsorCollaboratorsModule:
+      type: object
+      properties:
+        responsibleParty:
+          $ref: '#/components/schemas/ResponsibleParty'
+        leadSponsor:
+          $ref: '#/components/schemas/Sponsor'
+        collaborators:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sponsor'
+    DescriptionModule:
+      type: object
+      properties:
+        briefSummary:
+          type: string
+        detailedDescription:
+          type: string
+    DesignMasking:
+      type: string
+      enum:
+      - NONE
+      - SINGLE
+      - DOUBLE
+      - TRIPLE
+      - QUADRUPLE
+    OversightModule:
+      type: object
+      properties:
+        oversightHasDmc:
+          type: boolean
+        isFdaRegulatedDrug:
+          type: boolean
+        isFdaRegulatedDevice:
+          type: boolean
+        isUnapprovedDevice:
+          type: boolean
+        isPpsd:
+          type: boolean
+        isUsExport:
+          type: boolean
+        fdaaa801Violation:
+          type: boolean
+    StudyFhir:
+      description: Study in FHIR JSON format
+      type: object
+    PointOfContact:
+      type: object
+      properties:
+        title:
+          type: string
+        organization:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        phoneExt:
+          type: string
+    DerivedSection:
+      type: object
+      properties:
+        miscInfoModule:
+          $ref: '#/components/schemas/MiscInfoModule'
+        conditionBrowseModule:
+          $ref: '#/components/schemas/BrowseModule'
+        interventionBrowseModule:
+          $ref: '#/components/schemas/BrowseModule'
+    DropWithdraw:
+      type: object
+      properties:
+        type:
+          type: string
+        comment:
+          type: string
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowStats'
+    EventGroup:
       type: object
       properties:
         id:
           type: string
-        type:
-          $ref: '#/components/schemas/OrgStudyIdType'
-        link:
+        title:
           type: string
-    AnnotationModule:
-      type: object
-      properties:
-        unpostedAnnotation:
-          $ref: '#/components/schemas/UnpostedAnnotation'
-        violationAnnotation:
-          $ref: '#/components/schemas/ViolationAnnotation'
-    StudiesZip:
-      description: Study objects as files in zip archive
-      type: string
-    OutcomeMeasuresModule:
-      type: object
-      properties:
-        outcomeMeasures:
-          type: array
-          items:
-            $ref: '#/components/schemas/OutcomeMeasure'
-    ResponsibleParty:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ResponsiblePartyType'
-        investigatorFullName:
+        description:
           type: string
-        investigatorTitle:
-          type: string
-        investigatorAffiliation:
-          type: string
-        oldNameTitle:
-          type: string
-        oldOrganization:
-          type: string
-    ResponsiblePartyType:
-      type: string
-      enum:
-      - SPONSOR
-      - PRINCIPAL_INVESTIGATOR
-      - SPONSOR_INVESTIGATOR
-    SubmissionInfo:
-      type: object
-      properties:
-        releaseDate:
-          type: string
-          format: date
-        unreleaseDate:
-          type: string
-          format: date
-        unreleaseDateUnknown:
-          type: boolean
-        resetDate:
-          type: string
-          format: date
-        mcpReleaseN:
+        deathsNumAffected:
           type: integer
-    WebLink:
+        deathsNumAtRisk:
+          type: integer
+        seriousNumAffected:
+          type: integer
+        seriousNumAtRisk:
+          type: integer
+        otherNumAffected:
+          type: integer
+        otherNumAtRisk:
+          type: integer
+    FlowMilestone:
       type: object
       properties:
-        label:
-          type: string
-        url:
-          type: string
-      additionalProperties: false
-      required:
-      - label
-      - url
-    ReferencesModule:
-      type: object
-      properties:
-        references:
-          type: array
-          items:
-            $ref: '#/components/schemas/Reference'
-        seeAlsoLinks:
-          type: array
-          items:
-            $ref: '#/components/schemas/SeeAlsoLink'
-        availIpds:
-          type: array
-          items:
-            $ref: '#/components/schemas/AvailIpd'
-    FlowStats:
-      type: object
-      properties:
-        groupId:
+        type:
           type: string
         comment:
           type: string
-        numSubjects:
-          type: string
-        numUnits:
-          type: string
-    PrimaryPurpose:
-      type: string
-      enum:
-      - TREATMENT
-      - PREVENTION
-      - DIAGNOSTIC
-      - ECT
-      - SUPPORTIVE_CARE
-      - SCREENING
-      - HEALTH_SERVICES_RESEARCH
-      - BASIC_SCIENCE
-      - DEVICE_FEASIBILITY
-      - OTHER
-    BaselineCharacteristicsModule:
+        achievements:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowStats'
+    MeasureGroup:
       type: object
       properties:
-        populationDescription:
+        id:
           type: string
-        typeUnitsAnalyzed:
+        title:
           type: string
-        groups:
+        description:
+          type: string
+    SearchDocument:
+      type: object
+      properties:
+        areas:
           type: array
           items:
-            $ref: '#/components/schemas/MeasureGroup'
-        denoms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Denom'
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaselineMeasure'
+            $ref: '#/components/schemas/SearchArea'
+        name:
+          type: string
+      additionalProperties: false
+      required:
+      - areas
+      - name
     BrowseLeaf:
       type: object
       properties:
@@ -1434,6 +1348,63 @@ components:
           type: string
         relevance:
           $ref: '#/components/schemas/BrowseLeafRelevance'
+    OutcomesModule:
+      type: object
+      properties:
+        primaryOutcomes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Outcome'
+        secondaryOutcomes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Outcome'
+        otherOutcomes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Outcome'
+    Mesh:
+      type: object
+      properties:
+        id:
+          type: string
+        term:
+          type: string
+    Denom:
+      type: object
+      properties:
+        units:
+          type: string
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DenomCount'
+    InterventionType:
+      type: string
+      enum:
+      - BEHAVIORAL
+      - BIOLOGICAL
+      - COMBINATION_PRODUCT
+      - DEVICE
+      - DIAGNOSTIC_TEST
+      - DIETARY_SUPPLEMENT
+      - DRUG
+      - GENETIC
+      - PROCEDURE
+      - RADIATION
+      - OTHER
+    DocumentSection:
+      type: object
+      properties:
+        largeDocumentModule:
+          $ref: '#/components/schemas/LargeDocumentModule'
+    OutcomeMeasureType:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      - OTHER_PRE_SPECIFIED
+      - POST_HOC
     StatusModule:
       type: object
       properties:
@@ -1486,6 +1457,191 @@ components:
           format: date
         lastUpdatePostDateStruct:
           $ref: '#/components/schemas/DateStruct'
+    Status:
+      type: string
+      enum:
+      - ACTIVE_NOT_RECRUITING
+      - COMPLETED
+      - ENROLLING_BY_INVITATION
+      - NOT_YET_RECRUITING
+      - RECRUITING
+      - SUSPENDED
+      - TERMINATED
+      - WITHDRAWN
+      - AVAILABLE
+      - NO_LONGER_AVAILABLE
+      - TEMPORARILY_NOT_AVAILABLE
+      - APPROVED_FOR_MARKETING
+      - WITHHELD
+      - UNKNOWN
+    GeoName:
+      type: string
+      description: State/province or city name
+    AvailIpd:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+        comment:
+          type: string
+    MeasureClass:
+      type: object
+      properties:
+        title:
+          type: string
+        denoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Denom'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeasureCategory'
+    AdverseEvent:
+      type: object
+      properties:
+        term:
+          type: string
+        organSystem:
+          type: string
+        sourceVocabulary:
+          type: string
+        assessmentType:
+          $ref: '#/components/schemas/EventAssessment'
+        notes:
+          type: string
+        stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventStats'
+    ContactRole:
+      type: string
+      enum:
+      - STUDY_CHAIR
+      - STUDY_DIRECTOR
+      - PRINCIPAL_INVESTIGATOR
+      - SUB_INVESTIGATOR
+      - CONTACT
+    ArmsInterventionsModule:
+      type: object
+      properties:
+        armGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArmGroup'
+        interventions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Intervention'
+    Outcome:
+      type: object
+      properties:
+        measure:
+          type: string
+        description:
+          type: string
+        timeFrame:
+          type: string
+    StudyType:
+      type: string
+      enum:
+      - EXPANDED_ACCESS
+      - INTERVENTIONAL
+      - OBSERVATIONAL
+    RecruitmentStatus:
+      type: string
+      enum:
+      - ACTIVE_NOT_RECRUITING
+      - COMPLETED
+      - ENROLLING_BY_INVITATION
+      - NOT_YET_RECRUITING
+      - RECRUITING
+      - SUSPENDED
+      - TERMINATED
+      - WITHDRAWN
+      - AVAILABLE
+    SubmissionInfo:
+      type: object
+      properties:
+        releaseDate:
+          type: string
+          format: date
+        unreleaseDate:
+          type: string
+          format: date
+        unreleaseDateUnknown:
+          type: boolean
+        resetDate:
+          type: string
+          format: date
+        mcpReleaseN:
+          type: integer
+    MeasureDispersionType:
+      type: string
+      enum:
+      - NA
+      - STANDARD_DEVIATION
+      - STANDARD_ERROR
+      - INTER_QUARTILE_RANGE
+      - FULL_RANGE
+      - CONFIDENCE_80
+      - CONFIDENCE_90
+      - CONFIDENCE_95
+      - CONFIDENCE_975
+      - CONFIDENCE_99
+      - CONFIDENCE_OTHER
+      - GEOMETRIC_COEFFICIENT
+    ConfidenceIntervalNumSides:
+      type: string
+      enum:
+      - ONE_SIDED
+      - TWO_SIDED
+    EnumItem:
+      type: object
+      properties:
+        exceptions:
+          type: object
+        legacyValue:
+          type: string
+        value:
+          type: string
+      additionalProperties: false
+      required:
+      - legacyValue
+      - value
+    ProtocolSection:
+      type: object
+      properties:
+        identificationModule:
+          $ref: '#/components/schemas/IdentificationModule'
+        statusModule:
+          $ref: '#/components/schemas/StatusModule'
+        sponsorCollaboratorsModule:
+          $ref: '#/components/schemas/SponsorCollaboratorsModule'
+        oversightModule:
+          $ref: '#/components/schemas/OversightModule'
+        descriptionModule:
+          $ref: '#/components/schemas/DescriptionModule'
+        conditionsModule:
+          $ref: '#/components/schemas/ConditionsModule'
+        designModule:
+          $ref: '#/components/schemas/DesignModule'
+        armsInterventionsModule:
+          $ref: '#/components/schemas/ArmsInterventionsModule'
+        outcomesModule:
+          $ref: '#/components/schemas/OutcomesModule'
+        eligibilityModule:
+          $ref: '#/components/schemas/EligibilityModule'
+        contactsLocationsModule:
+          $ref: '#/components/schemas/ContactsLocationsModule'
+        referencesModule:
+          $ref: '#/components/schemas/ReferencesModule'
+        ipdSharingStatementModule:
+          $ref: '#/components/schemas/IpdSharingStatementModule'
     ConditionsModule:
       type: object
       properties:
@@ -1497,47 +1653,22 @@ components:
           type: array
           items:
             type: string
-    Retraction:
+    Organization:
       type: object
       properties:
-        pmid:
+        fullName:
           type: string
-        source:
-          type: string
-    PartialDateStruct:
-      type: object
-      properties:
-        date:
-          $ref: '#/components/schemas/PartialDate'
-        type:
-          $ref: '#/components/schemas/DateType'
-    Reference:
-      type: object
-      properties:
-        pmid:
-          type: string
-        type:
-          $ref: '#/components/schemas/ReferenceType'
-        citation:
-          type: string
-        retractions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Retraction'
-    EventAssessment:
+        class:
+          $ref: '#/components/schemas/AgencyClass'
+    BioSpecRetention:
       type: string
       enum:
-      - NON_SYSTEMATIC_ASSESSMENT
-      - SYSTEMATIC_ASSESSMENT
-    MeasureCategory:
-      type: object
-      properties:
-        title:
-          type: string
-        measurements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measurement'
+      - NONE_RETAINED
+      - SAMPLES_WITH_DNA
+      - SAMPLES_WITHOUT_DNA
+    DateTimeMinutes:
+      type: string
+      description: Date and time in `yyyy-MM-dd'T'HH:mm` format
     EnumInfo:
       type: object
       properties:
@@ -1556,6 +1687,16 @@ components:
       - pieces
       - type
       - values
+    UnpostedEvent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/UnpostedEventType'
+        date:
+          type: string
+          format: date
+        dateUnknown:
+          type: boolean
     Study:
       type: object
       properties:
@@ -1571,23 +1712,55 @@ components:
           $ref: '#/components/schemas/DerivedSection'
         hasResults:
           type: boolean
-    StudyFhir:
-      description: Study in FHIR JSON format
-      type: object
-    nct:
-      type: string
-      minLength: 11
-      maxLength: 11
-      description: NCT number
-    EnumInfoList:
-      type: array
-      items:
-        $ref: '#/components/schemas/EnumInfo'
-    SamplingMethod:
+    DesignTimePerspective:
       type: string
       enum:
-      - PROBABILITY_SAMPLE
-      - NON_PROBABILITY_SAMPLE
+      - RETROSPECTIVE
+      - PROSPECTIVE
+      - CROSS_SECTIONAL
+      - OTHER
+    Measurement:
+      type: object
+      properties:
+        groupId:
+          type: string
+        value:
+          type: string
+        spread:
+          type: string
+        lowerLimit:
+          type: string
+        upperLimit:
+          type: string
+        comment:
+          type: string
+    IpdSharingStatementModule:
+      type: object
+      properties:
+        ipdSharing:
+          $ref: '#/components/schemas/IpdSharing'
+        description:
+          type: string
+        infoTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IpdSharingInfoType'
+        timeFrame:
+          type: string
+        accessCriteria:
+          type: string
+        url:
+          type: string
+    GeoPoint:
+      type: object
+      properties:
+        lat:
+          type: number
+        lon:
+          type: number
+      required:
+      - lat
+      - lon
     ViolationAnnotation:
       type: object
       properties:
@@ -1595,30 +1768,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ViolationEvent'
-    OutcomeMeasureType:
+    ReferenceType:
       type: string
       enum:
-      - PRIMARY
-      - SECONDARY
-      - OTHER_PRE_SPECIFIED
-      - POST_HOC
-    DesignInfo:
-      type: object
-      properties:
-        allocation:
-          $ref: '#/components/schemas/DesignAllocation'
-        interventionModel:
-          $ref: '#/components/schemas/InterventionalAssignment'
-        interventionModelDescription:
-          type: string
-        primaryPurpose:
-          $ref: '#/components/schemas/PrimaryPurpose'
-        observationalModel:
-          $ref: '#/components/schemas/ObservationalModel'
-        timePerspective:
-          $ref: '#/components/schemas/DesignTimePerspective'
-        maskingInfo:
-          $ref: '#/components/schemas/MaskingBlock'
+      - BACKGROUND
+      - RESULT
+      - DERIVED
+    Phase:
+      type: string
+      enum:
+      - NA
+      - EARLY_PHASE1
+      - PHASE1
+      - PHASE2
+      - PHASE3
+      - PHASE4
     ParticipantFlowModule:
       type: object
       properties:
@@ -1636,19 +1800,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FlowPeriod'
-    IpdSharing:
+    UnpostedEventType:
       type: string
       enum:
-      - 'YES'
-      - 'NO'
-      - UNDECIDED
-    BioSpec:
-      type: object
-      properties:
-        retention:
-          $ref: '#/components/schemas/BioSpecRetention'
-        description:
-          type: string
+      - RESET
+      - RELEASE
+      - UNRELEASE
     IpdSharingInfoType:
       type: string
       enum:
@@ -1657,77 +1814,6 @@ components:
       - ICF
       - CSR
       - ANALYTIC_CODE
-    EnumItem:
-      type: object
-      properties:
-        exceptions:
-          type: object
-        legacyValue:
-          type: string
-        value:
-          type: string
-      additionalProperties: false
-      required:
-      - legacyValue
-      - value
-    EventStats:
-      type: object
-      properties:
-        groupId:
-          type: string
-        numEvents:
-          type: integer
-        numAffected:
-          type: integer
-        numAtRisk:
-          type: integer
-    AnalysisDispersionType:
-      type: string
-      enum:
-      - STANDARD_DEVIATION
-      - STANDARD_ERROR_OF_MEAN
-    InterventionType:
-      type: string
-      enum:
-      - BEHAVIORAL
-      - BIOLOGICAL
-      - COMBINATION_PRODUCT
-      - DEVICE
-      - DIAGNOSTIC_TEST
-      - DIETARY_SUPPLEMENT
-      - DRUG
-      - GENETIC
-      - PROCEDURE
-      - RADIATION
-      - OTHER
-    ExpandedAccessStatus:
-      type: string
-      enum:
-      - AVAILABLE
-      - NO_LONGER_AVAILABLE
-      - TEMPORARILY_NOT_AVAILABLE
-      - APPROVED_FOR_MARKETING
-    ReferenceType:
-      type: string
-      enum:
-      - BACKGROUND
-      - RESULT
-      - DERIVED
-    GeoName:
-      type: string
-      description: State/province or city name
-    SubmissionTracking:
-      type: object
-      properties:
-        estimatedResultsFirstSubmitDate:
-          type: string
-          format: date
-        firstMcpInfo:
-          $ref: '#/components/schemas/FirstMcpInfo'
-        submissionInfos:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmissionInfo'
     MeasureAnalysis:
       type: object
       properties:
@@ -1775,173 +1861,191 @@ components:
           type: array
           items:
             type: string
-    BrowseBranch:
+    OrgStudyIdInfo:
       type: object
       properties:
-        abbrev:
+        id:
           type: string
+        type:
+          $ref: '#/components/schemas/OrgStudyIdType'
+        link:
+          type: string
+    SearchArea:
+      type: object
+      properties:
         name:
           type: string
-    Organization:
+        param:
+          type: string
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchPart'
+        uiLabel:
+          type: string
+      additionalProperties: false
+      required:
+      - name
+      - parts
+    BrowseLeafRelevance:
+      type: string
+      enum:
+      - LOW
+      - HIGH
+    AgencyClass:
+      type: string
+      enum:
+      - NIH
+      - FED
+      - OTHER_GOV
+      - INDIV
+      - INDUSTRY
+      - NETWORK
+      - AMBIG
+      - OTHER
+      - UNKNOWN
+    WhoMasked:
+      type: string
+      enum:
+      - PARTICIPANT
+      - CARE_PROVIDER
+      - INVESTIGATOR
+      - OUTCOMES_ASSESSOR
+    OfficialRole:
+      type: string
+      enum:
+      - STUDY_CHAIR
+      - STUDY_DIRECTOR
+      - PRINCIPAL_INVESTIGATOR
+      - SUB_INVESTIGATOR
+    Sponsor:
       type: object
       properties:
-        fullName:
+        name:
           type: string
         class:
           $ref: '#/components/schemas/AgencyClass'
-    Status:
+    PartialDate:
       type: string
-      enum:
-      - ACTIVE_NOT_RECRUITING
-      - COMPLETED
-      - ENROLLING_BY_INVITATION
-      - NOT_YET_RECRUITING
-      - RECRUITING
-      - SUSPENDED
-      - TERMINATED
-      - WITHDRAWN
-      - AVAILABLE
-      - NO_LONGER_AVAILABLE
-      - TEMPORARILY_NOT_AVAILABLE
-      - APPROVED_FOR_MARKETING
-      - WITHHELD
-      - UNKNOWN
-    BaselineMeasure:
+      description: Date in `yyyy`, `yyyy-MM`, or `yyyy-MM-dd` format
+    SeeAlsoLink:
       type: object
       properties:
-        title:
+        label:
           type: string
-        description:
+        url:
           type: string
-        populationDescription:
-          type: string
-        paramType:
-          $ref: '#/components/schemas/MeasureParam'
-        dispersionType:
-          $ref: '#/components/schemas/MeasureDispersionType'
-        unitOfMeasure:
-          type: string
-        calculatePct:
-          type: boolean
-        denomUnitsSelected:
-          type: string
-        denoms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Denom'
-        classes:
-          type: array
-          items:
-            $ref: '#/components/schemas/MeasureClass'
-    DerivedSection:
+    SecondaryIdInfo:
       type: object
       properties:
-        miscInfoModule:
-          $ref: '#/components/schemas/MiscInfoModule'
-        conditionBrowseModule:
-          $ref: '#/components/schemas/BrowseModule'
-        interventionBrowseModule:
-          $ref: '#/components/schemas/BrowseModule'
-    AnnotationSection:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SecondaryIdType'
+        domain:
+          type: string
+        link:
+          type: string
+    DateStruct:
       type: object
       properties:
-        annotationModule:
-          $ref: '#/components/schemas/AnnotationModule'
-    ViolationEvent:
+        date:
+          type: string
+          format: date
+        type:
+          $ref: '#/components/schemas/DateType'
+    Intervention:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/ViolationEventType'
+          $ref: '#/components/schemas/InterventionType'
+        name:
+          type: string
         description:
           type: string
-        creationDate:
-          type: string
-          format: date
-        issuedDate:
-          type: string
-          format: date
-        releaseDate:
-          type: string
-          format: date
-        postedDate:
-          type: string
-          format: date
-    BioSpecRetention:
-      type: string
-      enum:
-      - NONE_RETAINED
-      - SAMPLES_WITH_DNA
-      - SAMPLES_WITHOUT_DNA
-    DesignAllocation:
-      type: string
-      enum:
-      - RANDOMIZED
-      - NON_RANDOMIZED
-      - NA
-    ContactsLocationsModule:
-      type: object
-      properties:
-        centralContacts:
+        armGroupLabels:
           type: array
           items:
-            $ref: '#/components/schemas/Contact'
-        overallOfficials:
+            type: string
+        otherNames:
           type: array
           items:
-            $ref: '#/components/schemas/Official'
-        locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Location'
-    ArmGroupType:
+            type: string
+    ObservationalModel:
       type: string
       enum:
-      - EXPERIMENTAL
-      - ACTIVE_COMPARATOR
-      - PLACEBO_COMPARATOR
-      - SHAM_COMPARATOR
-      - NO_INTERVENTION
+      - COHORT
+      - CASE_CONTROL
+      - CASE_ONLY
+      - CASE_CROSSOVER
+      - ECOLOGIC_OR_COMMUNITY
+      - FAMILY_BASED
+      - DEFINED_POPULATION
+      - NATURAL_HISTORY
       - OTHER
-    PointOfContact:
+    NonInferiorityType:
+      type: string
+      enum:
+      - SUPERIORITY
+      - NON_INFERIORITY
+      - EQUIVALENCE
+      - OTHER
+      - NON_INFERIORITY_OR_EQUIVALENCE
+      - SUPERIORITY_OR_OTHER
+      - NON_INFERIORITY_OR_EQUIVALENCE_LEGACY
+      - SUPERIORITY_OR_OTHER_LEGACY
+    EventStats:
       type: object
       properties:
-        title:
+        groupId:
           type: string
-        organization:
+        numEvents:
+          type: integer
+        numAffected:
+          type: integer
+        numAtRisk:
+          type: integer
+    SamplingMethod:
+      type: string
+      enum:
+      - PROBABILITY_SAMPLE
+      - NON_PROBABILITY_SAMPLE
+    Retraction:
+      type: object
+      properties:
+        pmid:
           type: string
-        email:
+        source:
           type: string
-        phone:
+    FlowStats:
+      type: object
+      properties:
+        groupId:
           type: string
-        phoneExt:
+        comment:
+          type: string
+        numSubjects:
+          type: string
+        numUnits:
           type: string
     ReportingStatus:
       type: string
       enum:
       - NOT_POSTED
       - POSTED
-    LargeDoc:
-      type: object
-      properties:
-        typeAbbrev:
-          type: string
-        hasProtocol:
-          type: boolean
-        hasSap:
-          type: boolean
-        hasIcf:
-          type: boolean
-        label:
-          type: string
-        date:
-          type: string
-          format: date
-        uploadDate:
-          $ref: '#/components/schemas/DateTimeMinutes'
-        filename:
-          type: string
-        size:
-          type: integer
+    PrimaryPurpose:
+      type: string
+      enum:
+      - TREATMENT
+      - PREVENTION
+      - DIAGNOSTIC
+      - ECT
+      - SUPPORTIVE_CARE
+      - SCREENING
+      - HEALTH_SERVICES_RESEARCH
+      - BASIC_SCIENCE
+      - DEVICE_FEASIBILITY
+      - OTHER
     SearchPart:
       type: object
       properties:
@@ -1965,150 +2069,177 @@ components:
       - pieces
       - type
       - weight
-    DesignTimePerspective:
-      type: string
-      enum:
-      - RETROSPECTIVE
-      - PROSPECTIVE
-      - CROSS_SECTIONAL
-      - OTHER
-    PagedStudies:
+    FieldNode:
       type: object
       properties:
-        nextPageToken:
+        altPieceNames:
+          type: array
+          items:
+            type: string
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldNode'
+        dedLink:
+          $ref: '#/components/schemas/WebLink'
+        description:
           type: string
-        studies:
-          $ref: '#/components/schemas/StudyList'
-        totalCount:
+        historicOnly:
+          type: boolean
+        indexedOnly:
+          type: boolean
+        isEnum:
+          type: boolean
+        maxChars:
           type: integer
           format: int32
-      additionalProperties: false
-      required:
-      - studies
-    Phase:
-      type: string
-      enum:
-      - NA
-      - EARLY_PHASE1
-      - PHASE1
-      - PHASE2
-      - PHASE3
-      - PHASE4
-    WhoMasked:
-      type: string
-      enum:
-      - PARTICIPANT
-      - CARE_PROVIDER
-      - INVESTIGATOR
-      - OUTCOMES_ASSESSOR
-    MeasureDispersionType:
-      type: string
-      enum:
-      - NA
-      - STANDARD_DEVIATION
-      - STANDARD_ERROR
-      - INTER_QUARTILE_RANGE
-      - FULL_RANGE
-      - CONFIDENCE_80
-      - CONFIDENCE_90
-      - CONFIDENCE_95
-      - CONFIDENCE_975
-      - CONFIDENCE_99
-      - CONFIDENCE_OTHER
-      - GEOMETRIC_COEFFICIENT
-    EnrollmentInfo:
-      type: object
-      properties:
-        count:
-          type: integer
-        type:
-          $ref: '#/components/schemas/EnrollmentType'
-    ArmsInterventionsModule:
-      type: object
-      properties:
-        armGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArmGroup'
-        interventions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Intervention'
-    AdverseEvent:
-      type: object
-      properties:
-        term:
-          type: string
-        organSystem:
-          type: string
-        sourceVocabulary:
-          type: string
-        assessmentType:
-          $ref: '#/components/schemas/EventAssessment'
-        notes:
-          type: string
-        stats:
-          type: array
-          items:
-            $ref: '#/components/schemas/EventStats'
-    FlowMilestone:
-      type: object
-      properties:
-        type:
-          type: string
-        comment:
-          type: string
-        achievements:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlowStats'
-    SearchDocument:
-      type: object
-      properties:
-        areas:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchArea'
         name:
           type: string
+        nested:
+          type: boolean
+        piece:
+          type: string
+        rules:
+          type: string
+        sourceType:
+          type: string
+        synonyms:
+          type: boolean
+        title:
+          type: string
+        type:
+          type: string
       additionalProperties: false
       required:
-      - areas
       - name
-    SponsorCollaboratorsModule:
+      - piece
+      - sourceType
+      - type
+    OutcomeMeasure:
       type: object
       properties:
-        responsibleParty:
-          $ref: '#/components/schemas/ResponsibleParty'
-        leadSponsor:
-          $ref: '#/components/schemas/Sponsor'
-        collaborators:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sponsor'
-    MaskingBlock:
-      type: object
-      properties:
-        masking:
-          $ref: '#/components/schemas/DesignMasking'
-        maskingDescription:
+        type:
+          $ref: '#/components/schemas/OutcomeMeasureType'
+        title:
           type: string
-        whoMasked:
+        description:
+          type: string
+        populationDescription:
+          type: string
+        reportingStatus:
+          $ref: '#/components/schemas/ReportingStatus'
+        anticipatedPostingDate:
+          $ref: '#/components/schemas/PartialDate'
+        paramType:
+          $ref: '#/components/schemas/MeasureParam'
+        dispersionType:
+          type: string
+        unitOfMeasure:
+          type: string
+        calculatePct:
+          type: boolean
+        timeFrame:
+          type: string
+        typeUnitsAnalyzed:
+          type: string
+        denomUnitsSelected:
+          type: string
+        groups:
           type: array
           items:
-            $ref: '#/components/schemas/WhoMasked'
-    errorMessage:
-      type: string
-      description: A text message describing an error
-    LargeDocumentModule:
+            $ref: '#/components/schemas/MeasureGroup'
+        denoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Denom'
+        classes:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeasureClass'
+        analyses:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeasureAnalysis'
+    AdverseEventsModule:
       type: object
       properties:
-        noSap:
-          type: boolean
-        largeDocs:
+        frequencyThreshold:
+          type: string
+        timeFrame:
+          type: string
+        description:
+          type: string
+        allCauseMortalityComment:
+          type: string
+        eventGroups:
           type: array
           items:
-            $ref: '#/components/schemas/LargeDoc'
+            $ref: '#/components/schemas/EventGroup'
+        seriousEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdverseEvent'
+        otherEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdverseEvent'
+    CertainAgreement:
+      type: object
+      properties:
+        piSponsorEmployee:
+          type: boolean
+        restrictionType:
+          $ref: '#/components/schemas/AgreementRestrictionType'
+        restrictiveAgreement:
+          type: boolean
+        otherDetails:
+          type: string
+    FlowGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+    IdentificationModule:
+      type: object
+      properties:
+        nctId:
+          $ref: '#/components/schemas/nct'
+        nctIdAliases:
+          type: array
+          items:
+            $ref: '#/components/schemas/nct'
+        orgStudyIdInfo:
+          $ref: '#/components/schemas/OrgStudyIdInfo'
+        secondaryIdInfos:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecondaryIdInfo'
+        briefTitle:
+          type: string
+        officialTitle:
+          type: string
+        acronym:
+          type: string
+        organization:
+          $ref: '#/components/schemas/Organization'
+    FirstMcpInfo:
+      type: object
+      properties:
+        postDateStruct:
+          $ref: '#/components/schemas/DateStruct'
+    OrgStudyIdType:
+      type: string
+      enum:
+      - NIH
+      - FDA
+      - VA
+      - CDC
+      - AHRQ
+      - SAMHSA
     DesignModule:
       type: object
       properties:
@@ -2133,158 +2264,111 @@ components:
           $ref: '#/components/schemas/BioSpec'
         enrollmentInfo:
           $ref: '#/components/schemas/EnrollmentInfo'
-    OversightModule:
-      type: object
-      properties:
-        oversightHasDmc:
-          type: boolean
-        isFdaRegulatedDrug:
-          type: boolean
-        isFdaRegulatedDevice:
-          type: boolean
-        isUnapprovedDevice:
-          type: boolean
-        isPpsd:
-          type: boolean
-        isUsExport:
-          type: boolean
-        fdaaa801Violation:
-          type: boolean
-    UnpostedEventType:
+    DesignAllocation:
       type: string
       enum:
-      - RESET
-      - RELEASE
-      - UNRELEASE
-    OutcomesModule:
+      - RANDOMIZED
+      - NON_RANDOMIZED
+      - NA
+    ContactsLocationsModule:
       type: object
       properties:
-        primaryOutcomes:
+        centralContacts:
           type: array
           items:
-            $ref: '#/components/schemas/Outcome'
-        secondaryOutcomes:
+            $ref: '#/components/schemas/Contact'
+        overallOfficials:
           type: array
           items:
-            $ref: '#/components/schemas/Outcome'
-        otherOutcomes:
+            $ref: '#/components/schemas/Official'
+        locations:
           type: array
           items:
-            $ref: '#/components/schemas/Outcome'
-    FlowGroup:
+            $ref: '#/components/schemas/Location'
+    BioSpec:
       type: object
       properties:
-        id:
+        retention:
+          $ref: '#/components/schemas/BioSpecRetention'
+        description:
           type: string
+    MeasureCategory:
+      type: object
+      properties:
         title:
           type: string
-        description:
-          type: string
-    OrgStudyIdType:
-      type: string
-      enum:
-      - NIH
-      - FDA
-      - VA
-      - CDC
-      - AHRQ
-      - SAMHSA
-    IdentificationModule:
-      type: object
-      properties:
-        nctId:
-          $ref: '#/components/schemas/nct'
-        nctIdAliases:
+        measurements:
           type: array
           items:
-            $ref: '#/components/schemas/nct'
-        orgStudyIdInfo:
-          $ref: '#/components/schemas/OrgStudyIdInfo'
-        secondaryIdInfos:
+            $ref: '#/components/schemas/Measurement'
+    Contact:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          $ref: '#/components/schemas/ContactRole'
+        phone:
+          type: string
+        phoneExt:
+          type: string
+        email:
+          type: string
+    StudyList:
+      title: Array of studies
+      description: '`study` field values of type `markup` are in markdown format.
+
+        '
+      type: array
+      items:
+        $ref: '#/components/schemas/Study'
+    EligibilityModule:
+      type: object
+      properties:
+        eligibilityCriteria:
+          type: string
+        healthyVolunteers:
+          type: boolean
+        sex:
+          $ref: '#/components/schemas/Sex'
+        genderBased:
+          type: boolean
+        genderDescription:
+          type: string
+        minimumAge:
+          type: string
+          pattern: ^\d+ (Year|Years|Month|Months|Week|Weeks|Day|Days|Hour|Hours|Minute|Minutes)$
+        maximumAge:
+          type: string
+          pattern: ^\d+ (Year|Years|Month|Months|Week|Weeks|Day|Days|Hour|Hours|Minute|Minutes)$
+        stdAges:
           type: array
           items:
-            $ref: '#/components/schemas/SecondaryIdInfo'
-        briefTitle:
+            $ref: '#/components/schemas/StandardAge'
+        studyPopulation:
           type: string
-        officialTitle:
-          type: string
-        acronym:
-          type: string
-        organization:
-          $ref: '#/components/schemas/Organization'
-    Sex:
-      type: string
-      enum:
-      - FEMALE
-      - MALE
-      - ALL
-    LimitationsAndCaveats:
+        samplingMethod:
+          $ref: '#/components/schemas/SamplingMethod'
+    MoreInfoModule:
       type: object
       properties:
-        description:
-          type: string
-    MiscInfoModule:
+        limitationsAndCaveats:
+          $ref: '#/components/schemas/LimitationsAndCaveats'
+        certainAgreement:
+          $ref: '#/components/schemas/CertainAgreement'
+        pointOfContact:
+          $ref: '#/components/schemas/PointOfContact'
+    PartialDateStruct:
       type: object
       properties:
-        versionHolder:
-          type: string
-          format: date
-        removedCountries:
-          type: array
-          items:
-            type: string
-        submissionTracking:
-          $ref: '#/components/schemas/SubmissionTracking'
-    ArmGroup:
-      type: object
-      properties:
-        label:
-          type: string
+        date:
+          $ref: '#/components/schemas/PartialDate'
         type:
-          $ref: '#/components/schemas/ArmGroupType'
-        description:
-          type: string
-        interventionNames:
-          type: array
-          items:
-            type: string
-    Sponsor:
-      type: object
-      properties:
-        name:
-          type: string
-        class:
-          $ref: '#/components/schemas/AgencyClass'
-    FlowPeriod:
-      type: object
-      properties:
-        title:
-          type: string
-        milestones:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlowMilestone'
-        dropWithdraws:
-          type: array
-          items:
-            $ref: '#/components/schemas/DropWithdraw'
-    SearchArea:
-      type: object
-      properties:
-        name:
-          type: string
-        param:
-          type: string
-        parts:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchPart'
-        uiLabel:
-          type: string
-      additionalProperties: false
-      required:
-      - name
-      - parts
+          $ref: '#/components/schemas/DateType'
+    FieldNodeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldNode'
     Official:
       type: object
       properties:
@@ -2294,49 +2378,12 @@ components:
           type: string
         role:
           $ref: '#/components/schemas/OfficialRole'
-    Mesh:
+    DenomCount:
       type: object
       properties:
-        id:
+        groupId:
           type: string
-        term:
-          type: string
-    MeasureGroup:
-      type: object
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-    IpdSharingStatementModule:
-      type: object
-      properties:
-        ipdSharing:
-          $ref: '#/components/schemas/IpdSharing'
-        description:
-          type: string
-        infoTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/IpdSharingInfoType'
-        timeFrame:
-          type: string
-        accessCriteria:
-          type: string
-        url:
-          type: string
-    SecondaryIdInfo:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/SecondaryIdType'
-        domain:
-          type: string
-        link:
+        value:
           type: string
 externalDocs:
   description: Introduction on clinicaltrials.gov
