@@ -42,9 +42,6 @@ paths:
       description: This server
 components:
   schemas:
-    errorMessage:
-      type: string
-      description: A text message describing an error
     Version:
       type: object
       properties:
@@ -55,6 +52,20 @@ components:
       additionalProperties: false
       required:
       - apiVersion
+    errorMessage:
+      type: string
+      description: A text message describing an error
+    v2VersionReply:
+      type: object
+      properties:
+        version:
+          type: string
+        major_ver:
+          type: integer
+        minor_ver:
+          type: integer
+        patch_ver:
+          type: integer
     rpcStatus:
       type: object
       properties:
@@ -75,17 +86,6 @@ components:
         value:
           type: string
           format: byte
-    v2VersionReply:
-      type: object
-      properties:
-        version:
-          type: string
-        major_ver:
-          type: integer
-        minor_ver:
-          type: integer
-        patch_ver:
-          type: integer
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

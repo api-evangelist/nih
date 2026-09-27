@@ -153,14 +153,6 @@ components:
       properties:
         length:
           type: integer
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte
     rpcStatus:
       type: object
       properties:
@@ -173,6 +165,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
     v2ProkaryoteGeneRequest:
       type: object
       properties:
