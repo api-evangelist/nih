@@ -165,14 +165,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte
     v2ProkaryoteGeneRequest:
       type: object
       properties:
@@ -189,6 +181,14 @@ components:
         taxon:
           type: string
           title: Limit gene sequences and the genome assemblies described by the [annotation report file](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/reference-docs/data-reports/prokaryote-gene-location/) to the specified NCBI Taxonomy ID or name (common or scientific) at any taxonomic rank.
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
