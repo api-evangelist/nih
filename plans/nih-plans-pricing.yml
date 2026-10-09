@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-06-13 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-06-13'
 name: NIH API Plans and Pricing
 description: NIH and NCBI APIs are provided as free public services with no cost to access. All APIs are publicly funded and offered without subscription fees. Access tiers are differentiated primarily by API key registration, which unlocks higher rate limits.
 url: https://www.ncbi.nlm.nih.gov/home/develop/api/
@@ -72,3 +77,40 @@ plans:
       - Access publications linked to NIH awards
       - Filter by institute, mechanism, fiscal year, keywords
       - Maximum 500 records per request, offset up to 14999
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Anonymous / No Key
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Registered API Key
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enhanced API Key (High Volume)
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: PubChem Access
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: NIH RePORTER Access
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
