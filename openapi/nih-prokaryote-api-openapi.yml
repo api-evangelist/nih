@@ -136,6 +136,11 @@ paths:
           default: ncbi_dataset.zip
 components:
   schemas:
+    v2ProkaryoteGeneRequestGeneFlankConfig:
+      type: object
+      properties:
+        length:
+          type: integer
     v2Fasta:
       type: string
       enum:
@@ -148,11 +153,6 @@ components:
       - FASTA_5P_UTR
       - FASTA_3P_UTR
       default: FASTA_UNSPECIFIED
-    v2ProkaryoteGeneRequestGeneFlankConfig:
-      type: object
-      properties:
-        length:
-          type: integer
     protobufAny:
       type: object
       properties:
